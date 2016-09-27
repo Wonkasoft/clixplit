@@ -20,7 +20,8 @@ function plugin_enqueues() {
 add_action ('admin_menu', 'clixplit_register_custom_menu');
 
 function clixplit_register_custom_menu() {
-  add_menu_page ('Home', 
+  add_menu_page (
+    'Home', 
     'cliXplit',
     'manage_options',
     'clixplit/clixplit-home.php',
@@ -50,8 +51,9 @@ add_action('wp_after_admin_bar_render', 'clixplit_menu_mod');
 
 function clixplit_menu_mod() {
   ?>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript">
-          jQuery("#toplevel_page_clixplit-clixplit-home a.wp-first-item").html("Home");
+          $("#toplevel_page_clixplit-clixplit-home a.wp-first-item").html("Home");
         </script> 
         <style type="text/css">
         @font-face {
@@ -61,10 +63,14 @@ function clixplit_menu_mod() {
 
           .vertical-space, 
           .nav-item,
+          .nav-buttons,
           .clixplit-panel,
           .nav-item.current,
           .new-campaigns-menu,
-          .campaign-item {
+          .campaign-item,
+          .nav-campaign-buttons,
+          .mymodal,
+          .mymodal-box {
             transition: all .4s ease-in-out;
           }
 
@@ -73,7 +79,7 @@ function clixplit_menu_mod() {
           }
 
           .bottom-space {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
           }
 
           .clixplit-clixplit-home-php,
@@ -88,11 +94,16 @@ function clixplit_menu_mod() {
             margin-bottom: 25px;
           }
 
-          .nav-item.current {
+          .logo-grad {
+            background: -webkit-radial-gradient(circle, #fff 15%, transparent 30%) !important;
+            background: radial-gradient(circle, #fff 15%, transparent 30%) !important;
+          }
+
+          .nav-buttons.current {
             background-color: #ff6102;
           }
 
-          .nav-item.current > a:after {
+          .nav-item > a.current:after {
             content: " ";
             position: absolute;
             height: 0;
@@ -100,24 +111,27 @@ function clixplit_menu_mod() {
             border: 16px solid transparent;
             border-bottom-color: #ff6102;
             pointer-events: none;
-            bottom: -29px;
+            bottom: -20px;
             left: 50%;
             margin: 0 -15px;
           }
 
           .nav-item {
+            margin: 0 14px;
             display: inline-block;
-            margin: 0 1em;
-            padding: 8px 2em;
-            background-color: #ffb502;
-            border-radius: 3px;
           }
 
-          .nav-item:hover {
+          .nav-buttons {
+            padding: 6px 14px;
+            background-color: #ffb502;
+            border-radius: 2px;
+          }
+
+          .nav-buttons:hover {
             background-color: #ff8339;
           }
 
-          .nav-item:active {
+          .nav-buttons:active {
             background-color: #ff6102;
           }
 
@@ -135,17 +149,20 @@ function clixplit_menu_mod() {
 
           .campaign-item {
             margin: 0 1em;
-            padding: 8px 1em;
-            background-color: #39d8cb;
             display: inline-block;
-            border-radius: 3px;
           }
 
-          .campaign-item:hover {
+          .nav-campaign-buttons {
+            padding: 6px 14px;
+            background-color: #39d8cb;
+            border-radius: 2px;
+          }
+
+          .nav-campaign-buttons:hover {
             background-color: #02ffa1;
           }
 
-          .campaign-item:active {
+          .nav-campaign-buttons:active {
             background-color: #009f92;
           }
 
@@ -156,12 +173,31 @@ function clixplit_menu_mod() {
             letter-spacing: 1px;
           }
 
+          input.item-checkbox {
+            margin: 0;
+          }
+
+          .table-header {
+            margin-left: 7px;
+            vertical-align: middle;
+          }
+
+          tr > th:first-child,
+          tr > td:first-child {
+            width: 32px;
+          }
+
+          #url-addon {
+            border: 1px dashed rgba( 0, 0, 0, .1);
+            background-color: #fff;
+          }
+
           .clixplit-panel:before {
             content: " ";
             display: block;
-            height: 6px;
-            margin: 0 -15px;
+            height: 8px;
             background-color: #ff6102;
+            margin: 0 -15px;
             box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
           }
 
@@ -169,10 +205,49 @@ function clixplit_menu_mod() {
             background-color: #ffffff;
             box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
             margin: 0 4px;
-            min-height: 350px;
+            min-height: 430px;
+          }
+
+          .mymodal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 10000;
+            background-color: rgba( 0, 0, 0, .95);
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          .mymodal-box {
+            top: 25%;
+            left: 20%;
+            position: absolute;
+          }
+
+          @media only screen and (max-width: 784px) {
+            .mymodal-box {
+              top: 5%;
+              left: 0;
+            }
           }
 
         </style>
+
+        <script type="text/javascript">
+        $( document ).ready(function() {
+          $("a.nav-campaign-buttons").click(function() {
+            $(".mymodal").css({"visibility": "inherit", "opacity": "1"});
+          })
+          $(".btn-default").click(function () {
+            var r = confirm("are you sure you would like to cancel this campaign? \n Your changes will not be saved.");
+            if (r == true) {
+              $(".mymodal").css({"visibility":"hidden", "opacity": "0"});
+            }
+          })
+        })
+        </script>
         <?php
 }
 
