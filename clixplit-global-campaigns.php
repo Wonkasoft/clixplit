@@ -135,5 +135,4 @@ if (!current_user_can('manage_options')) {
 </div>
 
 <?php
-
 ?>
