@@ -90,50 +90,61 @@ if (!current_user_can('manage_options')) {
 							<label for="keyword-input">input desired keyword</label>
 							<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
 						</div>
-						<div class="form-group">
-							<label for="primary-url">input primary url (new page/tab)</label>
-							<input type="text" class="form-control" id="primary-url" placeholder="primary-url...">
+						</form>
+						<div class="control-group" id="fields">
+							<label class="control-label" for="field1">input primary url (new page/tab)</label>
+							<div class="controls">
+								<form role="form" autocomplete="off">
+									<div class="entry input-group col-xs-12 bottom-form-space">
+										<input type="text" class="form-control" id="primary-url" name="fields[]" placeholder="url...">
+										<span class="input-group-btn">
+											<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="radio">
+									<label>Link rotation <input type="radio" name="" class="form-control" id="url-radio" placeholder=""> on</label>
+								</div>
+							</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<form>
+							<div class="form-group">
+								<label for="keyword-input">input desired keyword</label>
+								<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
+							</div>
+							<div class="form-group">
+								<label for="primary-url">input primary url (new page/tab)</label>
+								<input type="text" class="form-control" id="primary-url" placeholder="primary-url...">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="url-addon" placeholder="" disabled="">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="url-addon" placeholder="">
+							</div>
+						</form>
+					</div>
+					<div class="col-xs-12 text-center">
+						<div class="hr-width"><hr /></div>
+						<div class="radio">
+							<label>Mobile</label><input type="radio" name="" class="form-control" id="mobile-radio" placeholder=""><label>on</label>
 						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="url-addon" placeholder="" disabled="">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="url-addon" placeholder="">
-						</div>
-					</form>
-				</div>
-				<div class="col-xs-12 col-md-6">
-					<form>
-						<div class="form-group">
-							<label for="keyword-input">input desired keyword</label>
-							<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
-						</div>
-						<div class="form-group">
-							<label for="primary-url">input primary url (new page/tab)</label>
-							<input type="text" class="form-control" id="primary-url" placeholder="primary-url...">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="url-addon" placeholder="" disabled="">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="url-addon" placeholder="">
-						</div>
-					</form>
-				</div>
-				<div class="col-xs-12">
+						<div class="hr-width"><hr /></div>
+					</div>
+					<div class="col-xs-12 text-center">
 
-				</div>
-				<div class="col-xs-12 text-center">
+						<button type="button" class="btn btn-primary">save</button>
+						<button type="button" class="btn btn-default">cancel</button>
 
-					<button type="button" class="btn btn-primary">save</button>
-					<button type="button" class="btn btn-default">cancel</button>
-
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<?php
+	<?php
 
-?>
+	?>
