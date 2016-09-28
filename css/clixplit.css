@@ -17,7 +17,14 @@
           .campaign-item,
           .nav-campaign-buttons,
           .mymodal,
-          .mymodal-box {
+          .mymodal-box,
+          .hr-width,
+          #mobile-switch,
+          .clixplit-switch,
+          .clixplit-switch-center,
+          .switch-position,
+          .btn, .btn-primary,
+          .empty-form-group {
             transition: all .4s ease-in-out;
           }
 
@@ -39,6 +46,10 @@
           .vertical-space {
             margin-top: 25px;
             margin-bottom: 25px;
+          }
+
+          .empty-form-group {
+            height: 59px;
           }
 
           .logo-grad {
@@ -170,16 +181,29 @@
           .mymodal-box {
             top: 25%;
             left: 20%;
+            right: 20%;
             position: absolute;
           }
 
-          #primary-url {
+          .form-space {
+            margin-top: 30px;
+            margin-bottom: 25px;
+          }
+
+          .url-input {
           	border-radius: 4px !important;
           }
 
           button.clixplit-btn-add {
           	border-radius: 50% !important;
           	margin-left: 14px !important;
+            height: 25px;
+            width: 15px;
+            font-size: 10px;
+          }
+
+          .glyphicon {
+            left: -5px;
           }
 
           .bottom-form-space {
@@ -191,9 +215,42 @@
           	margin: 8px auto;
           }
 
+          .clixplit-labels {
+            margin: 0 5px;
+          }
+
+          .clixplit-switch {
+            margin: 0;
+            padding: 2px;
+            border-radius: 50%;
+            border: 3px solid #b5bfca;
+            font-size: 9px;
+          }
+
+          .clixplit-switch-center {
+            margin: 0;
+            padding: 0 5px;
+            border-radius: 50%;
+            background: #b5bfca;
+          }
+
+          .switch-position {
+            margin-left: 10px;
+            vertical-align: middle;
+          }
+
+          .clixplit-switch:hover {
+            border-color: #d6e0ec;
+          }
+
+          .clixplit-switch:hover .clixplit-switch-center {
+            background: #d6e0ec;
+          }
+
           @media only screen and (max-width: 784px) {
             .mymodal-box {
               top: 5%;
               left: 0;
+              right: 0;
             }
           }

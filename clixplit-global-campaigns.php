@@ -85,56 +85,68 @@ if (!current_user_can('manage_options')) {
 					<label>Global Campaign Editor</label>
 				</div>
 				<div class="col-xs-12 col-md-6">
-					<form>
 						<div class="form-group">
-							<label for="keyword-input">input desired keyword</label>
-							<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
-						</div>
-						</form>
-						<div class="control-group" id="fields">
-							<label class="control-label" for="field1">input primary url (new page/tab)</label>
-							<div class="controls">
-								<form role="form" autocomplete="off">
-									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control" id="primary-url" name="fields[]" placeholder="url...">
-										<span class="input-group-btn">
-											<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
-										</div>
-									</form>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="radio">
-									<label>Link rotation <input type="radio" name="" class="form-control" id="url-radio" placeholder=""> on</label>
-								</div>
-							</div>
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<form>
-							<div class="form-group">
+							<form>
 								<label for="keyword-input">input desired keyword</label>
 								<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
-							</div>
-							<div class="form-group">
-								<label for="primary-url">input primary url (new page/tab)</label>
-								<input type="text" class="form-control" id="primary-url" placeholder="primary-url...">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="url-addon" placeholder="" disabled="">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="url-addon" placeholder="">
-							</div>
-						</form>
-					</div>
-					<div class="col-xs-12 text-center">
-						<div class="hr-width"><hr /></div>
-						<div class="radio">
-							<label>Mobile</label><input type="radio" name="" class="form-control" id="mobile-radio" placeholder=""><label>on</label>
+							</form>
 						</div>
-						<div class="hr-width"><hr /></div>
+					<div class="control-group" id="primary-url">
+						<label class="control-label" for="primary1">input primary url (new page/tab)</label>
+						<div class="controls">
+							<form id="primary-url-form" role="form" autocomplete="off">
+								<div class="entry input-group col-xs-12 bottom-form-space">
+									<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
+									<span class="input-group-btn">
+										<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="vertical-space">
+							<form action="">
+								<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+							</form>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group empty-form-group">
+							<form action="">
+								<div class="col-xs-6 vertical-space">
+									<label id="primary-url-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+								</div>
+								<div class="col-xs-6 vertical-space">
+									<label id="primary-url-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+								</div>
+							</form>
+						</div>
+						<div class="control-group" id="secondary-url">
+						<label class="control-label" for="secondary1">input secondary url (page redirect)</label>
+						<div class="controls">
+							<form id="secondary-url-form" role="form" autocomplete="off">
+								<div class="entry input-group col-xs-12 bottom-form-space">
+									<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
+									<span class="input-group-btn">
+										<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+									</div>
+								</form>
+							</div>
+						</div>
+							<div class="vertical-space">
+								<form action="">
+									<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="col-xs-12 text-center">
+						<div class="hr-width"><hr /></div>
+						<form action="">
+							<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+						</form>
+						<div class="hr-width"><hr /></div>
+					</div>
+					<div class="col-xs-12 text-center bottom-space">
 
 						<button type="button" class="btn btn-primary">save</button>
 						<button type="button" class="btn btn-default">cancel</button>
