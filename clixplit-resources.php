@@ -14,7 +14,7 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 text-center bottom-space">
 				<div class="col-xs-12">
@@ -38,9 +38,22 @@ if (!current_user_can('manage_options')) {
 	</div>
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
-			<div class="col-xs-12 text-center">
+			<div class="col-xs-12 text-center vertical-space">
 				<div class="col-xs-12">
 					<h1>*Links to Resources, Supportform, Feature requests*</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center vertical-space">
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Resources & Downloads</label>
+				</div>
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Need Help? Get Support!</label>
+				</div>
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Got an Idea? Let us know!</label>
 				</div>
 			</div>
 		</div>
