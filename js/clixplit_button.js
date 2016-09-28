@@ -4,7 +4,7 @@
       ed.addButton( 'clixplit', {           
         title: 'clixplit',            
         cmd:   'clixplit',            
-        image:  '../wp-content/plugins/clixplit/img/clixplit-logo-icon.png'                      
+        image:  '../wp-content/plugins/clixplit/img/clixplit-icon-color25px.svg'                      
       });   
 
       ed.addCommand('clixplit', function() {
