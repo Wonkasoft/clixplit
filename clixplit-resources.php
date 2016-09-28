@@ -14,34 +14,47 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 text-center bottom-space">
-			              <div class="col-xs-12">
-			                <ul class="nav-menu">
-			                  <li class="nav-item">
-			                      <a class="nav-buttons" href="?page=clixplit/clixplit-home.php">home</a>
-			                  </li>
-			                  <li class="nav-item">
-			                      <a class="nav-buttons" href="?page=clixplit/clixplit-tutorials.php">tutorials</a>
-			                  </li>
-			                  <li class="nav-item">
-			                      <a class="nav-buttons" href="?page=clixplit/clixplit-global-campaigns.php">global campaigns</a>
-			                  </li>
-			                  <li class="nav-item current">
-			                      <a class="nav-buttons" href="?page=clixplit/clixplit-resources.php">resources</a>
-			                  </li>
-			                </ul>
-			              </div>
-			      </div>
+				<div class="col-xs-12">
+					<ul class="nav-menu">
+						<li class="nav-item">
+							<a class="nav-buttons" href="?page=clixplit/clixplit-home.php"><span class="nav-text">home</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-buttons" href="?page=clixplit/clixplit-tutorials.php"><span class="nav-text">tutorials</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-buttons" href="?page=clixplit/clixplit-global-campaigns.php"><span class="nav-text">global campaigns</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-buttons current" href="?page=clixplit/clixplit-resources.php"><span class="nav-text">resources</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
-			<div class="col-xs-12 text-center">
-			<div class="col-xs-12">
-			<h1>*Links to Resources, Supportform, Feature requests*</h1>
+			<div class="col-xs-12 text-center vertical-space">
+				<div class="col-xs-12">
+					<h1>*Links to Resources, Supportform, Feature requests*</h1>
+				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center vertical-space">
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Resources & Downloads</label>
+				</div>
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Need Help? Get Support!</label>
+				</div>
+				<div class="col-xs-4">
+					<label class="clixplit-tut-panel-labels">Got an Idea? Let us know!</label>
+				</div>
 			</div>
 		</div>
 	</div>

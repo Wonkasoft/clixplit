@@ -1,0 +1,365 @@
+/*!
+ * cliXplit v1.0.0 (http://wonkasoft.com)
+ * Copyright 2016 Wonkasoft.com & EpicWin.
+ */
+
+ @font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+
+.vertical-space, 
+.nav-item,
+.nav-buttons,
+.clixplit-panel,
+.nav-item.current,
+.new-campaigns-menu,
+.campaign-item,
+.nav-campaign-buttons,
+.mymodal,
+.mymodal-box,
+.hr-width,
+#mobile-switch,
+.clixplit-switch-off,
+.clixplit-switch-center-off,
+.clixplit-switch-on,
+.clixplit-switch-center-on,
+.switch-position,
+.btn, .btn-primary,
+.empty-form-group,
+.clixplit-pdf-label,
+.clixplit-tut-middle-text,
+.vertical-middle,
+.clixplit-save-btn,
+.clixplit-cancel-btn {
+  transition: all .4s ease-in-out;
+}
+
+.content-wrap {
+  font-family: 'Roboto-Regular' !important;
+}
+
+.bottom-space {
+  margin-bottom: 15px;
+}
+
+.clixplit-clixplit-home-php,
+.clixplit-clixplit-tutorials-php,
+.clixplit-clixplit-global-campaigns-php,
+.clixplit-clixplit-resources-php  {
+  background-color: #efefef;
+}
+
+.vertical-space {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.empty-form-group {
+  height: 59px;
+}
+
+.logo-grad {
+  background: -webkit-radial-gradient(circle, #fff 15%, transparent 30%) !important;
+  background: radial-gradient(circle, #fff 15%, transparent 30%) !important;
+}
+
+.vertical-middle {
+  margin-top: 15%;
+}
+
+.clixplit-tut-panel-labels {
+  color: rgba(189, 195, 199,1.0);
+}
+
+.clixplit-pdf-label {
+  color: rgba(192, 57, 43,1.0);
+  margin-top: -30px;
+}
+
+.clixplit-tut-middle-text {
+  margin: -35px 0 0;
+  font-weight: bold;
+  opacity: .2;
+}
+
+.nav-buttons.current {
+  background-color: #ff6102;
+}
+
+.nav-item > a.current:after {
+  content: " ";
+  position: absolute;
+  height: 0;
+  width: 0;
+  border: 16px solid transparent;
+  border-bottom-color: #ff6102;
+  pointer-events: none;
+  bottom: -20px;
+  left: 50%;
+  margin: 0 -15px;
+}
+
+.nav-item {
+  margin: 0 14px;
+  display: inline-block;
+}
+
+.nav-buttons {
+  padding: 6px 14px;
+  background-color: #ffb502;
+  border-radius: 3px;
+}
+
+.nav-buttons:hover {
+  background-color: #ff8339;
+}
+
+.nav-buttons:active {
+  background-color: #ff6102;
+}
+
+.nav-item > a {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  position: relative;
+}
+
+.new-campaigns-menu {
+  margin-top: 2em;
+}
+
+.campaign-item {
+  margin: 0 1em;
+  display: inline-block;
+}
+
+.nav-campaign-buttons {
+  padding: 6px 14px;
+  background-color: #39d8cb;
+  border-radius: 3px;
+}
+
+.nav-campaign-buttons:hover {
+  background-color: #02ffa1;
+}
+
+.nav-campaign-buttons:active {
+  background-color: #009f92;
+}
+
+.campaign-item > a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+input.item-checkbox {
+  margin: 0;
+}
+
+.table-header {
+  margin-left: 7px;
+  vertical-align: middle;
+}
+
+tr > th:first-child,
+tr > td:first-child {
+  width: 32px;
+}
+
+#url-addon {
+  border: 1px dashed rgba( 0, 0, 0, .1);
+  background-color: #fff;
+}
+
+.clixplit-panel:before {
+  content: " ";
+  display: block;
+  height: 8px;
+  background-color: #ff6102;
+  margin: 0 -15px;
+  box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
+}
+
+.clixplit-panel {
+  background-color: #ffffff;
+  box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
+  margin: 0 10px 0 -10px;
+  min-height: 420px;
+}
+
+.mymodal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+  background-color: rgba( 0, 0, 0, .8);
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: scroll;
+}
+
+.mymodal-box {
+  top: 25%;
+  left: 20%;
+  right: 20%;
+  position: absolute;
+  box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
+}
+
+.form-space {
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+
+.url-input {
+ border-radius: 4px !important;
+}
+
+button.clixplit-btn-add {
+ border-radius: 50% !important;
+ margin-left: 14px !important;
+ height: 25px;
+ width: 15px;
+ font-size: 10px;
+}
+
+.glyphicon {
+  left: -5px;
+}
+
+.bottom-form-space {
+ margin-bottom: 5px;
+}
+
+.hr-width > hr {
+ width:35%;
+ margin: 8px auto;
+}
+
+.clixplit-labels {
+  margin: 0 5px;
+}
+
+.clixplit-switch-off {
+  margin: 0;
+  padding: 2px;
+  border-radius: 50%;
+  border: 3px solid #b5bfca;
+  font-size: 9px;
+}
+
+.clixplit-switch-center-off {
+  margin: 0;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #b5bfca;
+}
+
+.clixplit-switch-on {
+  margin: 0;
+  padding: 2px;
+  border-radius: 50%;
+  border: 3px solid #36d9a9;
+  font-size: 9px;
+}
+
+.clixplit-switch-center-on {
+  margin: 0;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #36d9a9;
+}
+
+.switch-position {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.clixplit-switch-off:hover {
+  border-color: #d6e0ec;
+}
+
+.clixplit-switch-off:hover .clixplit-switch-center-off {
+  background: #d6e0ec;
+}
+
+.clixplit-switch-on:hover {
+  border-color: #7cdabe;
+}
+
+.clixplit-switch-on:hover .clixplit-switch-center-on {
+  background: #7cdabe;
+}
+
+.clixplit-save-btn {
+  background: #36d9a9;
+  color: #fff;
+  border-radius: 0;
+  width: 90px;
+  margin: 0 8px;
+  box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
+}
+
+.clixplit-save-btn:hover {
+  background: #7cdabe;
+  font-weight: bold;
+}
+
+.clixplit-cancel-btn {
+  background: #df671a;
+  color: #fff;
+  border-radius: 0;
+  width: 90px;
+  margin: 0 8px;
+  box-shadow:  0 4px 6px 0 rgba( 0, 0, 0, .3);
+}
+
+.clixplit-cancel-btn:hover {
+  background: #f09860;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 784px) {
+  .mymodal-box {
+    top: 5%;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+  }
+}
+
+@media only screen and (max-width: 605px) {
+  .nav-item {
+    display: block;
+    position: relative;
+    margin: 0 -20px;
+  }
+
+  .nav-item > a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .nav-buttons {
+    border-radius: 0;
+  }
+
+  .nav-item:after {
+    content: " ";
+    display: block;
+    clear: both;
+    position: relative;
+    height: 33px;
+    z-index: -1;
+  }
+}
