@@ -10,7 +10,9 @@
       ed.addCommand('clixplit', function() {
         var selected_text = ed.selection.getContent();
         var return_text = '';
-        return_text = '<a href="http://wonkasoft.com">' + selected_text + '</a>';
+        $mouse_over_url = $('[name="mouse-over-url"]').val();
+        alert($mouse_over_url);
+        return_text = '<a href="' + $mouse_over_url + '">' + selected_text + '</a>';
         ed.execCommand('mceInsertContent', 0, return_text);
       });
     },

@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 /*!
  * cliXplit v1.0.0 (http://wonkasoft.com)
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
-
  @font-face {
   font-family: 'Roboto-Regular';
   src: url('../fonts/Roboto-Regular.ttf');
@@ -325,7 +323,6 @@ button.clixplit-btn-add {
 .clixplit-cancel-btn:hover {
   background: #f09860;
   font-weight: bold;
-  position: absolute;
 }
 
 /*meta-box page*/
