@@ -72,6 +72,7 @@ function clixplit_register_buttons( $buttons ) {
 // Add new container in new page
 
 add_action( "add_meta_boxes_page", "clixplit_meta_box" );
+add_action( "add_meta_boxes_post", "clixplit_meta_box2" );
 
 // Register Your Meta box
 function clixplit_meta_box( $post ) {
@@ -80,8 +81,19 @@ function clixplit_meta_box( $post ) {
        'Clixplit Plugin', // This is the title
        'clixplit_meta_box_callback', // The callback function
        'page', // Register on post type = page
-       'advanced', // This is where the box is located : normal, side, advanced
+       'normal', // This is where the box is located : normal, side, advanced
        'high' // Set priority: low, high
+    );
+}
+
+function clixplit_meta_box2( $post ) {
+    add_meta_box( 
+       'clixplit_meta_box', // This is HTML id
+       'Clixplit Plugin', // This is the title
+       'clixplit_meta_box_callback', // The callback function
+       'post', // Register on post type = page
+       'side', // This is where the box is located : normal, side, advanced
+       'low' // Set priority: low, high
     );
 }
 
