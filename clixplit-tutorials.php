@@ -13,7 +13,7 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 text-center bottom-space">
 				<div class="col-xs-12">
@@ -37,7 +37,58 @@ if (!current_user_can('manage_options')) {
 	</div>
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
-			<div class="col-xs-12  text-center">
+			<div class="col-xs-12  vertical-space">
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">The Basics & Functionaity</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">Hyperlink Options</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">Page / Post Options</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<span><h1 class="clixplit-tut-middle-text">VIDEOS, PDFs, AD TO ADVANCED USER MASTERMIND</h1></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">Global Campaigns</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">Advanced Hyperlink Options</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<label class="clixplit-tut-panel-labels">Advanced User Mastermind</label>
+					<div class="panel panel-default clixplit-tutorial-panel">
+						<img src="http://localhost/wordpress/wp-content/plugins/clixplit/img/clixplit-logo-bw.png" class="img-responsive">
+					</div>
+					<label class="clixplit-pdf-label">>> Download PDF</label>
+				</div>
 			</div>
 		</div>
 	</div>

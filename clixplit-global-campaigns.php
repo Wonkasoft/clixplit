@@ -14,7 +14,7 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 text-center bottom-space">
 				<div class="col-xs-12">
@@ -51,7 +51,7 @@ if (!current_user_can('manage_options')) {
 						<table class="table table-hover table-striped">
 							<thead>
 								<tr>
-									<th><input class="item-checkbox" type="checkbox" value=""></th>
+									<th><input id="clixplit-check-all" class="item-checkbox" type="checkbox" value=""></th>
 									<th>Keyword</th>
 									<th>Created</th>
 									<th>#Pr | #Sc</th>
@@ -105,7 +105,7 @@ if (!current_user_can('manage_options')) {
 						</div>
 						<div class="vertical-space">
 							<form action="">
-								<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+								<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
 							</form>
 						</div>
 					</div>
@@ -113,10 +113,10 @@ if (!current_user_can('manage_options')) {
 						<div class="form-group empty-form-group">
 							<form action="">
 								<div class="col-xs-6 vertical-space">
-									<label id="primary-url-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+									<label id="posts-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
 								</div>
 								<div class="col-xs-6 vertical-space">
-									<label id="primary-url-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+									<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
 								</div>
 							</form>
 						</div>
@@ -134,7 +134,7 @@ if (!current_user_can('manage_options')) {
 						</div>
 							<div class="vertical-space">
 								<form action="">
-									<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+									<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
 								</form>
 							</div>
 						</div>
@@ -142,14 +142,14 @@ if (!current_user_can('manage_options')) {
 					<div class="col-xs-12 text-center">
 						<div class="hr-width"><hr /></div>
 						<form action="">
-							<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch"><span class="clixplit-switch-center"></span></span><span class="switch-position">off</span>
+							<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
 						</form>
 						<div class="hr-width"><hr /></div>
 					</div>
-					<div class="col-xs-12 text-center bottom-space">
+					<div class="col-xs-12 text-center vertical-space">
 
-						<button type="button" class="btn btn-primary">save</button>
-						<button type="button" class="btn btn-default">cancel</button>
+						<button type="button" class="btn btn-default clixplit-save-btn">save</button>
+						<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 
 					</div>
 				</div>
