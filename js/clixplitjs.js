@@ -15,10 +15,29 @@
  			$(".mymodal").css({"visibility":"hidden", "opacity": "0"});
  		}
  	})
-
+ 	
+ 	$(document).on('click', '.btn-add', function(e) {
+		e.preventDefault();
+ 		$maxInputs = 5;
+ 		$controlsSelect = $(this).parents('.controls').attr('id');
+ 		if ($('div', $(this).parents('.controls:first')).length < $maxInputs) {
+	 		$controlsSelect = $('#' + $controlsSelect);
+	 		$controlsClone = $(this).parents('.entry:first');
+ 			$newInput = $controlsClone.clone().appendTo($controlsSelect);
+ 			$newInput.find('input').val('');
+ 			$controlsSelect.find('.entry:not(:last) .btn-add').removeClass('btn-add').addClass('btn-remove').removeClass('btn-success').addClass('btn-danger').html('<span class="glyphicon glyphicon-minus"></span>');
+ 		}
+ 		else {
+ 			alert("5 imput fields is the max that you can make.");
+ 		}
+ 	}).on('click', '.btn-remove', function(e) {
+ 		$(this).parents('.entry:first').remove();
+ 		e.preventDefault();
+ 		return false;
+ 	})
  })
  $(function() {
- 	$( document ).on('click', '.btn-add', function(e) {
+ 	/*$( document ).on('click', '.btn-add', function(e) {
  		$formSelect = $(this).parents('form').attr('id'); 
  		$formSelect = $('.controls #' + $formSelect + ':first');
  		if ($('div', $formSelect).length <= 4) {
@@ -34,7 +53,7 @@
  		$(this).parents('.entry:first').remove();
  		e.preventDefault();
  		return false;
- 	})
+ 	})*/
  	$('.clixplit-switch-off').click(function(e) {
  		if ($(this).hasClass('clixplit-switch-off')) {
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
