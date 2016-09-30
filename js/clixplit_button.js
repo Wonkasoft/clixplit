@@ -10,11 +10,13 @@ $(function() {
 
       ed.addCommand('clixplit', function() {
         $(".mymodal").css({"visibility": "inherit", "opacity": "1"});
-        var selected_text = ed.selection.getContent();
-        var return_text = '';
-        $primary_url = $('[name="primary[]"]').val();
-        return_text = '<a href="' + $primary_url + '">' + selected_text + '</a>';
-        ed.execCommand('mceInsertContent', 0, return_text);
+        $('.clixplit-save-btn').click(function() {
+          var selected_text = ed.selection.getContent();
+          var return_text = '';
+          $primary_url = $('[name="primary[]"]').val();
+          return_text = '<a href="' + $primary_url + '">' + selected_text + '</a>';
+          ed.execCommand('mceInsertContent', 0, return_text);
+        });
       });
     },
     getInfo : function() {
