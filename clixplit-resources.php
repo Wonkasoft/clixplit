@@ -38,13 +38,6 @@ if (!current_user_can('manage_options')) {
 	</div>
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
-			<div class="col-xs-12 text-center vertical-space">
-				<div class="col-xs-12">
-					<h1>*Links to Resources, Supportform, Feature requests*</h1>
-				</div>
-			</div>
-		</div>
-		<div class="row">
 			<div class="col-xs-12 vertical-space">
 				<div class="col-xs-4">
 					<div class="text-center">

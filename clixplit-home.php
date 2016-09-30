@@ -40,7 +40,7 @@ if (!current_user_can('manage_options')) {
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<div class="col-xs-12 vertical-space">
-					<h1 class="vertical-middle">NEWS, UPDATES, FUTURE SOFTWARE ADS</h1>
+					
 				</div>
 			</div>
 		</div>

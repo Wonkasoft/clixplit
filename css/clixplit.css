@@ -26,8 +26,8 @@
 .switch-position,
 .btn, .btn-primary,
 .empty-form-group,
+.clixplit-labels,
 .clixplit-pdf-label,
-.clixplit-tut-middle-text,
 .vertical-middle,
 .clixplit-save-btn,
 .clixplit-cancel-btn {
@@ -67,19 +67,15 @@
   margin-top: 10%;
 }
 
-.clixplit-tut-panel-labels {
+.clixplit-labels, thead > tr > th,
+#modal-form-campaigns label,
+#modal-form-meta-box label {
   color: rgba(189, 195, 199,1.0);
 }
 
 .clixplit-pdf-label {
   color: rgba(192, 57, 43,1.0);
   margin-top: -30px;
-}
-
-.clixplit-tut-middle-text {
-  margin: -35px 0 0;
-  font-weight: bold;
-  opacity: .2;
 }
 
 .nav-buttons.current {
@@ -118,6 +114,10 @@
   background-color: #ff6102;
 }
 
+.nav-buttons:focus {
+  background-color: #ff6102;
+}
+
 .nav-item > a {
   color: #ffffff;
   font-weight: 700;
@@ -146,6 +146,10 @@
 }
 
 .nav-campaign-buttons:active {
+  background-color: #009f92;
+}
+
+.nav-campaign-buttons:focus {
   background-color: #009f92;
 }
 
@@ -185,7 +189,7 @@ tr > td:first-child {
 
 .clixplit-panel {
   background-color: #ffffff;
-  box-shadow:  0 2px 6px 0 rgba( 0, 0, 0, .3);
+  box-shadow:  0 2px 6px 0 rgba( 0, 0, 0, .2);
   margin: 0 10px 0 -10px;
   min-height: 420px;
 }
@@ -306,12 +310,12 @@ button.clixplit-btn-add {
 
 .clixplit-save-btn:hover {
   background: #7cdabe;
-  font-weight: bold;
+  color: #fff;
   border: none;
 }
 
 .clixplit-cancel-btn {
-  background: #df671a;
+  background: #ff6102;
   color: #fff;
   border-radius: 0;
   width: 90px;
@@ -321,7 +325,19 @@ button.clixplit-btn-add {
 
 .clixplit-cancel-btn:hover {
   background: #f09860;
-  font-weight: bold;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-cancel-btn:active {
+  background: #df671a;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-cancel-btn:focus {
+  background: #df671a;
+  color: #fff;
   border: none;
 }
 
