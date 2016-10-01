@@ -10,11 +10,14 @@
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
  	})
  	$(".clixplit-cancel-btn").click(function () {
- 		var r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will not be saved.");
+ 		var r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
  		if (r == true) {
  			$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  		}
  	})
+	$(".clixplit-save-btn").click(function () {
+		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
+	})
  	
  	$(document).on('click', '.btn-add', function(e) {
 		e.preventDefault();

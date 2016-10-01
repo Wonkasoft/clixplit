@@ -28,6 +28,7 @@
 .clixplit-switch-text-on,
 .btn, .btn-primary,
 .empty-form-group,
+.clixplit-labels,
 .clixplit-pdf-label,
 .clixplit-labels,
 .vertical-middle,
@@ -127,6 +128,10 @@ thead > tr > th,
   background-color: #ff6102;
 }
 
+.nav-buttons:focus {
+  background-color: #ff6102;
+}
+
 .nav-item > a {
   color: #ffffff;
   font-weight: 700;
@@ -155,6 +160,10 @@ thead > tr > th,
 }
 
 .nav-campaign-buttons:active {
+  background-color: #009f92;
+}
+
+.nav-campaign-buttons:focus {
   background-color: #009f92;
 }
 
