@@ -9,7 +9,7 @@ $(function() {
       
 
       ed.addCommand('clixplit', function() {
-        $(".mymodal").css({"visibility": "inherit", "opacity": "1"});
+        $(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
         var selected_text = ed.selection.getContent();
         var return_text = '';
         $primary_url = $('[name="primary[]"]').val();

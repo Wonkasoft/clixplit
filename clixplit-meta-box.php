@@ -12,7 +12,7 @@
 	</div>
 </div>
 <div class="mymodal">
-	<div class="container-fluid clixplit-panel mymodal-box">
+	<div class="container-fluid clixplit-panel-2 mymodal-box">
 		<div class="row">
 			<div class="col-xs-12">
 				<form id="modal-form-meta-box" role="form" autocomplete="off">
@@ -25,14 +25,12 @@
 								<div class="entry input-group col-xs-12 bottom-form-space">
 									<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 									<span class="input-group-btn">
-										<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+										<button class="btn btn-success btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
 									</div>
 								</div>
 							</div>
 							<div class="vertical-space">
-								<form action="">
-									<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
-								</form>
+								<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-6">
@@ -42,32 +40,26 @@
 									<div class="entry input-group col-xs-12 bottom-form-space">
 										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 										<span class="input-group-btn">
-											<button class="btn btn-success btn-add clixplit-btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+											<button class="btn btn-success btn-add clixplit-secondary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
 									</div>
 								</div>
 								<div class="vertical-space">
-									<form action="">
-										<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
-									</form>
+									<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 								</div>
 							</div>
-						</div>
-						<div class="col-xs-12 text-center">
-							<div class="hr-width"><hr /></div>
-							<form action="">
-								<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="switch-position">off</span>
-							</form>
-							<div class="hr-width"><hr /></div>
-						</div>
-						<div class="col-xs-12 text-center vertical-space">
-							<button type="button" class="btn btn-default clixplit-save-btn">save</button>
-							<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
-						</div>
-					</form>
+							<div class="col-xs-12 text-center">
+								<div class="hr-width"><hr /></div>
+								<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+								<div class="hr-width"><hr /></div>
+							</div>
+							<div class="col-xs-12 text-center vertical-space">
+								<button type="button" class="btn btn-default clixplit-save-btn">save</button>
+								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
 
