@@ -101,4 +101,142 @@ function clixplit_meta_box_callback() {
   require('clixplit-meta-box.php');
 }
 
+// Create database for Page Redirect Feature
+global $clixplit_db_version;
+$clixplit_db_version = '1.0';
+
+function clixplit_redirect_install() {
+  global $wpdb;
+  global $clixplit_db_version;
+
+  $table_name = $wpdb->prefix . 'clixplit_redirect';
+  
+  $charset_collate = $wpdb->get_charset_collate();
+
+  $sql = "CREATE TABLE $table_name ( 
+    id INT(15) NOT NULL AUTO_INCREMENT,
+    created DATE NOT NULL,
+    mouseoveropt BOOLEAN NOT NULL,
+    mouseoverurl VARCHAR(850) NOT NULL,
+    exitredirectopt BOOLEAN NOT NULL,
+    exitredirecturl VARCHAR(850) NOT NULL,
+    exitmessage TEXT NOT NULL, 
+    secondaryopt BOOLEAN NOT NULL,
+    secondaryurl VARCHAR(850) NOT NULL, 
+    PRIMARY KEY (id)
+    ) $charset_collate;";
+
+  require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+  dbDelta( $sql );
+
+  add_option( 'clixplit_db_version', $clixplit_db_version );
+
+  // Check for update version to update table structure
+    $installed_ver = get_option( "clixplit_db_version" );
+
+    if ( $installed_ver != $clixplit_db_version ) {
+
+        $table_name = $wpdb->prefix . 'clixplit_redirect';
+      
+      $charset_collate = $wpdb->get_charset_collate();
+
+      $sql = "CREATE TABLE $table_name ( 
+        id INT(15) NOT NULL AUTO_INCREMENT,
+        created DATE NOT NULL,
+        mouseoveropt BOOLEAN NOT NULL,
+        mouseoverurl VARCHAR(850) NOT NULL,
+        exitredirectopt BOOLEAN NOT NULL,
+        exitredirecturl VARCHAR(850) NOT NULL,
+        exitmessage TEXT NOT NULL, 
+        secondaryopt BOOLEAN NOT NULL,
+        secondaryurl VARCHAR(850) NOT NULL, 
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+
+      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+      dbDelta( $sql );
+
+      update_option( "clixplit_db_version", $clixplit_db_version );
+  }
+}
+
+register_activation_hook( __FILE__, 'clixplit_redirect_install' );
+
+// Create database for keyword crawl feature
+function clixplit_keyword_install() {
+  global $wpdb;
+  global $clixplit_db_version;
+
+  $table_name = $wpdb->prefix . 'clixplit_keyword';
+  
+  $charset_collate = $wpdb->get_charset_collate();
+
+  $sql = "CREATE TABLE $table_name ( 
+    id INT(15) NOT NULL AUTO_INCREMENT,
+    created DATE NOT NULL,
+    keyword TEXT(450) NOT NULL,
+    newtaburl VARCHAR(850) NOT NULL,
+    secondaryurl VARCHAR(850) NOT NULL,
+    postopt BOOLEAN NOT NULL,
+    pageopt BOOLEAN NOT NULL, 
+    enablemobile BOOLEAN NOT NULL,
+    numofprimary int(100) NOT NULL, 
+    numofsecondary int(100) NOT NULL, 
+    totalclicks int(250) NOT NULL, 
+    unqclicks int(250) NOT NULL, 
+    instances int(250) NOT NULL, 
+    globalopt BOOLEAN NOT NULL, 
+    PRIMARY KEY (id)
+    ) $charset_collate;";
+
+  require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+  dbDelta( $sql );
+
+  // Check for update version to update table structure
+  $installed_ver = get_option( "clixplit_db_version" );
+
+  if ( $installed_ver != $clixplit_db_version ) {
+
+      $table_name = $wpdb->prefix . 'clixplit_keyword';
+    
+      $charset_collate = $wpdb->get_charset_collate();
+
+      $sql = "CREATE TABLE $table_name ( 
+      id INT(15) NOT NULL AUTO_INCREMENT,
+      created DATE NOT NULL,
+      keyword TEXT(450) NOT NULL,
+      newtaburl VARCHAR(850) NOT NULL,
+      secondaryurl VARCHAR(850) NOT NULL,
+      postopt BOOLEAN NOT NULL,
+      pageopt BOOLEAN NOT NULL, 
+      enablemobile BOOLEAN NOT NULL,
+      numofprimary int(100) NOT NULL, 
+      numofsecondary int(100) NOT NULL, 
+      totalclicks int(250) NOT NULL, 
+      unqclicks int(250) NOT NULL, 
+      instances int(250) NOT NULL, 
+      globalopt BOOLEAN NOT NULL, 
+      PRIMARY KEY (id)
+      ) $charset_collate;";
+
+      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+      dbDelta( $sql );
+
+      update_option( "clixplit_db_version", $clixplit_db_version );
+  }
+}
+
+register_activation_hook( __FILE__, 'clixplit_keyword_install' );
+
+
+// Check for plugin update that requires new database structure 
+function clixplit_update_db_check() {
+    global $clixplit_db_version;
+    if ( get_site_option( 'clixplit_db_version' ) != $clixplit_db_version ) {
+        clixplit_redirect_install();
+        clixplit_keyword_install();
+    }
+}
+add_action( 'plugins_loaded', 'clixplit_update_db_check' );
+
 ?>
