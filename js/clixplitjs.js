@@ -7,14 +7,17 @@
 
  $( document ).ready(function() {
  	$("a.nav-campaign-buttons").click(function() {
- 		$(".mymodal").css({"visibility": "inherit", "opacity": "1"});
+ 		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
  	})
  	$(".clixplit-cancel-btn").click(function () {
- 		var r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will not be saved.");
+ 		var r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
  		if (r == true) {
- 			$(".mymodal").css({"visibility":"hidden", "opacity": "0"});
+ 			$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  		}
  	})
+	$(".clixplit-save-btn").click(function () {
+		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
+	})
  	
  	$(document).on('click', '.btn-add', function(e) {
 		e.preventDefault();
@@ -35,35 +38,24 @@
  		e.preventDefault();
  		return false;
  	})
+
+  // clixplit_meta_box styling
+  $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
+
+
  })
  $(function() {
- 	/*$( document ).on('click', '.btn-add', function(e) {
- 		$formSelect = $(this).parents('form').attr('id'); 
- 		$formSelect = $('.controls #' + $formSelect + ':first');
- 		if ($('div', $formSelect).length <= 4) {
- 			e.preventDefault();
- 			$controlForm = $formSelect, $currentEntry = $(this).parents('.entry:first'), $newEntry = $($currentEntry.clone()).appendTo($controlForm);
- 			$newEntry.find('input').val('');
- 			$controlForm.find('.entry:not(:last) .btn-add').removeClass('btn-add').addClass('btn-remove').removeClass('btn-success').addClass('btn-danger').html('<span class="glyphicon glyphicon-minus"></span>');
- 		} 
- 		else {
- 			alert("5 imput fields is the max that you can make.");
- 		}
- 	}).on('click', '.btn-remove',function(e) {
- 		$(this).parents('.entry:first').remove();
- 		e.preventDefault();
- 		return false;
- 	})*/
  	$('.clixplit-switch-off').click(function(e) {
  		if ($(this).hasClass('clixplit-switch-off')) {
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
  			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
- 			$(this).next('.switch-position').text('on');
+ 			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+ 			
  		}
  		else {
  			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
  			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
- 			$(this).next('.switch-position').text('off');
+ 			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
  		}
  	})
  	$('#clixplit-check-all').change(function(){
