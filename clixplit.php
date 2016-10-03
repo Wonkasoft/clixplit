@@ -78,7 +78,7 @@ add_action( "add_meta_boxes_post", "clixplit_meta_box2" );
 function clixplit_meta_box( $post ) {
     add_meta_box( 
        'clixplit_meta_box', // This is HTML id
-       'Clixplit Plugin', // This is the title
+       'page redirect options', // This is the title
        'clixplit_meta_box_callback', // The callback function
        'page', // Register on post type = page
        'normal', // This is where the box is located : normal, side, advanced
@@ -89,7 +89,7 @@ function clixplit_meta_box( $post ) {
 function clixplit_meta_box2( $post ) {
     add_meta_box( 
        'clixplit_meta_box', // This is HTML id
-       'Clixplit Plugin', // This is the title
+       'page redirect options', // This is the title
        'clixplit_meta_box_callback', // The callback function
        'post', // Register on post type = page
        'side', // This is where the box is located : normal, side, advanced
