@@ -68,6 +68,14 @@ if (!current_user_can('manage_options')) {
 									<td>New York</td>
 									<td>New York</td>
 								</tr>
+								<tr>
+									<td><input class="item-checkbox" type="checkbox" value=""></td>
+									<td>Anna</td>
+									<td>Pitt</td>
+									<td>35</td>
+									<td>New York</td>
+									<td>New York</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -105,7 +113,7 @@ if (!current_user_can('manage_options')) {
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
-							<div class="control-group" id="primary-url">
+							<div class="control-group" id="primary-url-campaigns-modal">
 								<label class="control-label" for="primary-url-controls">input primary url (new page/tab)</label>
 								<div id="primary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
@@ -116,11 +124,11 @@ if (!current_user_can('manage_options')) {
 									</div>
 								</div>
 								<div class="vertical-space">
-									<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+									<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<div class="control-group" id="secondary-url">
+								<div class="control-group" id="secondary-url-campaigns-modal">
 									<label class="control-label" for="secondary-url-controls">input secondary url (page redirect)</label>
 									<div id="secondary-url-controls"  class="controls">
 										<div class="entry input-group col-xs-12 bottom-form-space">
@@ -131,7 +139,7 @@ if (!current_user_can('manage_options')) {
 										</div>
 									</div>
 									<div class="vertical-space">
-										<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+										<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
 									</div>
 								</div>
 							</div>
