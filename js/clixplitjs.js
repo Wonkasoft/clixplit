@@ -21,18 +21,12 @@
  	
  	$(document).on('click', '.btn-add', function(e) {
 		e.preventDefault();
- 		$maxInputs = 5;
  		$controlsSelect = $(this).parents('.controls').attr('id');
- 		if ($('div', $(this).parents('.controls:first')).length < $maxInputs) {
 	 		$controlsSelect = $('#' + $controlsSelect);
 	 		$controlsClone = $(this).parents('.entry:first');
  			$newInput = $controlsClone.clone().appendTo($controlsSelect);
  			$newInput.find('input').val('');
  			$controlsSelect.find('.entry:not(:last) .btn-add').removeClass('btn-add').addClass('btn-remove').removeClass('btn-success').addClass('btn-danger').html('<span class="glyphicon glyphicon-minus"></span>');
- 		}
- 		else {
- 			alert("5 imput fields is the max that you can make.");
- 		}
  	}).on('click', '.btn-remove', function(e) {
  		$(this).parents('.entry:first').remove();
  		e.preventDefault();
@@ -45,6 +39,32 @@
 
  })
  $(function() {
+ 	$('.clixplit-primary-switch-off').click(function(e) {
+ 		if ($(this).hasClass('clixplit-primary-switch-off')) {
+ 			$(this).removeClass('clixplit-primary-switch-off').addClass('clixplit-primary-switch-on');
+ 			$(this).find('.clixplit-primary-switch-center-off').removeClass('clixplit-primary-switch-center-off').addClass('clixplit-primary-switch-center-on');
+ 			$(this).next('.clixplit-primary-switch-text-off').removeClass('clixplit-primary-switch-text-off').addClass('clixplit-primary-switch-text-on').text('on');
+ 			
+ 		}
+ 		else {
+ 			$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
+ 			$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
+ 			$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
+ 		}
+ 	})
+ 	$('.clixplit-secondary-switch-off').click(function(e) {
+ 		if ($(this).hasClass('clixplit-secondary-switch-off')) {
+ 			$(this).removeClass('clixplit-secondary-switch-off').addClass('clixplit-secondary-switch-on');
+ 			$(this).find('.clixplit-secondary-switch-center-off').removeClass('clixplit-secondary-switch-center-off').addClass('clixplit-secondary-switch-center-on');
+ 			$(this).next('.clixplit-secondary-switch-text-off').removeClass('clixplit-secondary-switch-text-off').addClass('clixplit-secondary-switch-text-on').text('on');
+ 			
+ 		}
+ 		else {
+ 			$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
+ 			$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
+ 			$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
+ 		}
+ 	})
  	$('.clixplit-switch-off').click(function(e) {
  		if ($(this).hasClass('clixplit-switch-off')) {
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
