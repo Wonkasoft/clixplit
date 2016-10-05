@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Clixplit
 * Plugin URI: http://clixplit.com
-* Description: Clixplit milks your traffic clicks for all they're worth while keeping it classy.
+* Description: Clixplit increases visitor clicks by 300%+ while keeping your site classy.
 * Author: EpicWin Solutions, Wonkasoft
 * Version: 1.0
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
@@ -92,7 +92,7 @@ function clixplit_meta_box2( $post ) {
        'page redirect options', // This is the title
        'clixplit_meta_box_callback', // The callback function
        'post', // Register on post type = page
-       'side', // This is where the box is located : normal, side, advanced
+       'normal', // This is where the box is located : normal, side, advanced
        'low' // Set priority: low, high
     );
 }
