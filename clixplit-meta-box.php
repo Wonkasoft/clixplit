@@ -13,7 +13,7 @@
 					<div class="col-xs-12 col-md-4">
 						<div class="control-group" id="mouseover-url">
 						<div class="bottom-space">
-								<label id="mouseover-url-label" class="clixplit-labels">mosueover redirect:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
+								<label id="mouseover-url-label" class="clixplit-labels">mosueover redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 							</div>
 							<div id="mouseover-url-controls" class="controls">
 								<div class="entry input-group col-xs-12 bottom-form-space">
@@ -45,7 +45,7 @@
 						<div class="col-xs-12 col-md-4">
 							<div class="control-group" id="secondary-url">
 							<div class="bottom-space">
-								<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
+								<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">

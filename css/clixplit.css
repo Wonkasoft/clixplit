@@ -693,4 +693,11 @@ button.clixplit-secondary-add:active:focus {
     height: 33px;
     z-index: -1;
   }
+
+  .nav-item > a.current:after {
+    border-right-color: #f9ae81;
+    border-bottom-color: transparent;
+    bottom: 0px;
+    left: 95.3%;
+  }
 }
