@@ -49,16 +49,16 @@
  		}
  		else {
  			var primarylinkopt = confirm("Are you sure you would like to disable link rotation?\nYour additional urls will be lost if you disable this option.");
- 		if (primarylinkopt == true) {
- 			$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
- 			$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
- 			$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
- 			$('.clixplit-primary-add').attr('disabled',true);
- 			$('#primary-url-controls').find('.entry:not(:first)').remove();
- 			$('#mouseover-url-controls').find('.entry:not(:first)').remove();
- 			$('#primary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
- 			$('#mouseover-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
- 		}
+	 		if (primarylinkopt == true) {
+	 			$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
+	 			$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
+	 			$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
+	 			$('.clixplit-primary-add').attr('disabled',true);
+	 			$('#primary-url-controls').find('.entry:not(:first)').remove();
+	 			$('#mouseover-url-controls').find('.entry:not(:first)').remove();
+	 			$('#primary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+	 			$('#mouseover-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+	 		}
 
  		}
  	})
@@ -94,12 +94,13 @@
  			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
  		}
  	})
- 	$('#clixplit-check-all').change(function(){
+ 	$('#clixplit-check-all').change(function() {
  		if($(this).prop('checked')){
  			$('tbody tr td input[type="checkbox"]').each(function(){
  				$(this).prop('checked', true);
  			})
- 		}else{
+ 		}
+ 		else {
  			$('tbody tr td input[type="checkbox"]').each(function(){
  				$(this).prop('checked', false);
  			})

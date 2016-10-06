@@ -40,7 +40,7 @@ if (!current_user_can('manage_options')) {
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<div class="col-xs-12 vertical-space">
-					
+					<iframe src="http://clixplit.com/blog" width="100%" height="500"><p>Your Browser Does Not Support This Function</p></iframe>
 				</div>
 			</div>
 		</div>

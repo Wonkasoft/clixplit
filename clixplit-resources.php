@@ -39,12 +39,14 @@ if (!current_user_can('manage_options')) {
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
 			<div class="col-xs-12 vertical-space">
-				<div class="col-xs-4">
+				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
 					<label class="clixplit-tut-panel-labels">Resources & Downloads</label>
 					</div>
+					<div class="col-xs-12 iframe-wrap"><iframe src="http://clixplit.com/mem-resources"><p>Your Browser Does Not Support This Function</p></iframe>
+					</div>
 				</div>
-				<div class="col-xs-4">
+				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
 					<label class="clixplit-tut-panel-labels">Need Help? Get Support!</label>
 					</div>
@@ -68,7 +70,7 @@ if (!current_user_can('manage_options')) {
 					  <button type="submit" class="btn btn-default">Submit</button>
 					</form>
 				</div>
-				<div class="col-xs-4">
+				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
 					<label class="clixplit-tut-panel-labels">Got an Idea? Let us know!</label>
 					</div>
