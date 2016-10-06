@@ -26,7 +26,7 @@
 	 		$controlsClone = $(this).parents('.entry:first');
  			$newInput = $controlsClone.clone().appendTo($controlsSelect);
  			$newInput.find('input').val('');
- 			$controlsSelect.find('.entry:not(:last) .btn-add').removeClass('btn-add').addClass('btn-remove').removeClass('btn-success').addClass('btn-danger').html('<span class="glyphicon glyphicon-minus"></span>');
+ 			$controlsSelect.find('.entry:not(:last) .btn-add').removeClass('btn-add').addClass('btn-remove').html('<span class="glyphicon glyphicon-minus"></span>');
  	}).on('click', '.btn-remove', function(e) {
  		$(this).parents('.entry:first').remove();
  		e.preventDefault();
@@ -44,12 +44,22 @@
  			$(this).removeClass('clixplit-primary-switch-off').addClass('clixplit-primary-switch-on');
  			$(this).find('.clixplit-primary-switch-center-off').removeClass('clixplit-primary-switch-center-off').addClass('clixplit-primary-switch-center-on');
  			$(this).next('.clixplit-primary-switch-text-off').removeClass('clixplit-primary-switch-text-off').addClass('clixplit-primary-switch-text-on').text('on');
+ 			$('.clixplit-primary-add').attr('disabled',false);
  			
  		}
  		else {
+ 			var primarylinkopt = confirm("Are you sure you would like to disable link rotation?\nYour additional urls will be lost if you disable this option.");
+ 		if (primarylinkopt == true) {
  			$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
  			$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
  			$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
+ 			$('.clixplit-primary-add').attr('disabled',true);
+ 			$('#primary-url-controls').find('.entry:not(:first)').remove();
+ 			$('#mouseover-url-controls').find('.entry:not(:first)').remove();
+ 			$('#primary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+ 			$('#mouseover-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+ 		}
+
  		}
  	})
  	$('.clixplit-secondary-switch-off').click(function(e) {
@@ -57,12 +67,18 @@
  			$(this).removeClass('clixplit-secondary-switch-off').addClass('clixplit-secondary-switch-on');
  			$(this).find('.clixplit-secondary-switch-center-off').removeClass('clixplit-secondary-switch-center-off').addClass('clixplit-secondary-switch-center-on');
  			$(this).next('.clixplit-secondary-switch-text-off').removeClass('clixplit-secondary-switch-text-off').addClass('clixplit-secondary-switch-text-on').text('on');
- 			
+ 			$('.clixplit-secondary-add').attr('disabled',false);
  		}
  		else {
- 			$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
- 			$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
- 			$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
+ 			var secondarylinkopt = confirm("Are you sure you would like to disable link rotation?\nYour additional urls will be lost if you disable this option.");
+ 			if (secondarylinkopt == true) {
+	 			$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
+	 			$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
+	 			$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
+	 			$('.clixplit-secondary-add').attr('disabled',true);
+	 			$('#secondary-url-controls').find('.entry:not(:first)').remove();	 			
+	 			$('#secondary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+ 			}
  		}
  	})
  	$('.clixplit-switch-off').click(function(e) {

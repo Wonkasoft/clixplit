@@ -19,7 +19,7 @@
 								<div class="entry input-group col-xs-12 bottom-form-space">
 									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url...">
 									<span class="input-group-btn">
-										<button class="btn btn-success btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+										<button class="btn btn-success btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 									</div>
 								</div>
 							</div>
@@ -51,7 +51,7 @@
 									<div class="entry input-group col-xs-12 bottom-form-space">
 										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 										<span class="input-group-btn">
-											<button class="btn btn-success btn-add clixplit-secondary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+											<button class="btn btn-success btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
 									</div>
 								</div>
@@ -118,7 +118,7 @@
 										<div class="entry input-group col-xs-12 bottom-form-space">
 											<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 											<span class="input-group-btn">
-												<button class="btn btn-success btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+												<button class="btn btn-success btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 											</div>
 										</div>
 									</div>
@@ -133,7 +133,7 @@
 											<div class="entry input-group col-xs-12 bottom-form-space">
 												<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 												<span class="input-group-btn">
-													<button class="btn btn-success btn-add clixplit-secondary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+													<button class="btn btn-success btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 												</div>
 											</div>
 										</div>

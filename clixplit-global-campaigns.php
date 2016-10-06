@@ -119,7 +119,7 @@ if (!current_user_can('manage_options')) {
 									<div class="entry input-group col-xs-12 bottom-form-space">
 										<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 										<span class="input-group-btn">
-											<button class="btn btn-success btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+											<button class="btn btn-success btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
 									</div>
 								</div>
@@ -134,7 +134,7 @@ if (!current_user_can('manage_options')) {
 										<div class="entry input-group col-xs-12 bottom-form-space">
 											<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 											<span class="input-group-btn">
-												<button class="btn btn-success btn-add clixplit-secondary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+												<button class="btn btn-success btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 											</div>
 										</div>
 									</div>
@@ -152,7 +152,7 @@ if (!current_user_can('manage_options')) {
 							</div>
 							<div class="row">
 								<div class="col-xs-12 text-center vertical-space">
-									<button type="button" class="btn btn-default clixplit-save-btn">save</button>
+									<input type="submit" class="btn btn-default clixplit-save-btn" value="save"></input>
 									<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 								</div>
 							</div>
