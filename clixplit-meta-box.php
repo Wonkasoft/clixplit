@@ -13,7 +13,7 @@
 					<div class="col-xs-12 col-md-4">
 						<div class="control-group" id="mouseover-url">
 						<div class="bottom-space">
-								<label id="primary-url-switch" class="clixplit-labels">mosueover redirect:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
+								<label id="mouseover-url-label" class="clixplit-labels">mosueover redirect:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
 							</div>
 							<div id="mouseover-url-controls" class="controls">
 								<div class="entry input-group col-xs-12 bottom-form-space">
@@ -24,13 +24,13 @@
 								</div>
 							</div>
 							<div class="vertical-space">
-								<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
+								<label id="mouseover-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-4 side-borders">
 						<div class="control-group" id="exit-redirect">
 						<div class="bottom-space">
-						<label id="mobile-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+						<label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 						</div>
 						<div id="exit-redirect-controls" class="controls">
 							<div class="entry input-group col-xs-12 bottom-form-space">
@@ -45,7 +45,7 @@
 						<div class="col-xs-12 col-md-4">
 							<div class="control-group" id="secondary-url">
 							<div class="bottom-space">
-								<label id="mouseover-switch" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
+								<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
@@ -60,7 +60,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<button type="button" class="btn btn-default clixplit-save-btn">save</button>
+								<input type="submit" class="btn btn-default clixplit-save-btn" value="save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 						</div>
