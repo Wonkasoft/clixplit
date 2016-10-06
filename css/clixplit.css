@@ -288,21 +288,31 @@ button.clixplit-primary-add {
  font-size: 10px;
  background: #36d9a9;
  border: none;
+ color: #fff;
 }
 
 button.clixplit-primary-add:hover {
   background: #7cdabe;
   border: none;
+  color: #fff;
 }
 
 button.clixplit-primary-add:active {
   background: #00bd85;
   border: none;
+  color: #fff;
 }
 
 button.clixplit-primary-add:focus {
   background: #00bd85;
   border: none;
+  color: #fff;
+}
+
+button.clixplit-primary-add:active:focus {
+  background: #00bd85;
+  border: none;
+  color: #fff;
 }
 
 button.clixplit-secondary-add {
@@ -313,21 +323,31 @@ button.clixplit-secondary-add {
  font-size: 10px;
  background: #f09860;
  border: none;
+ color: #fff;
 }
 
 button.clixplit-secondary-add:hover {
   background: #ff6400;
   border: none;
+  color: #fff;
 }
 
 button.clixplit-secondary-add:active {
   background: #c74e00;
   border: none;
+  color: #fff;
 }
 
 button.clixplit-secondary-add:focus {
   background: #c74e00;
   border: none;
+  color: #fff;
+}
+
+button.clixplit-secondary-add:active:focus {
+  background: #c74e00;
+  border: none;
+  color: #fff;
 }
 
 .glyphicon {
@@ -685,5 +705,5 @@ button.clixplit-secondary-add:focus {
    border-bottom-color: transparent;
    bottom: 0px;
    left: 95.3%;
- }
+  }
 }
