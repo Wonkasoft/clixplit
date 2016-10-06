@@ -19,7 +19,7 @@
 								<div class="entry input-group col-xs-12 bottom-form-space">
 									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url...">
 									<span class="input-group-btn">
-										<button class="btn btn-success btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+										<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 									</div>
 								</div>
 							</div>
@@ -51,7 +51,7 @@
 									<div class="entry input-group col-xs-12 bottom-form-space">
 										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 										<span class="input-group-btn">
-											<button class="btn btn-success btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
 									</div>
 								</div>
@@ -112,33 +112,33 @@
 							<div class="col-xs-12 vertical-space text-center">
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<div class="control-group" id="primary-url-modal">
-									<label class="control-label" for="primary-url-controls">input primary url (new page/tab)</label>
-									<div id="primary-url-controls" class="controls">
+								<div class="control-group" id="modal-primary-url">
+									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
+									<div id="modal-primary-url-controls" class="controls">
 										<div class="entry input-group col-xs-12 bottom-form-space">
 											<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 											<span class="input-group-btn">
-												<button class="btn btn-success btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+												<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 											</div>
 										</div>
 									</div>
 									<div class="vertical-space">
-										<label id="primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
+										<label id="modal-primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
 									</div>
 								</div>
 								<div class="col-xs-12 col-md-6">
-									<div class="control-group" id="secondary-url-modal">
-										<label class="control-label" for="secondary-url-controls">input secondary url (page redirect)</label>
-										<div id="secondary-url-controls" class="controls">
+									<div class="control-group" id="modal-secondary-url">
+										<label class="control-label" for="modal-secondary-url-controls">input secondary url (page redirect)</label>
+										<div id="modal-secondary-url-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
 												<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 												<span class="input-group-btn">
-													<button class="btn btn-success btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+													<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 												</div>
 											</div>
 										</div>
 										<div class="vertical-space">
-											<label id="secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
+											<label id="modal-secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
 										</div>
 									</div>
 									<div class="col-xs-12 text-center">
@@ -147,7 +147,7 @@
 										<div class="hr-width"><hr /></div>
 									</div>
 									<div class="col-xs-12 text-center vertical-space">
-										<button type="button" class="btn btn-default clixplit-save-btn">save</button>
+										<input type="submit" class="btn btn-default clixplit-save-btn" value="save">
 										<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 									</div>
 								</div>
