@@ -163,11 +163,11 @@ function clixplit_redirect_install() {
 register_activation_hook( __FILE__, 'clixplit_redirect_install' );
 
 // Create database for keyword crawl feature
-function clixplit_global_campaign() {
+function clixplit_global_campaigns() {
   global $wpdb;
   global $clixplit_db_version;
 
-  $table_name = $wpdb->prefix . 'clixplit_global_campaign';
+  $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
   
   $charset_collate = $wpdb->get_charset_collate();
 
@@ -197,7 +197,7 @@ function clixplit_global_campaign() {
 
   if ( $installed_ver != $clixplit_db_version ) {
 
-      $table_name = $wpdb->prefix . 'clixplit_global_campaign';
+      $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
     
       $charset_collate = $wpdb->get_charset_collate();
 
@@ -226,7 +226,7 @@ function clixplit_global_campaign() {
   }
 }
 
-register_activation_hook( __FILE__, 'clixplit_global_campaign' );
+register_activation_hook( __FILE__, 'clixplit_global_campaigns' );
 
 
 // Check for plugin update that requires new database structure 
@@ -234,7 +234,7 @@ function clixplit_update_db_check() {
     global $clixplit_db_version;
     if ( get_site_option( 'clixplit_db_version' ) != $clixplit_db_version ) {
         clixplit_redirect_install();
-        clixplit_global_campaign();
+        clixplit_global_campaigns();
     }
 }
 add_action( 'plugins_loaded', 'clixplit_update_db_check' );

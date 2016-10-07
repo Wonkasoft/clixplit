@@ -36,12 +36,8 @@
   // clixplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  alert($('#mouseover-url-label').next().next().text());
-  $mouseoverSwitch = $($('#mouseover-url-label').next().next());
-  $mouseoverSwitch.change(function () {
-  	alert($('#mouseover-url-label').next().next().text());
-  })
- })
+  
+   })
  $(function() {
  	$('.clixplit-primary-switch-off').click(function(e) {
  		$controlid = $('#' + $(this).parent('div').prev().attr('id'));

@@ -39,16 +39,28 @@ if (!current_user_can('manage_options')) {
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
 			<div class="col-xs-12 text-center">
-				<div class="col-xs-12 vertical-space">
-					<iframe src="http://clixplit.com/blog" width="100%" height="500"><p>Your Browser Does Not Support This Function</p></iframe>
+				<div class="col-xs-12 col-md-4 vertical-space">
+					<?php include('rss_class.php');
+					$feed_url = 'http://clixplit.com/feed/';
+					$category_pass = 'Updates';
+					$feedlist_Updates = new rss($feed_url, $category_pass);
+					echo $feedlist_Updates->display(6,"Updates From Clixplit"); ?>
+				</div>
+				<div class="col-xs-12 col-md-4 vertical-space">
+					<?php
+					$feed_url = 'http://clixplit.com/feed/';
+					$category_pass = 'News';
+					$feedlist_News = new rss($feed_url, $category_pass);
+					echo $feedlist_News->display(6,"News From Clixplit"); ?>
+				</div>
+				<div class="col-xs-12 col-md-4 vertical-space">
+					<?php
+					$feed_url = 'http://clixplit.com/feed/';
+					$category_pass = 'New Products';
+					$feedlist_Products = new rss($feed_url, $category_pass);
+					echo $feedlist_Products->display(6,"New Software Products"); ?>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </div> <!-- end content-wrap -->
-
-<?php
-
-
-?>
