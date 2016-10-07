@@ -17,7 +17,7 @@
 							</div>
 							<div id="mouseover-url-controls" class="controls">
 								<div class="entry input-group col-xs-12 bottom-form-space">
-									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url...">
+									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url..." disabled="disabled">
 									<span class="input-group-btn">
 										<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 									</div>
@@ -34,10 +34,10 @@
 						</div>
 						<div id="exit-redirect-controls" class="controls">
 							<div class="entry input-group col-xs-12 bottom-form-space">
-							<input type="text" class="form-control url-input" name="exit-pop[]" placeholder="url...">
+							<input type="text" class="form-control url-input" name="exit-pop[]" placeholder="url..." disabled="disabled">
 							</div>
 							<div class="entry input-group col-xs-12 bottom-form-space">
-							 <textarea class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..."></textarea>
+							 <textarea class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
 							 </div>
 						</div>
 						</div>
@@ -49,7 +49,7 @@
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
+										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url..." disabled="disabled">
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
@@ -141,8 +141,11 @@
 											<label id="modal-secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
 										</div>
 									</div>
-									<div class="col-xs-12 text-center">
+									<div class="col-xs-12 text-center bottom-space">
 										<div class="hr-width"><hr /></div>
+										<label id="campaign-add-switch" class="clixplit-labels">enable for global:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+									</div>
+									<div class="col-xs-12 text-center">
 										<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 										<div class="hr-width"><hr /></div>
 									</div>
