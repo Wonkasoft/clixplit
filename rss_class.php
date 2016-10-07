@@ -1,4 +1,11 @@
 <?php
+// Add this to the page for display!
+//<?php include('rss_class.php');
+//          $feed_url = 'http://clixplit.com/feed/';
+//          $category_pass = 'Updates';
+//          $feedlist_Updates = new rss($feed_url, $category_pass);
+//         echo $feedlist_Updates->display(6,"Updates From Clixplit"); 
+
 class rss {
   var $feed;
   var $category_type;
@@ -24,11 +31,11 @@ class rss {
         $image = $rss->channel->item->enclosure->attributes();
 
         $rss_split[] = '
-        <li>
-          <h5><a href="'.$link.'">'.$title.'</h5>
+        <div class="col-xs-12"><ul class="newsBlock">
+        <li class="feed-hover">
+          <a href="'.$link.'" target="_blank"><h4>'.$title.'</h4>
           <span class="dateWrap">'.$pubDate.'</span>
-          <p>'.$description.'<br>
-          More Info</a></p>
+          <p>'.$description.'</p></a>
         </li>
          <li> <p></p></li>
         ';
@@ -41,7 +48,7 @@ class rss {
 
     $rss_split = $this->parse();
     $i = 0;
-    $rss_data = '<label class="clixplit-labels">'.$head.'</label><ul class="newsBlock">';
+    $rss_data = '<div class="col-xs-12 text-center"><label class="clixplit-labels"><h3>'.$head.'</h3></label></div>';
     while($i<$numrows){
       $rss_data .= $rss_split[$i];
       $i++;
@@ -50,7 +57,7 @@ class rss {
     $user = str_replace('&lang=en-us&format=rss_200','',$trim);
 
 
-    $rss_data.='</ul>';
+    $rss_data.='</ul></div>';
 
     return $rss_data;
   }

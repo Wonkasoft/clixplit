@@ -39,67 +39,7 @@ if (!current_user_can('manage_options')) {
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
 			<div class="col-xs-12 vertical-space">
-				<div class="col-xs-12 col-md-4">
-					<div class="text-center">
-					<label class="clixplit-labels">Resources & Downloads</label>
-					</div>
-					<div class="col-xs-12 text-center">
-						<?php
-						include('rss_class.php');
-						$feed_url = 'http://clixplit.com/feed/';
-						$category_pass = 'Resources';
-						$feedlist_Resource = new rss($feed_url, $category_pass);
-						echo $feedlist_Resource->display(6,""); ?>
-					</div>
-				</div>
-				<div class="col-xs-12 col-md-4">
-					<div class="text-center">
-					<label class="clixplit-labels">Need Help? Get Support!</label>
-					</div>
-					<form action="mailto:support@wonkasoft.com" method="post" enctype="text/plain">
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="name-input">Name:</label>
-					    <input type="text" class="form-control" id="name-input" placeholder="Full Name...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="email">Email:</label>
-					    <input type="email" class="form-control" id="email" placeholder="Email Address...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="subject">Subject:</label>
-					    <input type="text" class="form-control" id="subject" placeholder="Subject Line...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="comment-support">Message:</label>
-					    <textarea class="form-control" rows="5" id="comment-support" placeholder="Enter your message..."></textarea>
-					  </div>
-					  <button type="submit" class="btn btn-default">Submit</button>
-					</form>
-				</div>
-				<div class="col-xs-12 col-md-4">
-					<div class="text-center">
-					<label class="clixplit-labels">Got an Idea? Let us know!</label>
-					</div>
-					<form action="mailto:support@wonkasoft.com" method="post" enctype="text/plain">
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="name-input">Name:</label>
-					    <input type="text" class="form-control" id="name-input" placeholder="Full Name...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="email">Email:</label>
-					    <input type="email" class="form-control" id="email" placeholder="Email Address...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="subject">Subject:</label>
-					    <input type="text" class="form-control" id="subject" placeholder="Subject Line...">
-					  </div>
-					  <div class="form-group">
-					    <label class="clixplit-labels" for="comment-ideas">Message:</label>
-					    <textarea class="form-control" rows="5" id="comment-ideas" placeholder="Enter your message..."></textarea>
-					  </div>
-					  <button type="submit" class="btn btn-default">Submit</button>
-					</form>
-				</div>
+				<iframe src="http://clixplit.com/mem_resources"></iframe>
 			</div>
 		</div>
 	</div>

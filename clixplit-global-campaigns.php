@@ -168,8 +168,9 @@ if (!current_user_can('manage_options')) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
 			$keyword = $_POST['keyword-input'];
-			$primary = $_POST['primary'];
-			$secondary = $_POST['secondary'];
+			$primary = $_POST['primary'][3];
+			$secondary = $_POST['secondary'][0];
+			echo $keyword;
 			echo $primary;
 			echo $secondary;
 			

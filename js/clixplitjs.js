@@ -36,7 +36,7 @@
   // clixplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  
+ 
  })
  $(function() {
  	$('.clixplit-switch-off').click(function(e) {
