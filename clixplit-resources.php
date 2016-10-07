@@ -43,7 +43,13 @@ if (!current_user_can('manage_options')) {
 					<div class="text-center">
 					<label class="clixplit-labels">Resources & Downloads</label>
 					</div>
-					<div class="col-xs-12 iframe-wrap"><iframe src="http://clixplit.com/mem-resources"><p>Your Browser Does Not Support This Function</p></iframe>
+					<div class="col-xs-12 text-center">
+						<?php
+						include('rss_class.php');
+						$feed_url = 'http://clixplit.com/feed/';
+						$category_pass = 'Resources';
+						$feedlist_Resource = new rss($feed_url, $category_pass);
+						echo $feedlist_Resource->display(6,""); ?>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-4">

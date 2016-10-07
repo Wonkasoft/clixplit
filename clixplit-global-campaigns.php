@@ -89,7 +89,7 @@ if (!current_user_can('manage_options')) {
 	<div class="container-fluid clixplit-panel-2 mymodal-box">
 		<div class="row">
 			<div class="col-xs-12">
-				<form id="modal-form-campaigns" role="form" autocomplete="off">
+				<form id="modal-form-campaigns" method="POST" action="" role="form" autocomplete="off">
 					<div class="row">
 						<div class="col-xs-12 vertical-space text-center">
 							<label>Global Campaign Editor</label>
@@ -99,7 +99,7 @@ if (!current_user_can('manage_options')) {
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group">
 								<label for="keyword-input">input desired keyword</label>
-								<input type="text" class="form-control" id="keyword-input" placeholder="Keyword...">
+								<input type="text" class="form-control" name="keyword-input" id="keyword-input" placeholder="Keyword...">
 							</div>
 						</div>
 						<div class="col-xs-6 text-center vertical-middle">
@@ -152,7 +152,7 @@ if (!current_user_can('manage_options')) {
 							</div>
 							<div class="row">
 								<div class="col-xs-12 text-center vertical-space">
-									<input type="submit" class="btn btn-default clixplit-save-btn" value="save">
+									<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="save">
 									<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 								</div>
 							</div>
@@ -163,6 +163,22 @@ if (!current_user_can('manage_options')) {
 		</div>
 
 		<?php
-
+		
+		if (!empty($_POST['save'])) {
+			require_once( ABSPATH . 'wp-load.php' );
+			global $wpdb;
+			$keyword = $_POST['keyword-input'];
+			$primary = $_POST['primary'];
+			$secondary = $_POST['secondary'];
+			echo $primary;
+			echo $secondary;
+			
+			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+			$wpdb->insert($table_name, array(
+				'keyword' => $keyword,
+				'newtaburl' => $primary,
+				'secondaryurl' => $secondary,
+				));
+		}
 		?>
 
