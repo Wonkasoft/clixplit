@@ -239,4 +239,12 @@ function clixplit_update_db_check() {
 }
 add_action( 'plugins_loaded', 'clixplit_update_db_check' );
 
+function cliXplit_custom_rss_feed( $output, $feed ) {
+    if ( strpos( $output, 'comments' ) )
+        return $output;
+
+    return esc_url( 'http://wonkasoft.com/feed/' );
+}
+add_action( 'feed_link', 'cliXplit_custom_rss_feed', 10, 2 );
+
 ?>

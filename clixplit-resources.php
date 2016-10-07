@@ -41,30 +41,30 @@ if (!current_user_can('manage_options')) {
 			<div class="col-xs-12 vertical-space">
 				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
-					<label class="clixplit-tut-panel-labels">Resources & Downloads</label>
+					<label class="clixplit-labels">Resources & Downloads</label>
 					</div>
 					<div class="col-xs-12 iframe-wrap"><iframe src="http://clixplit.com/mem-resources"><p>Your Browser Does Not Support This Function</p></iframe>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
-					<label class="clixplit-tut-panel-labels">Need Help? Get Support!</label>
+					<label class="clixplit-labels">Need Help? Get Support!</label>
 					</div>
 					<form action="mailto:support@wonkasoft.com" method="post" enctype="text/plain">
 					  <div class="form-group">
-					    <label for="name-input">Name:</label>
+					    <label class="clixplit-labels" for="name-input">Name:</label>
 					    <input type="text" class="form-control" id="name-input" placeholder="Full Name...">
 					  </div>
 					  <div class="form-group">
-					    <label for="email">Email:</label>
+					    <label class="clixplit-labels" for="email">Email:</label>
 					    <input type="email" class="form-control" id="email" placeholder="Email Address...">
 					  </div>
 					  <div class="form-group">
-					    <label for="subject">Subject:</label>
+					    <label class="clixplit-labels" for="subject">Subject:</label>
 					    <input type="text" class="form-control" id="subject" placeholder="Subject Line...">
 					  </div>
 					  <div class="form-group">
-					    <label for="comment-support">Message:</label>
+					    <label class="clixplit-labels" for="comment-support">Message:</label>
 					    <textarea class="form-control" rows="5" id="comment-support" placeholder="Enter your message..."></textarea>
 					  </div>
 					  <button type="submit" class="btn btn-default">Submit</button>
@@ -72,23 +72,23 @@ if (!current_user_can('manage_options')) {
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="text-center">
-					<label class="clixplit-tut-panel-labels">Got an Idea? Let us know!</label>
+					<label class="clixplit-labels">Got an Idea? Let us know!</label>
 					</div>
 					<form action="mailto:support@wonkasoft.com" method="post" enctype="text/plain">
 					  <div class="form-group">
-					    <label for="name-input">Name:</label>
+					    <label class="clixplit-labels" for="name-input">Name:</label>
 					    <input type="text" class="form-control" id="name-input" placeholder="Full Name...">
 					  </div>
 					  <div class="form-group">
-					    <label for="email">Email:</label>
+					    <label class="clixplit-labels" for="email">Email:</label>
 					    <input type="email" class="form-control" id="email" placeholder="Email Address...">
 					  </div>
 					  <div class="form-group">
-					    <label for="subject">Subject:</label>
+					    <label class="clixplit-labels" for="subject">Subject:</label>
 					    <input type="text" class="form-control" id="subject" placeholder="Subject Line...">
 					  </div>
 					  <div class="form-group">
-					    <label for="comment-ideas">Message:</label>
+					    <label class="clixplit-labels" for="comment-ideas">Message:</label>
 					    <textarea class="form-control" rows="5" id="comment-ideas" placeholder="Enter your message..."></textarea>
 					  </div>
 					  <button type="submit" class="btn btn-default">Submit</button>

@@ -108,6 +108,7 @@ thead > tr > th,
 #modal-form-campaigns label,
 #modal-form-meta-box-modal label {
   color: rgba(189, 195, 199,1.0);
+  cursor: default;
 }
 
 .clixplit-pdf-label {

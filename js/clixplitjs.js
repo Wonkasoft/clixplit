@@ -45,23 +45,31 @@
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
  			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
  			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
- 			if ($(this).next().text() == 'on') {
- 				$(this).parent().parent().find('input').attr('disabled', false);
- 				if ($switchID == 'exit-redirect-switch') {
- 					$(this).parent().parent().find('textarea').attr('disabled', false);
- 				}
- 			}
+			if ($switchID == 'exit-redirect-switch') {
+				$(this).parent().parent().find('input').attr('disabled', false);
+				$(this).parent().parent().find('textarea').attr('disabled', false);
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('input').attr('disabled', false);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('input').attr('disabled', false);
+			}
  		}
  		else {
  			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
  			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
  			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
- 			if ($(this).next().text() == 'off') {
- 				$(this).parent().parent().find('input').attr('disabled', true);
- 				if ($switchID == 'exit-redirect-switch') {
- 					$(this).parent().parent().find('textarea').attr('disabled', true);
- 				}
- 			}
+			if ($switchID == 'exit-redirect-switch') {
+				$(this).parent().parent().find('input').attr('disabled', true);
+				$(this).parent().parent().find('textarea').attr('disabled', true);
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('input').attr('disabled', true);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('input').attr('disabled', true);
+			}
  		}
  	})
  	$('.clixplit-primary-switch-off').click(function(e) {

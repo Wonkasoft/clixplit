@@ -41,7 +41,7 @@ if (!current_user_can('manage_options')) {
 				<div class="col-xs-12 col-md-4">
 					<label class="clixplit-labels">The Basics & Functionaity</label>
 					<div class="panel panel-default clixplit-tutorial-panel">
-						<img src="<?php echo plugins_url('/img/clixplit-logo-bw.png', __FILE__); ?>" class="img-responsive">
+						
 					</div>
 					<label class="clixplit-pdf-label">>> Download PDF</label>
 				</div>
