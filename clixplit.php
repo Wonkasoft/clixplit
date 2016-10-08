@@ -115,7 +115,7 @@ function clixplit_redirect_install() {
 
   $sql = "CREATE TABLE $table_name ( 
     id INT(15) NOT NULL AUTO_INCREMENT,
-    created DATE NOT NULL,
+    created DATETIME NOT NULL,
     mouseoveropt BOOLEAN NOT NULL,
     mouseoverurl VARCHAR(850) NOT NULL,
     exitredirectopt BOOLEAN NOT NULL,
@@ -142,7 +142,7 @@ function clixplit_redirect_install() {
 
       $sql = "CREATE TABLE $table_name ( 
         id INT(15) NOT NULL AUTO_INCREMENT,
-        created DATE NOT NULL,
+        created DATETIME NOT NULL,
         mouseoveropt BOOLEAN NOT NULL,
         mouseoverurl VARCHAR(850) NOT NULL,
         exitredirectopt BOOLEAN NOT NULL,
@@ -173,7 +173,7 @@ function clixplit_global_campaigns() {
 
   $sql = "CREATE TABLE $table_name ( 
     id INT(15) NOT NULL AUTO_INCREMENT,
-    created DATE NOT NULL,
+    created DATETIME NOT NULL,
     keyword TEXT(450) NOT NULL,
     newtaburl VARCHAR(850) NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL,
@@ -203,7 +203,7 @@ function clixplit_global_campaigns() {
 
       $sql = "CREATE TABLE $table_name ( 
       id INT(15) NOT NULL AUTO_INCREMENT,
-      created DATE NOT NULL,
+      created DATETIME NOT NULL,
       keyword TEXT(450) NOT NULL,
       newtaburl VARCHAR(850) NOT NULL,
       secondaryurl VARCHAR(850) NOT NULL,

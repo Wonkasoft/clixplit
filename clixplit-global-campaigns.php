@@ -104,10 +104,10 @@ if (!current_user_can('manage_options')) {
 						</div>
 						<div class="col-xs-6 text-center vertical-middle">
 							<div class="col-xs-6">
-								<label id="posts-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+								<label id="posts-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="post-switch" class="clixplit-switch-text-off">off</span>
 							</div>
 							<div class="col-xs-6">
-								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="page-switch" class="clixplit-switch-text-off">off</span>
 							</div>
 						</div>
 					</div>
@@ -167,19 +167,50 @@ if (!current_user_can('manage_options')) {
 		if (!empty($_POST['save'])) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
+			$primary_count = count($_POST['primary']);
+			$secondary_count = count($_POST['secondary']);
+			$primary_array = array();
+
 			$keyword = $_POST['keyword-input'];
-			$primary = $_POST['primary'][3];
-			$secondary = $_POST['secondary'][0];
-			echo $keyword;
-			echo $primary;
-			echo $secondary;
+			$post_switch = '';
+			$primary = $_POST['primary'];
+			$secondary = $_POST['secondary'];
 			
+			for ($i=0; $i < $primary_count; $i++) { 
+				if ($i == 0) {
+					if ($_POST['primary'] ) {
+						# code...
+					}
+					$primary_array = $primary[$i];
+				}
+				else {
+					$primary_array .= ','. $primary[$i];
+				}
+			};	
+			for ($i=0; $i < $secondary_count; $i++) { 
+				if ($i == 0) {
+					$secondary_array = $secondary[$i];
+				}
+				else {
+					$secondary_array .= ','. $secondary[$i];
+				}
+			};
+			
+
 			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
 			$wpdb->insert($table_name, array(
+				'created' => current_time('mysql'),
 				'keyword' => $keyword,
-				'newtaburl' => $primary,
-				'secondaryurl' => $secondary,
+				'newtaburl' => $primary_array,
+				'secondaryurl' => $secondary_array,
 				));
+		$wpdb->query($table_name, array(
+			$primary_array = 'newtaburl',
+			$secondary_array = 'secondaryurl'
+			));
+		echo $primary_array;
+		echo $secondary_array;
 		}
+
 		?>
 

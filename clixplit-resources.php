@@ -38,7 +38,7 @@ if (!current_user_can('manage_options')) {
 	</div>
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
-			<div class="col-xs-12 vertical-space">
+			<div class="col-xs-12 full-page-iframe">
 				<iframe src="http://clixplit.com/mem_resources"></iframe>
 			</div>
 		</div>
