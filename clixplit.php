@@ -175,7 +175,7 @@ function clixplit_global_campaigns() {
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
     keyword TEXT(450) NOT NULL,
-    newtaburl VARCHAR(850) NOT NULL,
+    primaryurl VARCHAR(850) NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL,
     postopt BOOLEAN NOT NULL,
     pageopt BOOLEAN NOT NULL, 
@@ -186,6 +186,7 @@ function clixplit_global_campaigns() {
     unqclicks int(250) NOT NULL, 
     instances int(250) NOT NULL, 
     globalopt BOOLEAN NOT NULL, 
+    active BOOLEAN NOT NULL, 
     PRIMARY KEY (id)
     ) $charset_collate;";
 
@@ -205,7 +206,7 @@ function clixplit_global_campaigns() {
       id INT(15) NOT NULL AUTO_INCREMENT,
       created DATETIME NOT NULL,
       keyword TEXT(450) NOT NULL,
-      newtaburl VARCHAR(850) NOT NULL,
+      primaryurl VARCHAR(850) NOT NULL,
       secondaryurl VARCHAR(850) NOT NULL,
       postopt BOOLEAN NOT NULL,
       pageopt BOOLEAN NOT NULL, 
@@ -216,6 +217,7 @@ function clixplit_global_campaigns() {
       unqclicks int(250) NOT NULL, 
       instances int(250) NOT NULL, 
       globalopt BOOLEAN NOT NULL, 
+      active BOOLEAN NOT NULL, 
       PRIMARY KEY (id)
       ) $charset_collate;";
 
