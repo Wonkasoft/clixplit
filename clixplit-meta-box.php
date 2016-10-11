@@ -91,8 +91,8 @@
 								$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
 								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
 								$keyword_check = '';
-										foreach (($table_build as $key) && ($key->pagepostcreated == 'Y') {
-											if ($keyword_check == '') {
+										foreach ($table_build as $key)  {
+											if (($keyword_check == '') && ($key->pagepostcreated == "Y")) {
 												$keyword_check = $key->keyword;
 												echo '<tr>' .
 												'<td></td>' .
@@ -102,7 +102,7 @@
 												'<td>'. $key->globalopt .'</td>' .
 												'</tr>';
 											}
-											if (($key->keyword != $keyword_check) && ($key->pagepostcreated == 'Y') {
+											if (($key->keyword != $keyword_check) && ($key->pagepostcreated == "Y")) {
 												$keyword_check = $key->keyword;
 												echo '<tr>' .
 												'<td></td>' .
