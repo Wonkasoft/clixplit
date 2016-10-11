@@ -60,16 +60,40 @@ if (!current_user_can('manage_options')) {
 								</tr>
 							</thead>
 							<tbody>
-							<tr>
 								<?php
 								global  $wpdb;
 								$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);
-								foreach ($table_build as $key) {
-									echo '<td>'. $key->keyword .'</td>';
-								}
+								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
+								$keyword_check = '';
+										foreach ($table_build as $key) {
+											if (($keyword_check == '') && ($key->globalopt == "Y")) {
+												$keyword_check = $key->keyword;
+												$primaryurl_count = $wpdb ->get_var('SELECT SUM(numofprimary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+												$secondaryurl_count = $wpdb ->get_var('SELECT SUM(numofsecondary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+												echo '<tr>' .
+												'<td><input class="item-checkbox" type="checkbox" value=""></td>' .
+												'<td>'. $key->keyword .'</td>' .
+												'<td>'. $key->created .'</td>' .
+												'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
+												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
+												'<td>'. $key->instances .'</td>' .
+												'</tr>';
+											}
+											if (($key->keyword != $keyword_check) && ($key->globalopt == "Y")) {
+												$keyword_check = $key->keyword;
+												$primaryurl_count = $wpdb ->get_var('SELECT SUM(numofprimary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+												$secondaryurl_count = $wpdb ->get_var('SELECT SUM(numofsecondary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+												echo '<tr>' .
+												'<td><input class="item-checkbox" type="checkbox" value=""></td>' .
+												'<td>'.$key->keyword .'</td>' .
+												'<td>'. $key->created .'</td>' .
+												'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
+												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
+												'<td>'. $key->instances .'</td>' .
+												'</tr>';
+											}
+									}
 								?>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -146,7 +170,7 @@ if (!current_user_can('manage_options')) {
 							</div>
 							<div class="row">
 								<div class="col-xs-12 text-center vertical-space">
-									<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="save">
+									<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="global">
 									<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 								</div>
 							</div>
@@ -158,13 +182,11 @@ if (!current_user_can('manage_options')) {
 
 		<?php
 		
-		if (!empty($_POST['save'])) {
+		if (!empty($_POST['global'])) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
 			$primary_count = count($_POST['primary']);
 			$secondary_count = count($_POST['secondary']);
-			$primary_array = array();
-
 			$keyword = $_POST['keyword-input'];
 			$post_switch = '';
 			$primary = $_POST['primary'];
@@ -176,7 +198,9 @@ if (!current_user_can('manage_options')) {
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
 					'keyword' => $keyword,
-					'primaryurl' => $primary_array
+					'primaryurl' => $primary_array,
+					'numofprimary' => 1,
+					'globalopt' => 'Y'
 					));
 			};
 			for ($i=0; $i < $secondary_count; $i++) { 
@@ -186,6 +210,8 @@ if (!current_user_can('manage_options')) {
 					'created' => current_time('mysql'),
 					'keyword' => $keyword,
 					'secondaryurl' => $secondary_array,
+					'numofsecondary' => 1,
+					'globalopt' => 'Y'
 					));
 			};	
 			};

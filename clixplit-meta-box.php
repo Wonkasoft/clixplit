@@ -60,7 +60,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<input type="submit" class="btn btn-default clixplit-save-btn" value="save">
+								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 						</div>
@@ -86,13 +86,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td>Secure Payment Via PayPal</td>
-									<td>2015-11-13 13:05:16</td>
-									<td>25 | 20</td>
-									<td>Y</td>
-								</tr>
+								<?php
+								global  $wpdb;
+								$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
+								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
+								$keyword_check = '';
+										foreach (($table_build as $key) && ($key->pagepostcreated == 'Y') {
+											if ($keyword_check == '') {
+												$keyword_check = $key->keyword;
+												echo '<tr>' .
+												'<td></td>' .
+												'<td>'. $key->keyword .'</td>' .
+												'<td>'. $key->created .'</td>' .
+												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
+												'<td>'. $key->globalopt .'</td>' .
+												'</tr>';
+											}
+											if (($key->keyword != $keyword_check) && ($key->pagepostcreated == 'Y') {
+												$keyword_check = $key->keyword;
+												echo '<tr>' .
+												'<td></td>' .
+												'<td>'. $key->keyword .'</td>' .
+												'<td>'. $key->created .'</td>' .
+												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
+												'<td>'. $key->globalopt .'</td>' .
+												'</tr>';
+											}
+									}
+								?>
 							</tbody>
 						</table>
 						</div>
@@ -150,7 +171,7 @@
 										<div class="hr-width"><hr /></div>
 									</div>
 									<div class="col-xs-12 text-center vertical-space">
-										<input type="submit" class="btn btn-default clixplit-save-btn" value="save">
+										<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-modal-save">
 										<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 									</div>
 								</div>
@@ -159,3 +180,76 @@
 					</div>
 				</div>
 
+<?php
+
+if (!empty($_POST['clixplit-modal-save'])) {
+	require_once( ABSPATH . 'wp-load.php' );
+	//global $wpdb;
+	$primary_count = count($_POST['primary']);
+	$secondary_count = count($_POST['secondary']);
+	$keyword = $_POST['keyword-input'];
+	$post_switch = '';
+	$primary = $_POST['primary'];
+	$secondary = $_POST['secondary'];
+	$globalopt = "";
+	$pagepostcreated = "";
+	
+	for ($i=0; $i < $primary_count; $i++) { 
+		$primary_array = $primary[$i];
+		$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+		$wpdb->insert($table_name, array(
+			'created' => current_time('mysql'),
+			'keyword' => $keyword,
+			'primaryurl' => $primary_array,
+			'numofprimary' => 1,
+			'globalopt' => $globalopt,
+			'pagepostcreated' => $pagepostcreated
+			));
+	};
+	for ($i=0; $i < $secondary_count; $i++) { 
+		$secondary_array = $secondary[$i];
+		$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+		$wpdb->insert($table_name, array(
+			'created' => current_time('mysql'),
+			'keyword' => $keyword,
+			'secondaryurl' => $secondary_array,
+			'numofsecondary' => 1,
+			'globalopt' => $globalopt,
+			'pagepostcreated' => $pagepostcreated
+			));
+	};	
+	};
+
+	if (!empty($_POST['clixplit-redirect-save'])) {
+	require_once( ABSPATH . 'wp-load.php' );
+	//global $wpdb;
+	$primary_count = count($_POST['primary']);
+	$secondary_count = count($_POST['secondary']);
+	$keyword = $_POST['keyword-input'];
+	$post_switch = '';
+	$primary = $_POST['primary'];
+	$secondary = $_POST['secondary'];
+	
+	for ($i=0; $i < $primary_count; $i++) { 
+		$primary_array = $primary[$i];
+		$table_name = $wpdb->prefix . 'clixplit_redirect';
+		$wpdb->insert($table_name, array(
+			'created' => current_time('mysql'),
+			'keyword' => $keyword,
+			'primaryurl' => $primary_array,
+			'numofprimary' => 1
+			));
+	};
+	for ($i=0; $i < $secondary_count; $i++) { 
+		$secondary_array = $secondary[$i];
+		$table_name = $wpdb->prefix . 'clixplit_redirect';
+		$wpdb->insert($table_name, array(
+			'created' => current_time('mysql'),
+			'keyword' => $keyword,
+			'secondaryurl' => $secondary_array,
+			'numofsecondary' => 1
+			));
+	};	
+	};
+
+?>

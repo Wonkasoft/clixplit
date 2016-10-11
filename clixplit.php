@@ -185,7 +185,8 @@ function clixplit_global_campaigns() {
     totalclicks int(250) NOT NULL, 
     unqclicks int(250) NOT NULL, 
     instances int(250) NOT NULL, 
-    globalopt BOOLEAN NOT NULL, 
+    globalopt ENUM('N','Y')NOT NULL, 
+    pagepostcreated ENUM('N','Y')NOT NULL, 
     active BOOLEAN NOT NULL, 
     PRIMARY KEY (id)
     ) $charset_collate;";
@@ -216,7 +217,8 @@ function clixplit_global_campaigns() {
       totalclicks int(250) NOT NULL, 
       unqclicks int(250) NOT NULL, 
       instances int(250) NOT NULL, 
-      globalopt BOOLEAN NOT NULL, 
+      globalopt ENUM('N','Y')NOT NULL, 
+      pagepostcreated ENUM('N','Y')NOT NULL, 
       active BOOLEAN NOT NULL, 
       PRIMARY KEY (id)
       ) $charset_collate;";
