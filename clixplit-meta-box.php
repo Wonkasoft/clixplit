@@ -133,6 +133,7 @@
 							<div class="col-xs-12 vertical-space text-center">
 							</div>
 							<div class="col-xs-12 col-md-6">
+								<input type="hidden" name="selected-text">
 								<div class="control-group" id="modal-primary-url">
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
 									<div id="modal-primary-url-controls" class="controls">
@@ -165,9 +166,11 @@
 									<div class="col-xs-12 text-center bottom-space">
 										<div class="hr-width"><hr /></div>
 										<label id="campaign-add-switch" class="clixplit-labels">enable for global:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+										<input type="hidden" name="globalopt">
 									</div>
 									<div class="col-xs-12 text-center">
 										<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+										<input type="hidden" name="mobileopt">
 										<div class="hr-width"><hr /></div>
 									</div>
 									<div class="col-xs-12 text-center vertical-space">
@@ -184,15 +187,16 @@
 
 if (!empty($_POST['clixplit-modal-save'])) {
 	require_once( ABSPATH . 'wp-load.php' );
-	//global $wpdb;
+	global $wpdb;
 	$primary_count = count($_POST['primary']);
 	$secondary_count = count($_POST['secondary']);
-	$keyword = $_POST['keyword-input'];
+	$keyword = $_POST['selected-text'];
 	$post_switch = '';
 	$primary = $_POST['primary'];
 	$secondary = $_POST['secondary'];
-	$globalopt = "";
-	$pagepostcreated = "";
+	$globalopt = $_POST['globalopt'];
+	$mobileopt = $_POST['mobileopt'];
+	$pagepostcreated = "Y";
 	
 	for ($i=0; $i < $primary_count; $i++) { 
 		$primary_array = $primary[$i];
@@ -201,6 +205,7 @@ if (!empty($_POST['clixplit-modal-save'])) {
 			'created' => current_time('mysql'),
 			'keyword' => $keyword,
 			'primaryurl' => $primary_array,
+			'enablemobile' => $mobileopt,
 			'numofprimary' => 1,
 			'globalopt' => $globalopt,
 			'pagepostcreated' => $pagepostcreated
@@ -213,6 +218,7 @@ if (!empty($_POST['clixplit-modal-save'])) {
 			'created' => current_time('mysql'),
 			'keyword' => $keyword,
 			'secondaryurl' => $secondary_array,
+			'enablemobile' => $mobileopt,
 			'numofsecondary' => 1,
 			'globalopt' => $globalopt,
 			'pagepostcreated' => $pagepostcreated
@@ -221,8 +227,6 @@ if (!empty($_POST['clixplit-modal-save'])) {
 	};
 
 	if (!empty($_POST['clixplit-redirect-save'])) {
-	require_once( ABSPATH . 'wp-load.php' );
-	//global $wpdb;
 	$primary_count = count($_POST['primary']);
 	$secondary_count = count($_POST['secondary']);
 	$keyword = $_POST['keyword-input'];
