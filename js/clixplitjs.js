@@ -36,7 +36,26 @@
   // clixplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  
+	$('#modal-form-meta-box').on('submit', function () {
+		$current_form = $(this);
+		$url = $current_form.attr('action');
+		$method = $current_form.attr('method');
+		$data = {};
+
+		$current_form.find('[name]').each(function (index, value) {
+			$primaryCount = $('[name="primary[]"]').length,
+			$secondaryCount = $('[name="secondary[]"]').length,
+			$this = $(this),
+			$name = $this.attr('name'),
+			$value = $this.val();
+
+			$data[$name] = $value;
+		});
+
+		console.log($data);
+
+		return false;
+	})
  })
  $(function() {
  	$('.clixplit-switch-off').click(function(e) {

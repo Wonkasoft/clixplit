@@ -712,6 +712,7 @@ button.clixplit-secondary-add:active:focus {
 /*meta-box page*/
 .box-wrap {
   position: relative;
+  margin: 0 -12px;
 }
 
 .mb-container {
@@ -723,9 +724,8 @@ button.clixplit-secondary-add:active:focus {
   text-align: center;
   border: 1px solid #eee;
   padding: 8px 12px;
-  width: 104.9%;
+  width: 100%;
   font-size: 14px;
-  left: -27px;
   position: relative;
   line-height: 1.4;
 }
