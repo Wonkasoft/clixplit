@@ -55,7 +55,9 @@ button.clixplit-secondary-add,
 .side-borders,
 .full-page-iframe,
 iframe,
-#exit-redirect-alert {
+#exit-redirect-alert,
+.clixplit-activate-btn,
+.clixplit-deactivate-btn {
   transition: all .4s ease-in-out;
 }
 
@@ -380,7 +382,7 @@ button.clixplit-secondary-add:active:focus {
   margin: 0;
   padding: 2px;
   border-radius: 50%;
-  border: 3px solid #36d9a9;
+  border: 3px solid #b5bfca;
   font-size: 9px;
 }
 
@@ -388,25 +390,25 @@ button.clixplit-secondary-add:active:focus {
   margin: 0;
   padding: 0 5px;
   border-radius: 50%;
-  background-color: #36d9a9;
+  background-color: #b5bfca;
 }
 
 .clixplit-primary-switch-text-off {
-  color: #36d9a9;
+  color: #b5bfca;
   margin-left: 10px;
   vertical-align: middle;
 }
 
 .clixplit-primary-switch-off:hover {
-  border-color: #7cdabe;
+  border-color: #d6e0ec;
 }
 
 .clixplit-primary-switch-off:hover .clixplit-primary-switch-center-off {
-  background-color: #7cdabe;
+  background-color: #d6e0ec;
 }
 
 .clixplit-primary-switch-off:hover .clixplit-primary-switch-text-off {
-  color: #7cdabe;
+  color: #d6e0ec;
 }
 
 .clixplit-primary-switch-on {
@@ -431,7 +433,7 @@ button.clixplit-secondary-add:active:focus {
 }
 
 .clixplit-primary-switch-on:hover {
-  border: 3px solid #7cdabe;
+  border-color: #7cdabe;
 }
 
 .clixplit-primary-switch-on:hover .clixplit-primary-switch-center-on {
@@ -447,7 +449,7 @@ button.clixplit-secondary-add:active:focus {
   margin: 0;
   padding: 2px;
   border-radius: 50%;
-  border: 3px solid #f09860 ;
+  border: 3px solid #b5bfca ;
   font-size: 9px;
 }
 
@@ -455,11 +457,11 @@ button.clixplit-secondary-add:active:focus {
   margin: 0;
   padding: 0 5px;
   border-radius: 50%;
-  background-color: #f09860 ;
+  background-color: #b5bfca ;
 }
 
 .clixplit-secondary-switch-text-off {
-  color: #f09860 ;
+  color: #b5bfca ;
   margin-left: 10px;
   vertical-align: middle;
 }
@@ -636,6 +638,72 @@ button.clixplit-secondary-add:active:focus {
 }
 
 .clixplit-cancel-btn:active:focus {
+  background: #df671a;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-activate-btn {
+  background: #36d9a9;
+  color: #fff;
+  border-radius: 0;
+  width: 90px;
+  margin: 0 8px;
+  border: none;
+}
+
+.clixplit-activate-btn:hover {
+  background: #7cdabe;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-activate-btn:active {
+  background: #7cdabe;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-activate-btn:focus {
+  background: #7cdabe;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-activate-btn:active:focus {
+  background: #7cdabe;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-deactivate-btn {
+  background: #ff6102;
+  color: #fff;
+  border-radius: 0;
+  width: 90px;
+  margin: 0 8px;
+  border: none;
+}
+
+.clixplit-deactivate-btn:hover {
+  background: #f09860;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-deactivate-btn:active {
+  background: #df671a;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-deactivate-btn:focus {
+  background: #df671a;
+  color: #fff;
+  border: none;
+}
+
+.clixplit-deactivate-btn:active:focus {
   background: #df671a;
   color: #fff;
   border: none;

@@ -60,7 +60,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
+								<input type="button" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 						</div>
@@ -171,7 +171,7 @@
 										<div class="hr-width"><hr /></div>
 									</div>
 									<div class="col-xs-12 text-center vertical-space">
-										<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-modal-save">
+										<input type="button" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-modal-save">
 										<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 									</div>
 								</div>
