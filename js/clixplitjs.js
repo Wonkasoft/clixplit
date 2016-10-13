@@ -37,16 +37,25 @@
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
 	$('#modal-form-meta-box').on('submit', function () {
-		$current_form = $(this);
-		$url = $current_form.attr('action');
-		$method = $current_form.attr('method');
+		$custom_form = $(this);
+		$url = $custom_form.attr('action');
+		$method = $custom_form.attr('method');
 		$data = {};
 
-		$current_form.find('[name]').each(function (index, value) {
-			$primaryCount = $('[name="primary[]"]').length,
-			$secondaryCount = $('[name="secondary[]"]').length,
-			$this = $(this),
-			$name = $this.attr('name'),
+		$custom_form.find('[name]').each(function (index, value) {
+			$this = $(this);
+			$primary_name = {};
+			$custom_form.find('[name="primary"]').each( function ( index, value) {
+				$this = $(this);
+				$primaryname = $this.attr('name');
+				$index = '[' + index + ']';
+				$primaryurl = $this.val();
+
+				$primary_name[$primaryname + $index] = $primaryurl;
+
+			});
+			console.log($primary_name);
+			$name = $this.attr('name');
 			$value = $this.val();
 
 			$data[$name] = $value;

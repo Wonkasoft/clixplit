@@ -140,7 +140,7 @@
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
 									<div id="modal-primary-url-controls" class="controls">
 										<div class="entry input-group col-xs-12 bottom-form-space">
-											<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
+											<input type="text" class="form-control url-input" name="primary" placeholder="url...">
 											<span class="input-group-btn">
 												<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 											</div>
@@ -155,7 +155,7 @@
 										<label class="control-label" for="modal-secondary-url-controls">input secondary url (page redirect)</label>
 										<div id="modal-secondary-url-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
+												<input type="text" class="form-control url-input" name="secondary" placeholder="url...">
 												<span class="input-group-btn">
 													<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 												</div>

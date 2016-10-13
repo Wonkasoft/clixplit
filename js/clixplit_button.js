@@ -25,9 +25,7 @@ $(function() {
           $mobileswitch = $('#mobile-switch').next().next().text();
           $('[name="mobileopt"]').val($mobileswitch);
           $primary_url = $('[name="primary[]"]').val();
-          alert($return_text);
           $return_text = '<a href="' + $primary_url + '">' + $selected_text + '</a>';
-          alert($return_text);
           ed.execCommand('mceInsertContent', 0, $return_text);
           $(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
         });
