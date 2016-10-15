@@ -130,7 +130,7 @@
 		<div class="mymodal">
 			<div class="container-fluid clixplit-panel-2 mymodal-box">
 				<div class="row">
-					<form id="modal-form-meta-box" action="ajax\modal-meta-box-form.php" method="post" role="form" autocomplete="off">
+					<form id="modal-form-meta-box" action="<?php echo plugins_url("/ajax/modal-meta-box-form.php", __FILE__); ?>" method="post" role="form" autocomplete="off">
 						<div class="col-xs-12">
 							<div class="col-xs-12 vertical-space text-center">
 							</div>

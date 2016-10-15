@@ -41,30 +41,45 @@
 		$url = $custom_form.attr('action');
 		$method = $custom_form.attr('method');
 		$data = {};
+		$primaryurl = {};
+		$secondaryurl = {};
 
-		$custom_form.find('[name]').each(function (index, value) {
+		$custom_form.find('[name=primary]').each(function (index, value) {
 			$this = $(this);
-			$primary_name = {};
-			$custom_form.find('[name="primary"]').each( function ( index, value) {
-				$this = $(this);
-				$primaryname = $this.attr('name');
-				$index = '[' + index + ']';
-				$primaryurl = $this.val();
+			$primaryname = $this.attr('name');
+			$index = '[' + index + ']';
+			$value = $this.val();
 
-				$primary_name[$primaryname + $index] = $primaryurl;
+			$primaryurl[$primaryname + $index] = $value;
+		});
 
-			});
-			console.log($primary_name);
+		$custom_form.find('[name=secondary]').each(function (index, value) {
+			$this = $(this);
+			$secondaryname = $this.attr('name');
+			$index = '[' + index + ']';
+			$value = $this.val();
+
+			$secondaryurl[$secondaryname + $index] = $value;
+		});
+
+		$custom_form.find('[name]').not('[name=primary]').not('[name=secondary]').each(function (index, value) {
+			$this = $(this);
 			$name = $this.attr('name');
 			$value = $this.val();
 
 			$data[$name] = $value;
 		});
 
-		console.log($data);
-
+		$.ajax( {
+			url: $url,
+			type: $method,
+			data: $data + $primaryurl + $secondaryurl,
+			success: function($response) {
+				console.log($response);
+			}
+		});
 		return false;
-	})
+	});
  })
  $(function() {
  	$('.clixplit-switch-off').click(function(e) {
