@@ -200,7 +200,8 @@ if (!current_user_can('manage_options')) {
 					'keyword' => $keyword,
 					'primaryurl' => $primary_array,
 					'numofprimary' => 1,
-					'globalopt' => 'Y'
+					'globalopt' => 'Y',
+					'active' => 1
 					));
 			};
 			for ($i=0; $i < $secondary_count; $i++) { 
@@ -211,7 +212,8 @@ if (!current_user_can('manage_options')) {
 					'keyword' => $keyword,
 					'secondaryurl' => $secondary_array,
 					'numofsecondary' => 1,
-					'globalopt' => 'Y'
+					'globalopt' => 'Y',
+					'active' => 1
 					));
 			};	
 			};

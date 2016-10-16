@@ -140,7 +140,7 @@
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
 									<div id="modal-primary-url-controls" class="controls">
 										<div class="entry input-group col-xs-12 bottom-form-space">
-											<input type="text" class="form-control url-input" name="primary" placeholder="url...">
+											<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 											<span class="input-group-btn">
 												<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 											</div>
@@ -155,7 +155,7 @@
 										<label class="control-label" for="modal-secondary-url-controls">input secondary url (page redirect)</label>
 										<div id="modal-secondary-url-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<input type="text" class="form-control url-input" name="secondary" placeholder="url...">
+												<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 												<span class="input-group-btn">
 													<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 												</div>
@@ -187,46 +187,7 @@
 
 				<?php
 
-				if (!empty($_POST['clixplit-modal-save'])) {
-					require_once( ABSPATH . 'wp-load.php' );
-					global $wpdb;
-					$primary_count = count($_POST['primary']);
-					$secondary_count = count($_POST['secondary']);
-					$keyword = $_POST['selected-text'];
-					$post_switch = '';
-					$primary = $_POST['primary'];
-					$secondary = $_POST['secondary'];
-					$globalopt = $_POST['globalopt'];
-					$mobileopt = $_POST['mobileopt'];
-					$pagepostcreated = "Y";
-
-					for ($i=0; $i < $primary_count; $i++) { 
-						$primary_array = $primary[$i];
-						$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-						$wpdb->insert($table_name, array(
-							'created' => current_time('mysql'),
-							'keyword' => $keyword,
-							'primaryurl' => $primary_array,
-							'enablemobile' => $mobileopt,
-							'numofprimary' => 1,
-							'globalopt' => $globalopt,
-							'pagepostcreated' => $pagepostcreated
-							));
-					};
-					for ($i=0; $i < $secondary_count; $i++) { 
-						$secondary_array = $secondary[$i];
-						$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-						$wpdb->insert($table_name, array(
-							'created' => current_time('mysql'),
-							'keyword' => $keyword,
-							'secondaryurl' => $secondary_array,
-							'enablemobile' => $mobileopt,
-							'numofsecondary' => 1,
-							'globalopt' => $globalopt,
-							'pagepostcreated' => $pagepostcreated
-							));
-					};	
-				};
+				
 
 				if (!empty($_POST['clixplit-redirect-save'])) {
 					$primary_count = count($_POST['primary']);
