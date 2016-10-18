@@ -7,9 +7,6 @@
 * Version: 1.0
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
 */
-include_once('clixplit_validation_class.php');
-$key = $_REQUEST['clixplit_license_key'];
-
 
 add_action( 'wp_enqueue_scripts', 'plugin_enqueues');
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
@@ -28,13 +25,7 @@ function plugin_enqueues() {
   wp_enqueue_script('clixplit-clixplit.js', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array(), '1.0.0');
 }
 
-add_action ('admin_menu', 'clixplit_register_custom_menu');
-
 function clixplit_register_custom_menu() {
-  $checkkey = new clixplit_validation();
-  $localhostdbkey = get_option('clixplit_license_key');
-  $activeoption = get_option('clixplit_license_active');
-  if ($checkkey->clixplit_check($localhostdbkey) == 'valid') {
   add_menu_page (
     'Home', 
     'cliXplit',
@@ -66,7 +57,14 @@ function clixplit_register_custom_menu() {
       'manage_options',
       'clixplit/clixplit-activation.php',
       '');
-  } else {
+  } 
+  
+include_once('clixplit_validation_class.php');
+$checkkey = new clixplit_validation();
+$localhostdbkey = get_option('clixplit_license_key');
+$activeoption = get_option('clixplit_license_active');
+
+  function clixplit_register_activation_menu() {
    add_menu_page ('ClixplitRegistration',
       'cliXplit Activation',
       'manage_options',
@@ -74,10 +72,8 @@ function clixplit_register_custom_menu() {
       '',
       plugins_url("/img/clixplit-logo-icon-bw20px.svg", __FILE__));
     }
-}
 
 // Add New Page Button
-add_action( 'init', 'clixplit_buttons' );
 function clixplit_buttons() {
     add_filter( "mce_external_plugins", "clixplit_add_buttons" );
     add_filter( 'mce_buttons', 'clixplit_register_buttons' );
@@ -91,11 +87,15 @@ function clixplit_register_buttons( $buttons ) {
     return $buttons;
 }
 
-// Add new container in new page
-
+// Check activation status and load menus
+if (($activeoption =='active') && ($checkkey->clixplit_check($localhostdbkey)=='active')) {
+add_action ('admin_menu', 'clixplit_register_custom_menu');
+add_action( 'init', 'clixplit_buttons' );
 add_action( "add_meta_boxes_page", "clixplit_meta_box" );
 add_action( "add_meta_boxes_post", "clixplit_meta_box2" );
-
+} else {
+  add_action('admin_menu','clixplit_register_activation_menu');
+}
 // Register Your Meta box
 function clixplit_meta_box( $post ) {
     add_meta_box( 
