@@ -138,7 +138,7 @@
 							<div class="col-xs-12 vertical-space text-center">
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
+								<input type="hidden" name="activepost-modal" value="<?php echo get_the_ID(); ?>">
 								<input type="hidden" name="selected-text">
 								<div class="control-group" id="modal-primary-url">
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
