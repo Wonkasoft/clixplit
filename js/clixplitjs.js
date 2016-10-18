@@ -3,8 +3,6 @@
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
 
- $("#toplevel_page_clixplit-clixplit-home a.wp-first-item").html("Home");
-
  $( document ).ready(function() {
  	$("a.nav-campaign-buttons").click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
@@ -21,7 +19,9 @@
 
  	// Global Campaigns Editor
  	$post_value = $('#posts-switch').next().next().text();
- 	$('[name=""]')
+ 	$('[name="post-value"]').val($post_value);
+ 	$page_value = $('#page-switch').next().next().text();
+ 	$('[name="page-value"]').val($page_value);
  	
  	$(document).on('click', '.btn-add', function(e) {
  		e.preventDefault();
@@ -40,18 +40,13 @@
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  // cliXplit_meta_box page redirect options
-  $mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
-  $('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
-  $redirect_exit = $('#exit-redirect-switch').next().next().text();
-  $('[name="exit-redirectopt"]').val($redirect_exit);
-  $secondary_redirect_label = $('#secondary-url-label').next().next().text();
-  $('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+  
   $('#form-meta-box').on('submit', function () {
   	$form = $(this);
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
+  	console.log($data);
 
   	$.ajax( {
   		url: $url,
@@ -90,14 +85,21 @@
  			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
  			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
  			if ($switchID == 'exit-redirect-switch') {
+ 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+ 				$('[name="exit-redirectopt"]').val($redirect_exit);
  				$(this).parent().parent().find('input').attr('disabled', false);
  				$(this).parent().parent().find('textarea').attr('disabled', false);
+
  			}
  			if ($switchID == 'mouseover-url-label') {
  				$(this).parent().parent().find('input').attr('disabled', false);
+ 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+ 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
  			}
  			if ($switchID == 'secondary-url-label') {
  				$(this).parent().parent().find('input').attr('disabled', false);
+ 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+ 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
  			}
  		}
  		else {
@@ -105,14 +107,20 @@
  			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
  			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
  			if ($switchID == 'exit-redirect-switch') {
+ 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+ 				$('[name="exit-redirectopt"]').val($redirect_exit);
  				$(this).parent().parent().find('input').attr('disabled', true);
  				$(this).parent().parent().find('textarea').attr('disabled', true);
  			}
  			if ($switchID == 'mouseover-url-label') {
  				$(this).parent().parent().find('input').attr('disabled', true);
+ 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+ 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
  			}
  			if ($switchID == 'secondary-url-label') {
  				$(this).parent().parent().find('input').attr('disabled', true);
+ 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+ 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
  			}
  		}
  	})

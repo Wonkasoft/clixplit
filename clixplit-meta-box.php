@@ -8,6 +8,7 @@
 			<form></form>
 			<form id="form-meta-box" action="<?php echo plugins_url("/ajax/ajax-form.php", __FILE__); ?>" method="post" role="form" autocomplete="off">
 				<div class="col-xs-12">
+				<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
 					<div class="col-xs-12 vertical-space text-center">
 					</div>
 					<div class="col-xs-12 col-md-4">
@@ -36,7 +37,7 @@
 								</div>
 								<div id="exit-redirect-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="exit-pop[]" placeholder="url..." disabled="disabled">
+										<input type="text" class="form-control url-input" name="exit-pop" placeholder="url..." disabled="disabled">
 									</div>
 									<div class="entry input-group col-xs-12 bottom-form-space">
 										<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
@@ -63,7 +64,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<input type="button" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
+								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 						</div>
@@ -138,7 +139,7 @@
 							<div class="col-xs-12 vertical-space text-center">
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
+								<input type="hidden" name="activepost-modal" value="<?php echo get_the_ID(); ?>">
 								<input type="hidden" name="selected-text">
 								<div class="control-group" id="modal-primary-url">
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>

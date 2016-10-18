@@ -28,12 +28,18 @@ add_action ('admin_menu', 'clixplit_register_custom_menu');
 
 function clixplit_register_custom_menu() {
   add_menu_page (
-    'Home', 
+    'cliXplit', 
     'cliXplit',
     'manage_options',
     'clixplit/clixplit-home.php',
     '',
     plugins_url("/img/clixplit-logo-icon-bw20px.svg", __FILE__));
+  add_submenu_page ('clixplit/clixplit-home.php',
+    'Home',
+    'Home',
+    'manage_options',
+    'clixplit/clixplit-home.php',
+    '');
  add_submenu_page ('clixplit/clixplit-home.php',
     'clixplit-tutorials',
     'Tutorials',

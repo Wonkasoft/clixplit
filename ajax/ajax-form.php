@@ -5,7 +5,7 @@ if (isset($_POST['selected-text'])) {
 	if (!empty($_POST['selected-text'])) {
 					require_once( $file_path . 'wp-load.php' );
 					global $wpdb;
-					$page_post_id = $_POST['activepost-modal']
+					$page_post_id = $_POST['activepost-modal'];
 					$primary_count = count($_POST['primary']);
 					$secondary_count = count($_POST['secondary']);
 					$keyword = $_POST['selected-text'];
@@ -46,11 +46,11 @@ if (isset($_POST['selected-text'])) {
 				};
 }
 
-if ((isset($_POST['mouseoverurl'])) || (isset($_POST['exit-pop'])) || (isset($_POST['secondary-redirect']))) {
-	if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty($_POST['secondary-redirect']))) {
+
+if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty($_POST['secondary-redirect']))) {
 					require_once( $file_path . 'wp-load.php' );
 					global $wpdb;
-					$page_post_id = $_POST['activepost']
+					$page_post_id = $_POST['activepost'];
 					$mouseoveropt = $_POST['mouseover-redirectopt'];
 					$mouseover_count = count($_POST['mouseoverurl']);
 					$mouseoverurl = $_POST['mouseoverurl'];
@@ -75,7 +75,7 @@ if ((isset($_POST['mouseoverurl'])) || (isset($_POST['exit-pop'])) || (isset($_P
 							));
 					};
 					for ($i=0; $i < $secondary_count; $i++) { 
-						$secondary_array = $secondary[$i];
+						$secondary_array = $secondary_redirect[$i];
 						$table_name = $wpdb->prefix . 'clixplit_redirect';
 						$wpdb->insert($table_name, array(
 							'created' => current_time('mysql'),
@@ -87,7 +87,6 @@ if ((isset($_POST['mouseoverurl'])) || (isset($_POST['exit-pop'])) || (isset($_P
 							'exitmessage' => $exitmessage
 							));
 					};	
-				};
 }
 
 
