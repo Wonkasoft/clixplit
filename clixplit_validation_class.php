@@ -94,7 +94,7 @@ class clixplit_validation {
         if($license_data->result == 'success'){//Success was returned for the license activation
 
             //Uncomment the followng line to see the message that returned from the license server
-        	$response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="1;url=?page=clixplit/clixplit-home.php" />';
+        	$response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="0;url=?page=clixplit/clixplit-home.php" />';
         	return $response_message;
         	
         }
@@ -142,7 +142,7 @@ class clixplit_validation {
      if($license_data->result == 'success'){//Success was returned for the license activation
 
             //Uncomment the followng line to see the message that returned from the license server
-        $response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="1;url=?page=clixplit/clixplit-activation.php" />';
+        $response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="0;url=?page=clixplit/clixplit-activation.php" />';
        return $response_message;
    }
    else{

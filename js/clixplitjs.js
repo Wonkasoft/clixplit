@@ -3,8 +3,6 @@
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
 
- $("#toplevel_page_clixplit-clixplit-home a.wp-first-item").html("Home");
-
  $( document ).ready(function() {
  	$("a.nav-campaign-buttons").click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
