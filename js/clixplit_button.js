@@ -12,7 +12,7 @@ $(function() {
         $(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
         $selected_text = ed.selection.getContent();
         $return_text = '';
-        $('.clixplit-save-btn').unbind().click(function() {
+        $('[name="clixplit-modal-save"]').unbind().click(function() {
           $('[name="selected-text"]').val($selected_text);
           $globalswitch = $('#campaign-add-switch').next().next().text();
           if ($globalswitch == "on") {

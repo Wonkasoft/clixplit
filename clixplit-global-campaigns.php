@@ -115,6 +115,7 @@ if (!current_user_can('manage_options')) {
 					</div>
 					<div class="row clixplit-flex">
 						<div class="col-xs-12 col-md-6">
+						<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
 							<div class="form-group">
 								<label for="keyword-input">input desired keyword</label>
 								<input type="text" class="form-control" name="keyword-input" id="keyword-input" placeholder="Keyword...">
@@ -123,9 +124,11 @@ if (!current_user_can('manage_options')) {
 						<div class="col-xs-6 text-center vertical-middle">
 							<div class="col-xs-6">
 								<label id="posts-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="post-switch" class="clixplit-switch-text-off">off</span>
+								<input type="hidden" name="post-value">
 							</div>
 							<div class="col-xs-6">
 								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="page-switch" class="clixplit-switch-text-off">off</span>
+								<input type="hidden" name="page-value">
 							</div>
 						</div>
 					</div>
@@ -185,6 +188,7 @@ if (!current_user_can('manage_options')) {
 		if (!empty($_POST['global'])) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
+			$page_post_id = $_POST['activepost'];
 			$primary_count = count($_POST['primary']);
 			$secondary_count = count($_POST['secondary']);
 			$keyword = $_POST['keyword-input'];
@@ -197,6 +201,7 @@ if (!current_user_can('manage_options')) {
 				$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
+					'page_post_id' => $page_post_id,
 					'keyword' => $keyword,
 					'primaryurl' => $primary_array,
 					'numofprimary' => 1,
@@ -209,6 +214,7 @@ if (!current_user_can('manage_options')) {
 				$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
+					'page_post_id' => $page_post_id,
 					'keyword' => $keyword,
 					'secondaryurl' => $secondary_array,
 					'numofsecondary' => 1,

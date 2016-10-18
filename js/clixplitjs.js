@@ -18,6 +18,10 @@
  	$(".clixplit-save-btn").click(function () {
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  	})
+
+ 	// Global Campaigns Editor
+ 	$post_value = $('#posts-switch').next().next().text();
+ 	$('[name=""]')
  	
  	$(document).on('click', '.btn-add', function(e) {
  		e.preventDefault();
@@ -33,13 +37,38 @@
  		return false;
  	})
 
-  // clixplit_meta_box styling
+  // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
+  // cliXplit_meta_box page redirect options
+  $mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+  $('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+  $redirect_exit = $('#exit-redirect-switch').next().next().text();
+  $('[name="exit-redirectopt"]').val($redirect_exit);
+  $secondary_redirect_label = $('#secondary-url-label').next().next().text();
+  $('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+  $('#form-meta-box').on('submit', function () {
+  	$form = $(this);
+  	$url = $form.attr('action');
+  	$method = $form.attr('method');
+  	$data = $('#form-meta-box').serialize();
+
+  	$.ajax( {
+  		url: $url,
+  		type: $method,
+  		data: $data,
+  		success: function($response) {
+  			console.log($response);
+  		}
+  	});
+  	return false;
+  });
+
+  // cliXplit_meta_box modal form
   $('#modal-form-meta-box').on('submit', function () {
-  	$custom_form = $(this);
-  	$url = $custom_form.attr('action');
-  	$method = $custom_form.attr('method');
+  	$form = $(this);
+  	$url = $form.attr('action');
+  	$method = $form.attr('method');
   	$data = $('#modal-form-meta-box').serialize();
 
   	$.ajax( {
