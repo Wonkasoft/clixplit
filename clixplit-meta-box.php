@@ -6,14 +6,15 @@
 	<div class="container mb-container">
 		<div class="row">
 			<form></form>
-			<form id="form-meta-box" role="form1" autocomplete="off">
+			<form id="form-meta-box" action="<?php echo plugins_url("/ajax/ajax-form.php", __FILE__); ?>" method="post" role="form" autocomplete="off">
 				<div class="col-xs-12">
 					<div class="col-xs-12 vertical-space text-center">
 					</div>
 					<div class="col-xs-12 col-md-4">
 						<div class="control-group" id="mouseover-url">
-						<div class="bottom-space">
-								<label id="mouseover-url-label" class="clixplit-labels">mosueover redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+							<div class="bottom-space">
+								<label id="mouseover-url-label" class="clixplit-labels">mouseover redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+								<input type="hidden" name="mouseover-redirectopt">
 							</div>
 							<div id="mouseover-url-controls" class="controls">
 								<div class="entry input-group col-xs-12 bottom-form-space">
@@ -28,28 +29,30 @@
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-4 side-borders">
-						<div class="control-group" id="exit-redirect">
-						<div class="bottom-space">
-						<label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
-						</div>
-						<div id="exit-redirect-controls" class="controls">
-							<div class="entry input-group col-xs-12 bottom-form-space">
-							<input type="text" class="form-control url-input" name="exit-pop[]" placeholder="url..." disabled="disabled">
+							<div class="control-group" id="exit-redirect">
+								<div class="bottom-space">
+									<label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+									<input type="hidden" name="exit-redirectopt">
+								</div>
+								<div id="exit-redirect-controls" class="controls">
+									<div class="entry input-group col-xs-12 bottom-form-space">
+										<input type="text" class="form-control url-input" name="exit-pop[]" placeholder="url..." disabled="disabled">
+									</div>
+									<div class="entry input-group col-xs-12 bottom-form-space">
+										<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
+									</div>
+								</div>
 							</div>
-							<div class="entry input-group col-xs-12 bottom-form-space">
-							 <textarea class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
-							 </div>
-						</div>
-						</div>
 						</div>
 						<div class="col-xs-12 col-md-4">
 							<div class="control-group" id="secondary-url">
-							<div class="bottom-space">
-								<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+								<div class="bottom-space">
+									<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+									<input type="hidden" name="secondary-redirectopt">
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="secondary[]" placeholder="url..." disabled="disabled">
+										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled">
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
@@ -60,37 +63,39 @@
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
+								<input type="button" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 						</div>
 					</form>
 				</div>
+			</div>
 
-				<!-- page-level clixplit stats -->
+			<!-- page-level clixplit stats -->
+			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12">
 					<div class="col-xs-12 clixplit-meta-box-title">
 						page-level cliXplit stats
 					</div>
 					<div class="col-xs-12">
-					<div class="table-responsive">
-						<table class="table table-hover table-striped">
-							<thead>
-								<tr>
-									<th></th>
-									<th>Keyword</th>
-									<th>Created</th>
-									<th>Tot | Unq</th>
-									<th>Global</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								global  $wpdb;
-								$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
-								$keyword_check = '';
+						<div class="col-xs-12">
+							<div class="table-responsive">
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th></th>
+											<th>Keyword</th>
+											<th>Created</th>
+											<th>Tot | Unq</th>
+											<th>Global</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										global  $wpdb;
+										$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
+										$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
+										$keyword_check = '';
 										foreach ($table_build as $key)  {
 											if (($keyword_check == '') && ($key->pagepostcreated == "Y")) {
 												$keyword_check = $key->keyword;
@@ -112,11 +117,11 @@
 												'<td>'. $key->globalopt .'</td>' .
 												'</tr>';
 											}
-									}
-								?>
-							</tbody>
-						</table>
-						</div>
+										}
+										?>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -128,11 +133,12 @@
 		<div class="mymodal">
 			<div class="container-fluid clixplit-panel-2 mymodal-box">
 				<div class="row">
-					<form id="modal-form-meta-box-modal" role="form2" autocomplete="off">
+					<form id="modal-form-meta-box" action="<?php echo plugins_url("/ajax/ajax-form.php", __FILE__); ?>" method="post" role="form" autocomplete="off">
 						<div class="col-xs-12">
 							<div class="col-xs-12 vertical-space text-center">
 							</div>
 							<div class="col-xs-12 col-md-6">
+								<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
 								<input type="hidden" name="selected-text">
 								<div class="control-group" id="modal-primary-url">
 									<label class="control-label" for="modal-primary-url-controls">input primary url (new page/tab)</label>
@@ -183,77 +189,6 @@
 					</div>
 				</div>
 
-<?php
+				<?php
 
-if (!empty($_POST['clixplit-modal-save'])) {
-	require_once( ABSPATH . 'wp-load.php' );
-	global $wpdb;
-	$primary_count = count($_POST['primary']);
-	$secondary_count = count($_POST['secondary']);
-	$keyword = $_POST['selected-text'];
-	$post_switch = '';
-	$primary = $_POST['primary'];
-	$secondary = $_POST['secondary'];
-	$globalopt = $_POST['globalopt'];
-	$mobileopt = $_POST['mobileopt'];
-	$pagepostcreated = "Y";
-	
-	for ($i=0; $i < $primary_count; $i++) { 
-		$primary_array = $primary[$i];
-		$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-		$wpdb->insert($table_name, array(
-			'created' => current_time('mysql'),
-			'keyword' => $keyword,
-			'primaryurl' => $primary_array,
-			'enablemobile' => $mobileopt,
-			'numofprimary' => 1,
-			'globalopt' => $globalopt,
-			'pagepostcreated' => $pagepostcreated
-			));
-	};
-	for ($i=0; $i < $secondary_count; $i++) { 
-		$secondary_array = $secondary[$i];
-		$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-		$wpdb->insert($table_name, array(
-			'created' => current_time('mysql'),
-			'keyword' => $keyword,
-			'secondaryurl' => $secondary_array,
-			'enablemobile' => $mobileopt,
-			'numofsecondary' => 1,
-			'globalopt' => $globalopt,
-			'pagepostcreated' => $pagepostcreated
-			));
-	};	
-	};
-
-	if (!empty($_POST['clixplit-redirect-save'])) {
-	$primary_count = count($_POST['primary']);
-	$secondary_count = count($_POST['secondary']);
-	$keyword = $_POST['keyword-input'];
-	$post_switch = '';
-	$primary = $_POST['primary'];
-	$secondary = $_POST['secondary'];
-	
-	for ($i=0; $i < $primary_count; $i++) { 
-		$primary_array = $primary[$i];
-		$table_name = $wpdb->prefix . 'clixplit_redirect';
-		$wpdb->insert($table_name, array(
-			'created' => current_time('mysql'),
-			'keyword' => $keyword,
-			'primaryurl' => $primary_array,
-			'numofprimary' => 1
-			));
-	};
-	for ($i=0; $i < $secondary_count; $i++) { 
-		$secondary_array = $secondary[$i];
-		$table_name = $wpdb->prefix . 'clixplit_redirect';
-		$wpdb->insert($table_name, array(
-			'created' => current_time('mysql'),
-			'keyword' => $keyword,
-			'secondaryurl' => $secondary_array,
-			'numofsecondary' => 1
-			));
-	};	
-	};
-
-?>
+				?>

@@ -10,9 +10,10 @@ $(function() {
 
       ed.addCommand('clixplit', function() {
         $(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
-        $('.clixplit-save-btn').click(function() {
-          var selected_text = ed.selection.getContent();
-          $('[name="selected-text"]').val(selected_text);
+        $selected_text = ed.selection.getContent();
+        $return_text = '';
+        $('[name="clixplit-modal-save"]').unbind().click(function() {
+          $('[name="selected-text"]').val($selected_text);
           $globalswitch = $('#campaign-add-switch').next().next().text();
           if ($globalswitch == "on") {
             $globalswitch = "Y";
@@ -23,10 +24,10 @@ $(function() {
           $('[name="globalopt"]').val($globalswitch);
           $mobileswitch = $('#mobile-switch').next().next().text();
           $('[name="mobileopt"]').val($mobileswitch);
-          var return_text = '';
           $primary_url = $('[name="primary[]"]').val();
-          return_text = '<a href="' + $primary_url + '">' + selected_text + '</a>';
-          ed.execCommand('mceInsertContent', 0, return_text);
+          $return_text = '<a href="' + $primary_url + '">' + $selected_text + '</a>';
+          ed.execCommand('mceInsertContent', 0, $return_text);
+          $(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
         });
       });
     },

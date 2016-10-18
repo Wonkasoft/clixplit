@@ -18,6 +18,10 @@
  	$(".clixplit-save-btn").click(function () {
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  	})
+
+ 	// Global Campaigns Editor
+ 	$post_value = $('#posts-switch').next().next().text();
+ 	$('[name=""]')
  	
  	$(document).on('click', '.btn-add', function(e) {
  		e.preventDefault();
@@ -33,10 +37,50 @@
  		return false;
  	})
 
-  // clixplit_meta_box styling
+  // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  
+  // cliXplit_meta_box page redirect options
+  $mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+  $('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+  $redirect_exit = $('#exit-redirect-switch').next().next().text();
+  $('[name="exit-redirectopt"]').val($redirect_exit);
+  $secondary_redirect_label = $('#secondary-url-label').next().next().text();
+  $('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+  $('#form-meta-box').on('submit', function () {
+  	$form = $(this);
+  	$url = $form.attr('action');
+  	$method = $form.attr('method');
+  	$data = $('#form-meta-box').serialize();
+
+  	$.ajax( {
+  		url: $url,
+  		type: $method,
+  		data: $data,
+  		success: function($response) {
+  			console.log($response);
+  		}
+  	});
+  	return false;
+  });
+
+  // cliXplit_meta_box modal form
+  $('#modal-form-meta-box').on('submit', function () {
+  	$form = $(this);
+  	$url = $form.attr('action');
+  	$method = $form.attr('method');
+  	$data = $('#modal-form-meta-box').serialize();
+
+  	$.ajax( {
+  		url: $url,
+  		type: $method,
+  		data: $data,
+  		success: function($response) {
+  			console.log($response);
+  		}
+  	});
+  	return false;
+  });
  })
  $(function() {
  	$('.clixplit-switch-off').click(function(e) {
@@ -45,31 +89,31 @@
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
  			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
  			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
-			if ($switchID == 'exit-redirect-switch') {
-				$(this).parent().parent().find('input').attr('disabled', false);
-				$(this).parent().parent().find('textarea').attr('disabled', false);
-			}
-			if ($switchID == 'mouseover-url-label') {
-				$(this).parent().parent().find('input').attr('disabled', false);
-			}
-			if ($switchID == 'secondary-url-label') {
-				$(this).parent().parent().find('input').attr('disabled', false);
-			}
+ 			if ($switchID == 'exit-redirect-switch') {
+ 				$(this).parent().parent().find('input').attr('disabled', false);
+ 				$(this).parent().parent().find('textarea').attr('disabled', false);
+ 			}
+ 			if ($switchID == 'mouseover-url-label') {
+ 				$(this).parent().parent().find('input').attr('disabled', false);
+ 			}
+ 			if ($switchID == 'secondary-url-label') {
+ 				$(this).parent().parent().find('input').attr('disabled', false);
+ 			}
  		}
  		else {
  			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
  			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
  			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
-			if ($switchID == 'exit-redirect-switch') {
-				$(this).parent().parent().find('input').attr('disabled', true);
-				$(this).parent().parent().find('textarea').attr('disabled', true);
-			}
-			if ($switchID == 'mouseover-url-label') {
-				$(this).parent().parent().find('input').attr('disabled', true);
-			}
-			if ($switchID == 'secondary-url-label') {
-				$(this).parent().parent().find('input').attr('disabled', true);
-			}
+ 			if ($switchID == 'exit-redirect-switch') {
+ 				$(this).parent().parent().find('input').attr('disabled', true);
+ 				$(this).parent().parent().find('textarea').attr('disabled', true);
+ 			}
+ 			if ($switchID == 'mouseover-url-label') {
+ 				$(this).parent().parent().find('input').attr('disabled', true);
+ 			}
+ 			if ($switchID == 'secondary-url-label') {
+ 				$(this).parent().parent().find('input').attr('disabled', true);
+ 			}
  		}
  	})
  	$('.clixplit-primary-switch-off').click(function(e) {

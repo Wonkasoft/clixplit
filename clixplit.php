@@ -138,12 +138,13 @@ function clixplit_redirect_install() {
   $sql = "CREATE TABLE $table_name ( 
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
-    mouseoveropt BOOLEAN NOT NULL,
+    page_post_id VARCHAR(850) NOT NULL,
+    mouseoveropt ENUM('off','on') NOT NULL,
     mouseoverurl VARCHAR(850) NOT NULL,
-    exitredirectopt BOOLEAN NOT NULL,
+    exitredirectopt ENUM('off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
     exitmessage TEXT NOT NULL, 
-    secondaryopt BOOLEAN NOT NULL,
+    secondaryopt ENUM('off','on') NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL, 
     PRIMARY KEY (id)
     ) $charset_collate;";
@@ -165,12 +166,13 @@ function clixplit_redirect_install() {
       $sql = "CREATE TABLE $table_name ( 
         id INT(15) NOT NULL AUTO_INCREMENT,
         created DATETIME NOT NULL,
-        mouseoveropt BOOLEAN NOT NULL,
+        page_post_id VARCHAR(850) NOT NULL,
+        mouseoveropt ENUM('off','on') NOT NULL,
         mouseoverurl VARCHAR(850) NOT NULL,
-        exitredirectopt BOOLEAN NOT NULL,
+        exitredirectopt ENUM('off','on') NOT NULL,
         exitredirecturl VARCHAR(850) NOT NULL,
         exitmessage TEXT NOT NULL, 
-        secondaryopt BOOLEAN NOT NULL,
+        secondaryopt ENUM('off','on') NOT NULL,
         secondaryurl VARCHAR(850) NOT NULL, 
         PRIMARY KEY (id)
         ) $charset_collate;";
@@ -196,6 +198,7 @@ function clixplit_global_campaigns() {
   $sql = "CREATE TABLE $table_name ( 
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
+    page_post_id VARCHAR(850) NOT NULL,
     keyword TEXT(450) NOT NULL,
     primaryurl VARCHAR(850) NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL,
@@ -228,6 +231,7 @@ function clixplit_global_campaigns() {
       $sql = "CREATE TABLE $table_name ( 
       id INT(15) NOT NULL AUTO_INCREMENT,
       created DATETIME NOT NULL,
+      page_post_id VARCHAR(850) NOT NULL,
       keyword TEXT(450) NOT NULL,
       primaryurl VARCHAR(850) NOT NULL,
       secondaryurl VARCHAR(850) NOT NULL,
