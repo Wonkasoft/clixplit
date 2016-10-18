@@ -7,6 +7,9 @@
 * Version: 1.0
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
 */
+include_once('clixplit_validation_class.php');
+$key = $_REQUEST['clixplit_license_key'];
+
 
 add_action( 'wp_enqueue_scripts', 'plugin_enqueues');
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
@@ -28,6 +31,10 @@ function plugin_enqueues() {
 add_action ('admin_menu', 'clixplit_register_custom_menu');
 
 function clixplit_register_custom_menu() {
+  $checkkey = new clixplit_validation();
+  $localhostdbkey = get_option('clixplit_license_key');
+  $activeoption = get_option('clixplit_license_active');
+  if ($checkkey->clixplit_check($localhostdbkey) == 'valid') {
   add_menu_page (
     'Home', 
     'cliXplit',
@@ -54,11 +61,19 @@ function clixplit_register_custom_menu() {
     'clixplit/clixplit-resources.php',
     '');
  add_submenu_page ('clixplit/clixplit-home.php',
-    'clixplit-resources',
-    'Activation',
-    'manage_options',
-    'clixplit/clixplit-activation.php',
-    '');
+      'clixplit-resources',
+      'Activation',
+      'manage_options',
+      'clixplit/clixplit-activation.php',
+      '');
+  } else {
+   add_menu_page ('ClixplitRegistration',
+      'cliXplit Activation',
+      'manage_options',
+      'clixplit/clixplit-activation.php',
+      '',
+      plugins_url("/img/clixplit-logo-icon-bw20px.svg", __FILE__));
+    }
 }
 
 // Add New Page Button
@@ -249,17 +264,6 @@ function clixplit_update_db_check() {
     }
 }
 add_action( 'plugins_loaded', 'clixplit_update_db_check' );
-
-
-// This is the secret key for API authentication. You configured it in the settings menu of the license manager plugin.
-define('CLIXPLIT_SECRET_KEY', '57f80db7cba2a2.89306186'); //Rename this constant name so it is specific to your plugin or theme.
-
-// This is the URL where API query request will be sent to. This should be the URL of the site where you have installed the main license manager plugin. Get this value from the integration help page.
-define('CLIXPLIT_LICENSE_SERVER_URL', 'http://wonkasoft.com'); //Rename this constant name so it is specific to your plugin or theme.
-
-// This is a value that will be recorded in the license manager data so you can identify licenses for this item/product.
-define('CLIXPLIT_REFERENCE', 'clixplit'); //Rename this constant name so it is specific to your plugin or theme.
-
     
 
 ?>

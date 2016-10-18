@@ -1,9 +1,7 @@
 <?php
-global $activated;
-if ((!current_user_can('manage_options')) && ($activated == "yes")) {
+if (!current_user_can('manage_options')) {
 	wp_die(__('You do not have sufficient permissions to access this page.'));
 }
-echo "here is my test" .$activated;
 ?>
 
 <div class="content-wrap">
@@ -92,5 +90,5 @@ echo "here is my test" .$activated;
 </div> <!-- end content-wrap -->
 
 <?php
-
+   
 ?>
