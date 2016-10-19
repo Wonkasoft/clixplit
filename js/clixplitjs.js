@@ -6,16 +6,28 @@
  $( document ).ready(function() {
  	$("a.nav-campaign-buttons").click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
- 	})
+ 	});
  	$(".clixplit-cancel-btn").click(function () {
- 		var r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
- 		if (r == true) {
+ 		$r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
+ 		if ($r) {
  			$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  		}
- 	})
+ 	});
  	$(".clixplit-save-btn").click(function () {
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
- 	})
+ 	});
+
+ 	$(function fetch_data() {
+ 		$table_dir = $('[name="directory"]').val();
+ 		$.ajax({
+ 			url: $table_dir,
+ 			method: 'post',
+ 			datatype: 'text',
+ 			success: function($data) {
+ 				$('#global-table').html($data);
+ 			}
+ 		});
+ 	});
 
  	// Global Campaigns Editor
  	$post_value = $('#posts-switch').next().next().text();
@@ -35,7 +47,7 @@
  		$(this).parents('.entry:first').remove();
  		e.preventDefault();
  		return false;
- 	})
+ 	});
 
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
@@ -46,7 +58,6 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
-  	console.log($data);
 
   	$.ajax( {
   		url: $url,
@@ -76,7 +87,7 @@
   	});
   	return false;
   });
- })
+ });
  $(function() {
  	$('.clixplit-switch-off').click(function(e) {
  		$switchID = $(this).prev().attr('id');
@@ -123,7 +134,7 @@
  				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
  			}
  		}
- 	})
+ 	});
  	$('.clixplit-primary-switch-off').click(function(e) {
  		$controlid = $('#' + $(this).parent('div').prev().attr('id'));
  		$switchID = $controlid.find('label').next().next().text();
@@ -136,7 +147,7 @@
  			}
  			else {
  				var primarylinkopt = confirm("Are you sure you would like to disable link rotation?\nYour additional urls will be lost if you disable this option.");
- 				if (primarylinkopt == true) {
+ 				if (primarylinkopt) {
  					$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
  					$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
  					$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
@@ -146,7 +157,7 @@
  				}
  			}
  		}
- 	})
+ 	});
  	$('.clixplit-secondary-switch-off').click(function(e) {
  		$controlid = $('#' + $(this).parents('div').prev().attr('id'));
  		$switchID = $controlid.find('label').next().next().text();
@@ -159,7 +170,7 @@
  			}
  			else {
  				var secondarylinkopt = confirm("Are you sure you would like to disable link rotation?\nYour additional urls will be lost if you disable this option.");
- 				if (secondarylinkopt == true) {
+ 				if (secondarylinkopt) {
  					$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
  					$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
  					$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
@@ -169,17 +180,17 @@
  				}
  			}
  		}
- 	})
+ 	});
  	$('#clixplit-check-all').change(function() {
  		if($(this).prop('checked')){
  			$('tbody tr td input[type="checkbox"]').each(function(){
  				$(this).prop('checked', true);
- 			})
+ 			});
  		}
  		else {
  			$('tbody tr td input[type="checkbox"]').each(function(){
  				$(this).prop('checked', false);
- 			})
+ 			});
  		}
- 	})
- })
+ 	});
+ });

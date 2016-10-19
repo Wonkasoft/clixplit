@@ -1,5 +1,4 @@
 <?php
-
 if (!current_user_can('manage_options')) {
 	wp_die(__('You do not have sufficient permissions to access this page.'));
 }
@@ -59,43 +58,11 @@ if (!current_user_can('manage_options')) {
 									<th>Instances</th>
 								</tr>
 							</thead>
-							<tbody>
-								<?php
-								global  $wpdb;
-								$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-								$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
-								$keyword_check = '';
-										foreach ($table_build as $key) {
-											if (($keyword_check == '') && ($key->globalopt == "Y")) {
-												$keyword_check = $key->keyword;
-												$primaryurl_count = $wpdb ->get_var('SELECT SUM(numofprimary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-												$secondaryurl_count = $wpdb ->get_var('SELECT SUM(numofsecondary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-												echo '<tr>' .
-												'<td><input class="item-checkbox" type="checkbox" value=""></td>' .
-												'<td>'. $key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->instances .'</td>' .
-												'</tr>';
-											}
-											if (($key->keyword != $keyword_check) && ($key->globalopt == "Y")) {
-												$keyword_check = $key->keyword;
-												$primaryurl_count = $wpdb ->get_var('SELECT SUM(numofprimary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-												$secondaryurl_count = $wpdb ->get_var('SELECT SUM(numofsecondary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-												echo '<tr>' .
-												'<td><input class="item-checkbox" type="checkbox" value=""></td>' .
-												'<td>'.$key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->instances .'</td>' .
-												'</tr>';
-											}
-									}
-								?>
+							<tbody id="global-table">
+								
 							</tbody>
 						</table>
+						<input type="hidden" name="directory" value="<?php echo plugins_url('ajax/ajax-table.php', __FILE__); ?>">
 					</div>
 				</div>
 			</div>
@@ -222,6 +189,7 @@ if (!current_user_can('manage_options')) {
 					'active' => 1
 					));
 			};	
-			};
+			
+		};
 
 		?>

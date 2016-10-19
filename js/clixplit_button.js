@@ -17,6 +17,7 @@ $(function() {
           $globalswitch = $('#campaign-add-switch').next().next().text();
           if ($globalswitch == "on") {
             $globalswitch = "Y";
+            
           }
           else {
             $globalswitch = "N";
