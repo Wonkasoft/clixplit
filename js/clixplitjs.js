@@ -17,7 +17,7 @@
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  	});
 
- 	$(function fetch_data() {
+ 	setInterval(function fetch_data() {
  		$table_dir = $('[name="directory"]').val();
  		$.ajax({
  			url: $table_dir,
@@ -27,7 +27,7 @@
  				$('#global-table').html($data);
  			}
  		});
- 	});
+ 	}, 3000);
 
  	// Global Campaigns Editor
  	$post_value = $('#posts-switch').next().next().text();
