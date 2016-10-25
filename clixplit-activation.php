@@ -1,4 +1,5 @@
-<?php include_once('clixplit_validation_class.php'); 
+<?php 
+    include_once('clixplit_validation_class.php'); 
     $checkkey = new clixplit_validation();
 
 if (isset($_REQUEST['activate_license'])) {
@@ -20,7 +21,6 @@ if (isset($_REQUEST['deactivate_license'])) {
 }
 ?>
 <div class="content-wrap">
-
     <div class="container">
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4 vertical-space">

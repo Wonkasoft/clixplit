@@ -1,7 +1,5 @@
 <?php 
 
-define('FILE_PATH', realpath(dirname(__FILE__). '/../../..'). '/');
-
 class clixplit_validation {
 
 	const CLIXPLIT_SECRET_KEY = "57f80db7cba2a2.89306186";
