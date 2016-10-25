@@ -91,37 +91,11 @@
 											<th>Global</th>
 										</tr>
 									</thead>
-									<tbody>
-										<?php
-										global  $wpdb;
-										$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-										$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
-										$keyword_check = '';
-										foreach ($table_build as $key)  {
-											if (($keyword_check == '') && ($key->pagepostcreated == "Y")) {
-												$keyword_check = $key->keyword;
-												echo '<tr>' .
-												'<td></td>' .
-												'<td>'. $key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->globalopt .'</td>' .
-												'</tr>';
-											}
-											if (($key->keyword != $keyword_check) && ($key->pagepostcreated == "Y")) {
-												$keyword_check = $key->keyword;
-												echo '<tr>' .
-												'<td></td>' .
-												'<td>'. $key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->globalopt .'</td>' .
-												'</tr>';
-											}
-										}
-										?>
+									<tbody id='page-table'>
+										
 									</tbody>
 								</table>
+								<input type="hidden" name="directory" value="<?php echo plugins_url('ajax/ajax-table.php', __FILE__); ?>">
 							</div>
 						</div>
 					</div>
@@ -191,5 +165,20 @@
 				</div>
 
 				<?php
+				$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
+				require_once( $file_path . 'wp-load.php' );
+				global  $wpdb;
+				$table_name = $wpdb->prefix . 'clixplit_redirect';
+				$mouseover_count = 6;
+				$secondary_count = 7;
+				$page_post_id = get_the_ID();
+				$record_updates = $wpdb ->get_results('SELECT * FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '"', OBJECT);
+				$mou_count = $wpdb ->get_var('SELECT COUNT(mouseoverurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""');
+				$pps_count = $wpdb ->get_var('SELECT COUNT(secondaryurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND  secondaryurl != ""');
+				$mou_compute = ($mou_count - $mouseover_count);
+				$pps_compute = ($pps_count - $secondary_count);
+				$test = $mou_compute;
+				var_dump($record_updates);
+				echo $record_updates[4]->id;
 
 				?>

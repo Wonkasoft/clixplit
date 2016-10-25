@@ -19,15 +19,23 @@
 
  	setInterval(function fetch_data() {
  		$table_dir = $('[name="directory"]').val();
+ 		$data = $('[name="activepost"]').serialize();
+
  		$.ajax({
  			url: $table_dir,
  			method: 'post',
  			datatype: 'text',
- 			success: function($data) {
- 				$('#global-table').html($data);
+ 			data: $data,
+ 			success: function($response) {
+ 				if ($('#global-table').length) {
+ 					$('#global-table').html($response);
+ 				}
+ 				if ($('#page-table').length) {
+ 					$('#page-table').html($response);
+ 				}
  			}
  		});
- 	}, 3000);
+ 	}, 2000);
 
  	// Global Campaigns Editor
  	$post_value = $('#posts-switch').next().next().text();
@@ -52,7 +60,7 @@
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  
+  //cliXplit_meta_box
   $('#form-meta-box').on('submit', function () {
   	$form = $(this);
   	$url = $form.attr('action');
