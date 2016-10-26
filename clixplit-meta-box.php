@@ -1,4 +1,18 @@
 <?php 
+$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
+require_once( $file_path . 'wp-load.php' );
+global  $wpdb;
+$table_redirect = $wpdb->prefix . 'clixplit_redirect';
+$page_post_id = get_the_ID();
+$options = $wpdb->get_results('SELECT * FROM ' . $table_redirect . ' WHERE page_post_id = "' . $page_post_id . '" AND mouseoveropt != ""');
+$mou_option = '';
+$exit_option = '';
+$pps_option = '';
+if ($options != NULL) {
+	$mou_option = $options[0]->mouseoveropt;
+	$exit_option = $options[0]->exitredirectopt;
+	$pps_option = $options[0]->secondaryopt;
+}
 
 ?>
 
@@ -53,7 +67,7 @@
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled">
+										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled" value="">
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
@@ -172,13 +186,13 @@
 				$mouseover_count = 6;
 				$secondary_count = 7;
 				$page_post_id = get_the_ID();
-				$record_updates = $wpdb ->get_results('SELECT * FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '"', OBJECT);
-				$mou_count = $wpdb ->get_var('SELECT COUNT(mouseoverurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""');
+				$record_updates = $wpdb ->get_results('SELECT mouseoverurl FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""', OBJECT);
+				$mou_count = $wpdb->get_var('SELECT COUNT(mouseoverurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""');
 				$pps_count = $wpdb ->get_var('SELECT COUNT(secondaryurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND  secondaryurl != ""');
 				$mou_compute = ($mou_count - $mouseover_count);
 				$pps_compute = ($pps_count - $secondary_count);
 				$test = $mou_compute;
 				var_dump($record_updates);
-				echo $record_updates[4]->id;
+				var_dump($mou_count);
 
 				?>

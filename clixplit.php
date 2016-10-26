@@ -8,7 +8,7 @@
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
 */
 
-add_action( 'wp_enqueue_scripts', 'plugin_locals');
+/*add_action( 'wp_enqueue_scripts', 'plugin_locals');*/
 
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
 
@@ -147,6 +147,7 @@ function clixplit_redirect_install() {
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
     page_post_id VARCHAR(850) NOT NULL,
+    input_id VARCHAR(850) NOT NULL,
     mouseoveropt ENUM('','off','on') NOT NULL,
     mouseoverurl VARCHAR(850) NOT NULL,
     exitredirectopt ENUM('','off','on') NOT NULL,
@@ -175,6 +176,7 @@ function clixplit_redirect_install() {
         id INT(15) NOT NULL AUTO_INCREMENT,
         created DATETIME NOT NULL,
         page_post_id VARCHAR(850) NOT NULL,
+        input_id VARCHAR(850) NOT NULL,
         mouseoveropt ENUM('','off','on') NOT NULL,
         mouseoverurl VARCHAR(850) NOT NULL,
         exitredirectopt ENUM('','off','on') NOT NULL,

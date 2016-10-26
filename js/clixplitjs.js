@@ -89,8 +89,9 @@
   		url: $url,
   		type: $method,
   		data: $data,
+  		datatype: 'json',
   		success: function($response) {
-  			console.log($response);
+  			console.log($response[0]);
   		}
   	});
   	return false;
