@@ -220,29 +220,5 @@ if (!current_user_can('manage_options')) {
 
   echo $url_totalclicks;
 
-  echo "<br>";
-  var_dump($url_totalclicks);
-   $ipaddress = '';
-    if (isset($_SERVER['HTTP_CLIENT_IP']))
-        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else if(isset($_SERVER['HTTP_X_FORWARDED']))
-        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
-        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-    else if(isset($_SERVER['HTTP_FORWARDED']))
-        $ipaddress = $_SERVER['HTTP_FORWARDED'];
-    else if(isset($_SERVER['REMOTE_ADDR']))
-        $ipaddress = $_SERVER['REMOTE_ADDR'];
-    else
-        $ipaddress = 'UNKNOWN';
-      echo $ipaddress;
+  
 ?>		
-<script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
-
-<script type="text/javascript">
- 	var userip;
- 	document.cookie = "userip=" + userip;
- 	
-</script>
