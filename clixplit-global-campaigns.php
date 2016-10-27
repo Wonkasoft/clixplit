@@ -194,6 +194,7 @@ if (!current_user_can('manage_options')) {
 			$content_output = str_replace(' ', '',$content_output);
 			$instances = substr_count(strtoupper($content_output), strtoupper($keyword_instance));
 			$wpdb->insert($table_name, array(
+					'created' => current_time('mysql'),
 					'keyword' => $keyword,
 					'instances' => $instances,
 					'globalopt' => 'Y',

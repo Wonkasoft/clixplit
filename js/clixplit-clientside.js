@@ -46,12 +46,10 @@ $(document).ready(function() {
           var keyword = [];
           for (var i = 0; i < dbData.length; i++) {
             if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-              // console.log("primary: "+dbData[i].primaryurl+" has: " +dbData[i].totalclicks+" clicks on this url");
              primaryArr[primaryCounter] = dbData[i].primaryurl;
              keyword[primaryCounter] = dbData[i].keyword;
              primaryCounter++;
             }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-              // console.log("secondary: "+dbData[i].secondaryurl+" has: " +dbData[i].totalclicks+" clicks on this url");
              secondaryArr[secondaryCounter] = dbData[i].secondaryurl;
              secondaryCounter++;
             }else {
