@@ -8,7 +8,6 @@
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
 */
 
-add_action( 'wp_enqueue_scripts', 'plugin_locals');
 function plugin_locals() {
 wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), '1.12.4');
 wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',  array(), '1.12.4');
@@ -16,6 +15,7 @@ wp_enqueue_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.j
 wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array( 
 'cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
 }
+add_action( 'wp_enqueue_scripts', 'plugin_locals');
 
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
 
@@ -30,7 +30,8 @@ function plugin_enqueues() {
   wp_enqueue_style('clixplit-bootstrap', plugins_url( '/css/bootstrap.min.css', __FILE__ ) , array(), '3.3.7', 'all');
   wp_enqueue_style('clixplit-style', plugins_url( '/css/clixplit.css', __FILE__ ) , array(), '1.0.0', 'all');
   wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7');
-  wp_enqueue_script('clixplit-clixplit.js', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array(), '1.0.0');
+  wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array(), '1.0.0');
+ 
 }
 
 function clixplit_register_custom_menu() {
@@ -153,12 +154,13 @@ function clixplit_redirect_install() {
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
     page_post_id VARCHAR(850) NOT NULL,
-    mouseoveropt ENUM('off','on') NOT NULL,
+    input_id VARCHAR(850) NOT NULL,
+    mouseoveropt ENUM('','off','on') NOT NULL,
     mouseoverurl VARCHAR(850) NOT NULL,
-    exitredirectopt ENUM('off','on') NOT NULL,
+    exitredirectopt ENUM('','off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
     exitmessage TEXT NOT NULL, 
-    secondaryopt ENUM('off','on') NOT NULL,
+    secondaryopt ENUM('','off','on') NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL, 
     PRIMARY KEY (id)
     ) $charset_collate;";
@@ -181,12 +183,13 @@ function clixplit_redirect_install() {
         id INT(15) NOT NULL AUTO_INCREMENT,
         created DATETIME NOT NULL,
         page_post_id VARCHAR(850) NOT NULL,
-        mouseoveropt ENUM('off','on') NOT NULL,
+        input_id VARCHAR(850) NOT NULL,
+        mouseoveropt ENUM('','off','on') NOT NULL,
         mouseoverurl VARCHAR(850) NOT NULL,
-        exitredirectopt ENUM('off','on') NOT NULL,
+        exitredirectopt ENUM('','off','on') NOT NULL,
         exitredirecturl VARCHAR(850) NOT NULL,
         exitmessage TEXT NOT NULL, 
-        secondaryopt ENUM('off','on') NOT NULL,
+        secondaryopt ENUM('','off','on') NOT NULL,
         secondaryurl VARCHAR(850) NOT NULL, 
         PRIMARY KEY (id)
         ) $charset_collate;";

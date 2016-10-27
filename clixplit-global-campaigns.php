@@ -162,16 +162,64 @@ if (!current_user_can('manage_options')) {
 
 <?php
 		
-	if (!empty($_POST['global'])) {
-		require_once( ABSPATH . 'wp-load.php' );
-		global $wpdb;
-		$page_post_id = $_POST['activepost'];
-		$primary_count = count($_POST['primary']);
-		$secondary_count = count($_POST['secondary']);
-		$keyword = $_POST['keyword-input'];
-		$post_switch = '';
-		$primary = $_POST['primary'];
-		$secondary = $_POST['secondary'];
+		if (!empty($_POST['global'])) {
+			require_once( ABSPATH . 'wp-load.php' );
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+			$page_post_id = $_POST['activepost'];
+			$primary_count = count($_POST['primary']);
+			$secondary_count = count($_POST['secondary']);
+			$keyword = $_POST['keyword-input'];
+			$primary = $_POST['primary'];
+			$secondary = $_POST['secondary'];
+
+			$content_output = "";
+			$posts = get_posts();
+			$pages = get_pages();
+			foreach ($posts as $post) {
+			$post_content = apply_filters('the_content', $post->post_content);
+			$content_output .= $post_content;
+			}
+			foreach ($pages as $page) {
+			$page_content = apply_filters('the_content', $page->post_content);
+			$content_output .= $page_content;
+			}
+			$index_content = file_get_contents(get_home_url());
+			$index_cleaned = strip_tags($index_content);
+			$content_output .= trim($index_cleaned);
+			$keyword_instance = trim($keyword);
+			$keyword_instance = str_replace(' ', '',$keyword_instance);
+			$content_output = str_replace(' ', '',$content_output);
+			$instances = substr_count(strtoupper($content_output), strtoupper($keyword_instance));
+			$wpdb->insert($table_name, array(
+					'keyword' => $keyword,
+					'instances' => $instances
+					));
+
+			for ($i=0; $i < $primary_count; $i++) { 
+				$primary_array = $primary[$i];
+				$wpdb->insert($table_name, array(
+					'created' => current_time('mysql'),
+					'page_post_id' => $page_post_id,
+					'keyword' => $keyword,
+					'primaryurl' => $primary_array,
+					'numofprimary' => 1,
+					'globalopt' => 'Y',
+					'active' => 1
+					));
+			};
+			for ($i=0; $i < $secondary_count; $i++) { 
+				$secondary_array = $secondary[$i];
+				$wpdb->insert($table_name, array(
+					'created' => current_time('mysql'),
+					'page_post_id' => $page_post_id,
+					'keyword' => $keyword,
+					'secondaryurl' => $secondary_array,
+					'numofsecondary' => 1,
+					'globalopt' => 'Y',
+					'active' => 1
+					));
+			};	
 			
 		for ($i=0; $i < $primary_count; $i++) { 
 			$primary_array = $primary[$i];
@@ -201,24 +249,5 @@ if (!current_user_can('manage_options')) {
 				));
 		};		
 	};
-
-	require_once( ABSPATH . 'wp-load.php' );
-	global $wpdb;
-  $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-
-  $url_clicked = "dumb.com";
-  $userip = $_POST['userip'];
-
-  $url_id = $wpdb->get_var('SELECT id FROM '.$table_name.' WHERE primaryurl="'.$url_clicked.'" OR secondaryurl="'.$url_clicked.'"');
-
-
- $url_totalclicks = $wpdb->get_var('SELECT totalclicks FROM '.$table_name.' WHERE id="'.$url_id.'"');
-  $url_totalclicks++;
-
-  
-  	$wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('id'=>$url_id));
-
-  echo $url_totalclicks;
-
   
 ?>		

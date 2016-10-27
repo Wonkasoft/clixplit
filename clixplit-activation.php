@@ -79,8 +79,8 @@ if (isset($_REQUEST['deactivate_license'])) {
             </tr>
         </table>
         <p class="submit">
-            <input type="submit" name="activate_license" value="Activate" class="button-primary" />
-            <input type="submit" name="deactivate_license" value="Deactivate" class="button" />
+            <input type="submit" name="activate_license" value="Activate" class="clixplit-activate-btn" />
+            <input type="submit" name="deactivate_license" value="Deactivate" class="clixplit-deactivate-btn" />
         </p>
     </form>
     </div>

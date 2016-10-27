@@ -17,17 +17,25 @@
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  	});
 
- 	$(function fetch_data() {
+ 	setInterval(function fetch_data() {
  		$table_dir = $('[name="directory"]').val();
+ 		$data = $('[name="activepost"]').serialize();
+
  		$.ajax({
  			url: $table_dir,
  			method: 'post',
  			datatype: 'text',
- 			success: function($data) {
- 				$('#global-table').html($data);
+ 			data: $data,
+ 			success: function($response) {
+ 				if ($('#global-table').length) {
+ 					$('#global-table').html($response);
+ 				}
+ 				if ($('#page-table').length) {
+ 					$('#page-table').html($response);
+ 				}
  			}
  		});
- 	});
+ 	}, 2000);
 
  	// Global Campaigns Editor
  	$post_value = $('#posts-switch').next().next().text();
@@ -52,7 +60,10 @@
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  
+  $('.clixplit-save-btn').click(function(){
+  	$('#submission').text('Processing...').fadeIn();
+  });
+  //cliXplit_meta_box
   $('#form-meta-box').on('submit', function () {
   	$form = $(this);
   	$url = $form.attr('action');
@@ -65,6 +76,7 @@
   		data: $data,
   		success: function($response) {
   			console.log($response);
+  			$('#submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
   	return false;
@@ -81,8 +93,9 @@
   		url: $url,
   		type: $method,
   		data: $data,
+  		datatype: 'json',
   		success: function($response) {
-  			console.log($response);
+  			console.log($response[0]);
   		}
   	});
   	return false;

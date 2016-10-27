@@ -1,4 +1,18 @@
 <?php 
+$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
+require_once( $file_path . 'wp-load.php' );
+global  $wpdb;
+$table_redirect = $wpdb->prefix . 'clixplit_redirect';
+$page_post_id = get_the_ID();
+$options = $wpdb->get_results('SELECT * FROM ' . $table_redirect . ' WHERE page_post_id = "' . $page_post_id . '" AND mouseoveropt != ""');
+$mou_option = '';
+$exit_option = '';
+$pps_option = '';
+if ($options != NULL) {
+	$mou_option = $options[0]->mouseoveropt;
+	$exit_option = $options[0]->exitredirectopt;
+	$pps_option = $options[0]->secondaryopt;
+}
 
 ?>
 
@@ -53,7 +67,7 @@
 								</div>
 								<div id="secondary-url-controls" class="controls">
 									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled">
+										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled" value="">
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
@@ -66,6 +80,9 @@
 							<div class="col-xs-12 text-center vertical-space">
 								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
+							</div>
+							<div class="col-xs-12 text-center">
+								<span id="submission"></span>
 							</div>
 						</div>
 					</form>
@@ -91,37 +108,11 @@
 											<th>Global</th>
 										</tr>
 									</thead>
-									<tbody>
-										<?php
-										global  $wpdb;
-										$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-										$table_build = $wpdb ->get_results ('SELECT * FROM '.$table_name);								
-										$keyword_check = '';
-										foreach ($table_build as $key)  {
-											if (($keyword_check == '') && ($key->pagepostcreated == "Y")) {
-												$keyword_check = $key->keyword;
-												echo '<tr>' .
-												'<td></td>' .
-												'<td>'. $key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->globalopt .'</td>' .
-												'</tr>';
-											}
-											if (($key->keyword != $keyword_check) && ($key->pagepostcreated == "Y")) {
-												$keyword_check = $key->keyword;
-												echo '<tr>' .
-												'<td></td>' .
-												'<td>'. $key->keyword .'</td>' .
-												'<td>'. $key->created .'</td>' .
-												'<td>'. $key->totalclicks . ' | ' . $key->unqclicks .'</td>' .
-												'<td>'. $key->globalopt .'</td>' .
-												'</tr>';
-											}
-										}
-										?>
+									<tbody id='page-table'>
+										
 									</tbody>
 								</table>
+								<input type="hidden" name="directory" value="<?php echo plugins_url('ajax/ajax-table.php', __FILE__); ?>">
 							</div>
 						</div>
 					</div>
@@ -191,5 +182,28 @@
 				</div>
 
 				<?php
+				$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
+				require_once( $file_path . 'wp-load.php' );
+				global  $wpdb;
+				$table_redirect = $wpdb->prefix . 'clixplit_redirect';
+				$mouseover_count = 6;
+				$secondary_count = 7;
+				$page_post_id = get_the_ID();
+				$mou_load = ''; $mou_count = '';
+				$pps_count = '';
+				// Database Fetch
+				$db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
+					for ($i=0; $i < count($db_fetch); $i++) {
+						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->mouseoverurl != '')) {
+							$mou_count++;
+						};
+						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->secondaryurl != '')) {
+							$pps_count++;
+						};
+					};
+				$set = $mou_count-1;
+				echo $set;
+
+				echo $pps_count;
 
 				?>
