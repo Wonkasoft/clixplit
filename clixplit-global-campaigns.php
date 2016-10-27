@@ -5,7 +5,6 @@ if (!current_user_can('manage_options')) {
 ?>
 
 <div class="content-wrap">
-	
 	<div class="container logo-grad">
 		<div class="row">
 			<div class="col-xs-4 col-xs-offset-4 vertical-space">
@@ -13,6 +12,7 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 text-center bottom-space">
@@ -35,6 +35,7 @@ if (!current_user_can('manage_options')) {
 			</div>
 		</div>
 	</div>
+
 	<div class="container-fluid clixplit-panel">
 		<div class="row">
 			<div class="col-xs-12">
@@ -59,7 +60,6 @@ if (!current_user_can('manage_options')) {
 								</tr>
 							</thead>
 							<tbody id="global-table">
-								
 							</tbody>
 						</table>
 						<input type="hidden" name="directory" value="<?php echo plugins_url('ajax/ajax-table.php', __FILE__); ?>">
@@ -70,6 +70,7 @@ if (!current_user_can('manage_options')) {
 	</div>
 
 </div> <!-- end content-wrap -->
+
 <div class="mymodal">
 	<div class="container-fluid clixplit-panel-2 mymodal-box">
 		<div class="row">
@@ -80,25 +81,29 @@ if (!current_user_can('manage_options')) {
 							<label>Global Campaign Editor</label>
 						</div>
 					</div>
+
 					<div class="row clixplit-flex">
 						<div class="col-xs-12 col-md-6">
-						<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
+							<input type="hidden" name="activepost" value="<?php echo get_the_ID(); ?>">
 							<div class="form-group">
 								<label for="keyword-input">input desired keyword</label>
 								<input type="text" class="form-control" name="keyword-input" id="keyword-input" placeholder="Keyword...">
 							</div>
 						</div>
+
 						<div class="col-xs-6 text-center vertical-middle">
 							<div class="col-xs-6">
 								<label id="posts-switch" class="clixplit-labels">posts:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="post-switch" class="clixplit-switch-text-off">off</span>
 								<input type="hidden" name="post-value">
 							</div>
+
 							<div class="col-xs-6">
 								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="page-switch" class="clixplit-switch-text-off">off</span>
 								<input type="hidden" name="page-value">
 							</div>
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="control-group" id="modal-primary-url-campaigns">
@@ -108,13 +113,15 @@ if (!current_user_can('manage_options')) {
 										<input type="text" class="form-control url-input" name="primary[]" placeholder="url...">
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
-										</div>
 									</div>
 								</div>
-								<div class="vertical-space">
-									<label id="modal-primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
-								</div>
 							</div>
+
+							<div class="vertical-space">
+								<label id="modal-primary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-primary-switch-off"><span class="clixplit-primary-switch-center-off"></span></span><span class="clixplit-primary-switch-text-off">off</span>
+							</div>
+						</div>
+
 							<div class="col-xs-12 col-md-6">
 								<div class="control-group" id="modal-secondary-url-campaigns">
 									<label class="control-label" for="modal-secondary-url-controls">input secondary url (page redirect)</label>
@@ -123,34 +130,37 @@ if (!current_user_can('manage_options')) {
 											<input type="text" class="form-control url-input" name="secondary[]" placeholder="url...">
 											<span class="input-group-btn">
 												<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
-											</div>
 										</div>
 									</div>
-									<div class="vertical-space">
-										<label id="modal-secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
-									</div>
 								</div>
+
+							<div class="vertical-space">
+								<label id="modal-secondary-url-switch" class="clixplit-labels">link rotation:</label><span class="clixplit-secondary-switch-off"><span class="clixplit-secondary-switch-center-off"></span></span><span class="clixplit-secondary-switch-text-off">off</span>
 							</div>
-							<div class="row">
-								<div class="col-xs-12 text-center">
-									<div class="hr-width"><hr /></div>
-									<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
-									<div class="hr-width"><hr /></div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 text-center vertical-space">
-									<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="global">
-									<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
-								</div>
-							</div>
-						</form>
+						</div>
 					</div>
-				</div>
+
+					<div class="row">
+						<div class="col-xs-12 text-center">
+							<div class="hr-width"><hr /></div>
+							<label id="mobile-switch" class="clixplit-labels">enable for mobile:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+							<div class="hr-width"><hr /></div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12 text-center vertical-space">
+							<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="global">
+							<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<?php
+<?php
 		
 		if (!empty($_POST['global'])) {
 			require_once( ABSPATH . 'wp-load.php' );
@@ -221,6 +231,33 @@ if (!current_user_can('manage_options')) {
 					));
 			};	
 			
+		for ($i=0; $i < $primary_count; $i++) { 
+			$primary_array = $primary[$i];
+			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+			$wpdb->insert($table_name, array(
+				'created' => current_time('mysql'),
+				'page_post_id' => $page_post_id,
+				'keyword' => $keyword,
+				'primaryurl' => $primary_array,
+				'numofprimary' => 1,
+				'globalopt' => 'Y',
+				'active' => 1
+				));
 		};
 
-		?>
+		for ($i=0; $i < $secondary_count; $i++) { 
+			$secondary_array = $secondary[$i];
+			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+			$wpdb->insert($table_name, array(
+				'created' => current_time('mysql'),
+				'page_post_id' => $page_post_id,
+				'keyword' => $keyword,
+				'secondaryurl' => $secondary_array,
+				'numofsecondary' => 1,
+				'globalopt' => 'Y',
+				'active' => 1
+				));
+		};		
+	};
+  
+?>		
