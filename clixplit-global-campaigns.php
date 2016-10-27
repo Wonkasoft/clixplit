@@ -162,6 +162,8 @@ if (!current_user_can('manage_options')) {
 			$keyword = $_POST['keyword-input'];
 			$primary = $_POST['primary'];
 			$secondary = $_POST['secondary'];
+			$post_value = $_POST['post-value'];
+			$page_value = $_POST['page-value'];
 
 			$content_output = "";
 			$posts = get_posts();
@@ -183,7 +185,9 @@ if (!current_user_can('manage_options')) {
 			$instances = substr_count(strtoupper($content_output), strtoupper($keyword_instance));
 			$wpdb->insert($table_name, array(
 					'keyword' => $keyword,
-					'instances' => $instances
+					'instances' => $instances,
+					'globalopt' => 'Y',
+					'active' => 1
 					));
 
 			for ($i=0; $i < $primary_count; $i++) { 
@@ -192,8 +196,11 @@ if (!current_user_can('manage_options')) {
 					'created' => current_time('mysql'),
 					'page_post_id' => $page_post_id,
 					'keyword' => $keyword,
+					'input_id' =>$i,
 					'primaryurl' => $primary_array,
 					'numofprimary' => 1,
+					'pageopt' => $page_value,
+					'post_value' => $post_value,
 					'globalopt' => 'Y',
 					'active' => 1
 					));
@@ -204,8 +211,11 @@ if (!current_user_can('manage_options')) {
 					'created' => current_time('mysql'),
 					'page_post_id' => $page_post_id,
 					'keyword' => $keyword,
+					'input_id' =>$i,
 					'secondaryurl' => $secondary_array,
 					'numofsecondary' => 1,
+					'pageopt' => $page_value,
+					'post_value' => $post_value,
 					'globalopt' => 'Y',
 					'active' => 1
 					));

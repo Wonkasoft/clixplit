@@ -3,10 +3,9 @@ $file_path = realpath(dirname(__FILE__). '/../../../..'). '/';
 require_once( $file_path . 'wp-load.php' );
 global  $wpdb;
 $table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-$table_build = $wpdb ->get_results('SELECT * FROM ' . $table_name . ' GROUP BY keyword');
-$keyword_check ='';
-/*$page_post_check = $wpdb ->get_col('SELECT page_post_id FROM ' . $table_name . ' GROUP BY keyword');*/
+$table_build = $wpdb ->get_results('SELECT * FROM ' . $table_name);
 $pagepost_id = $_POST['activepost'];
+$keyword_check ='';
 
 if ($pagepost_id == '') {
 	foreach ($table_build as $key) {

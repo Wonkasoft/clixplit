@@ -4,15 +4,15 @@ require_once( $file_path . 'wp-load.php' );
 global  $wpdb;
 $table_redirect = $wpdb->prefix . 'clixplit_redirect';
 $page_post_id = get_the_ID();
-$options = $wpdb->get_results('SELECT * FROM ' . $table_redirect . ' WHERE page_post_id = "' . $page_post_id . '" AND mouseoveropt != ""');
-$mou_option = '';
-$exit_option = '';
-$pps_option = '';
-if ($options != NULL) {
-	$mou_option = $options[0]->mouseoveropt;
-	$exit_option = $options[0]->exitredirectopt;
-	$pps_option = $options[0]->secondaryopt;
-}
+$options = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
+$mou_option = ''; $exit_option = ''; $pps_option = '';
+for ($i=0; $i < count($options); $i++) {
+	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->input_id == '')) {
+		$mou_option = $options[$i]->mouseoveropt;
+		$exit_option = $options[$i]->exitredirectopt;
+		$pps_option = $options[$i]->secondaryopt;
+	}
+};
 
 ?>
 
@@ -28,14 +28,33 @@ if ($options != NULL) {
 					<div class="col-xs-12 col-md-4">
 						<div class="control-group" id="mouseover-url">
 							<div class="bottom-space">
-								<label id="mouseover-url-label" class="clixplit-labels">mouseover redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
-								<input type="hidden" name="mouseover-redirectopt">
-							</div>
-							<div id="mouseover-url-controls" class="controls">
-								<div class="entry input-group col-xs-12 bottom-form-space">
-									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url..." disabled="disabled">
-									<span class="input-group-btn">
-										<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+							<?php 
+							if (($mou_option == 'off') || ($mou_option == '')) {
+								?><label id="mouseover-url-label" class="clixplit-labels">mouseover redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+									<input type="hidden" name="mouseover-redirectopt">
+								</div>
+								<div id="mouseover-url-controls" class="controls">
+									<div class="entry input-group col-xs-12 bottom-form-space">
+										<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url..." disabled="disabled">
+										<span class="input-group-btn">
+											<button class="btn btn-add clixplit-primary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
+								<?php
+							}
+							?>
+							<?php 
+							if ($mou_option == 'on') {
+								?><label id="mouseover-url-label" class="clixplit-labels">mouseover redirect:</label><span class="clixplit-switch-on"><span class="clixplit-switch-center-on"></span></span><span class="clixplit-switch-text-on">on</span>
+									<input type="hidden" name="mouseover-redirectopt">
+								</div>
+								<div id="mouseover-url-controls" class="controls">
+									<div class="entry input-group col-xs-12 bottom-form-space">
+										<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url...">
+										<span class="input-group-btn">
+											<button class="btn btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>
+								<?php
+							}
+								?>
+								
 									</div>
 								</div>
 							</div>
@@ -46,15 +65,35 @@ if ($options != NULL) {
 						<div class="col-xs-12 col-md-4 side-borders">
 							<div class="control-group" id="exit-redirect">
 								<div class="bottom-space">
-									<label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
-									<input type="hidden" name="exit-redirectopt">
-								</div>
-								<div id="exit-redirect-controls" class="controls">
-									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="exit-pop" placeholder="url..." disabled="disabled">
-									</div>
-									<div class="entry input-group col-xs-12 bottom-form-space">
-										<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
+									<?php 
+									if (($exit_option == 'off') || ($exit_option == '')) {
+										?><label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+											<input type="hidden" name="exit-redirectopt">
+										</div>
+										<div id="exit-redirect-controls" class="controls">
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<input type="text" class="form-control url-input" name="exit-pop" placeholder="url..." disabled="disabled">
+											</div>
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
+										<?php
+									}
+									?>
+									<?php 
+									if ($exit_option == 'on') {
+										?><label id="exit-redirect-switch" class="clixplit-labels">exit pop redirect:</label><span class="clixplit-switch-on"><span class="clixplit-switch-center-on"></span></span><span class="clixplit-switch-text-on">on</span>
+											<input type="hidden" name="exit-redirectopt">
+										</div>
+										<div id="exit-redirect-controls" class="controls">
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<input type="text" class="form-control url-input" name="exit-pop" placeholder="url...">
+											</div>
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..."></textarea>
+										<?php
+									}
+									?>
+									
 									</div>
 								</div>
 							</div>
@@ -62,12 +101,29 @@ if ($options != NULL) {
 						<div class="col-xs-12 col-md-4">
 							<div class="control-group" id="secondary-url">
 								<div class="bottom-space">
-									<label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
-									<input type="hidden" name="secondary-redirectopt">
-								</div>
-								<div id="secondary-url-controls" class="controls">
-									<div class="entry input-group col-xs-12 bottom-form-space">
-										<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled" value="">
+								<?php
+								if (($exit_option == 'off') || ($exit_option == '')) {
+										?><label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
+											<input type="hidden" name="secondary-redirectopt">
+										</div>
+										<div id="secondary-url-controls" class="controls">
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." disabled="disabled" value="">
+										<?php
+								}
+								?>
+								<?php
+								if ($exit_option == 'on') {
+										?><label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-on"><span class="clixplit-switch-center-on"></span></span><span class="clixplit-switch-text-on">on</span>
+											<input type="hidden" name="secondary-redirectopt">
+										</div>
+										<div id="secondary-url-controls" class="controls">
+											<div class="entry input-group col-xs-12 bottom-form-space">
+												<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." value="">
+										<?php
+								}
+								?>
+									
 										<span class="input-group-btn">
 											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
@@ -182,28 +238,6 @@ if ($options != NULL) {
 				</div>
 
 				<?php
-				$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
-				require_once( $file_path . 'wp-load.php' );
-				global  $wpdb;
-				$table_redirect = $wpdb->prefix . 'clixplit_redirect';
-				$mouseover_count = 6;
-				$secondary_count = 7;
-				$page_post_id = get_the_ID();
-				$mou_load = ''; $mou_count = '';
-				$pps_count = '';
-				// Database Fetch
-				$db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
-					for ($i=0; $i < count($db_fetch); $i++) {
-						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->mouseoverurl != '')) {
-							$mou_count++;
-						};
-						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->secondaryurl != '')) {
-							$pps_count++;
-						};
-					};
-				$set = $mou_count-1;
-				echo $set;
-
-				echo $pps_count;
+				
 
 				?>

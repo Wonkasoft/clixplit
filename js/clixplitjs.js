@@ -148,6 +148,52 @@
  			}
  		}
  	});
+  $('.clixplit-switch-on').click(function(e) {
+    $switchID = $(this).prev().attr('id');
+    if ($(this).hasClass('clixplit-switch-on')) {
+      $(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
+      $(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
+      $(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
+      if ($switchID == 'exit-redirect-switch') {
+        $redirect_exit = $('#exit-redirect-switch').next().next().text();
+        $('[name="exit-redirectopt"]').val($redirect_exit);
+        $(this).parent().parent().find('input').attr('disabled', true);
+        $(this).parent().parent().find('textarea').attr('disabled', true);
+
+      }
+      if ($switchID == 'mouseover-url-label') {
+        $(this).parent().parent().find('input').attr('disabled', true);
+        $mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+        $('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+      }
+      if ($switchID == 'secondary-url-label') {
+        $(this).parent().parent().find('input').attr('disabled', true);
+        $secondary_redirect_label = $('#secondary-url-label').next().next().text();
+        $('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+      }
+    }
+    else {
+      $(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
+      $(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
+      $(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+      if ($switchID == 'exit-redirect-switch') {
+        $redirect_exit = $('#exit-redirect-switch').next().next().text();
+        $('[name="exit-redirectopt"]').val($redirect_exit);
+        $(this).parent().parent().find('input').attr('disabled', false);
+        $(this).parent().parent().find('textarea').attr('disabled', false);
+      }
+      if ($switchID == 'mouseover-url-label') {
+        $(this).parent().parent().find('input').attr('disabled', false);
+        $mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+        $('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+      }
+      if ($switchID == 'secondary-url-label') {
+        $(this).parent().parent().find('input').attr('disabled', false);
+        $secondary_redirect_label = $('#secondary-url-label').next().next().text();
+        $('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+      }
+    }
+  });
  	$('.clixplit-primary-switch-off').click(function(e) {
  		$controlid = $('#' + $(this).parent('div').prev().attr('id'));
  		$switchID = $controlid.find('label').next().next().text();
