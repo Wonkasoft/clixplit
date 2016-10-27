@@ -81,6 +81,9 @@ if ($options != NULL) {
 								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
+							<div class="col-xs-12 text-center">
+								<span id="submission"></span>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -182,17 +185,25 @@ if ($options != NULL) {
 				$file_path = realpath(dirname(__FILE__). '/../../..'). '/';
 				require_once( $file_path . 'wp-load.php' );
 				global  $wpdb;
-				$table_name = $wpdb->prefix . 'clixplit_redirect';
+				$table_redirect = $wpdb->prefix . 'clixplit_redirect';
 				$mouseover_count = 6;
 				$secondary_count = 7;
 				$page_post_id = get_the_ID();
-				$record_updates = $wpdb ->get_results('SELECT mouseoverurl FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""', OBJECT);
-				$mou_count = $wpdb->get_var('SELECT COUNT(mouseoverurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND mouseoverurl != ""');
-				$pps_count = $wpdb ->get_var('SELECT COUNT(secondaryurl) FROM ' . $table_name . ' WHERE page_post_id="' . $page_post_id . '" AND  secondaryurl != ""');
-				$mou_compute = ($mou_count - $mouseover_count);
-				$pps_compute = ($pps_count - $secondary_count);
-				$test = $mou_compute;
-				var_dump($record_updates);
-				var_dump($mou_count);
+				$mou_load = ''; $mou_count = '';
+				$pps_count = '';
+				// Database Fetch
+				$db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
+					for ($i=0; $i < count($db_fetch); $i++) {
+						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->mouseoverurl != '')) {
+							$mou_count++;
+						};
+						if (($db_fetch[$i]->page_post_id == $page_post_id) && ($db_fetch[$i]->secondaryurl != '')) {
+							$pps_count++;
+						};
+					};
+				$set = $mou_count-1;
+				echo $set;
+
+				echo $pps_count;
 
 				?>

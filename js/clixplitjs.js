@@ -60,6 +60,9 @@
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
+  $('.clixplit-save-btn').click(function(){
+  	$('#submission').text('Processing...').fadeIn();
+  });
   //cliXplit_meta_box
   $('#form-meta-box').on('submit', function () {
   	$form = $(this);
@@ -73,6 +76,7 @@
   		data: $data,
   		success: function($response) {
   			console.log($response);
+  			$('#submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
   	return false;
