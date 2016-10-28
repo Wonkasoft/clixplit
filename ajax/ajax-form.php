@@ -48,7 +48,7 @@ if (isset($_POST['selected-text'])) {
 }
 
 // Page Post Meta-box
-if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty($_POST['secondary-redirect']))) {
+if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'])) || (isset($_POST['secondary-redirectopt']))) {
 		require_once( $file_path . 'wp-load.php' );
 		global $wpdb;
 		$table_redirect = $wpdb->prefix . 'clixplit_redirect';
@@ -108,7 +108,7 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 					'secondaryurl' => $secondary_redirect[$i]
 					));
 			};	
-		} ;
+		};
 		
 	$wpdb->update($table_redirect, array(
 			'created' => current_time('mysql'),
@@ -117,6 +117,11 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 			'exitredirecturl' => $exitredirecturl,
 			'exitmessage' => $exitmessage
 			), array('page_post_id' => $page_post_id, 'mouseoveropt' => "on"));
+
+		if (($page_post_check == $page_post_id) && ($mouseoveropt == "off") && ($secondaryopt == "off") && ($exitredirectopt == "off")) {
+			$wpdb->delete($table_redirect, array(
+					'page_post_id' => $page_post_id));
+		};
 		
 		if (($page_post_check == $page_post_id) && ($mouseover_count == $mou_count) && ($secondary_count == $pps_count)) {
 			for ($i=0; $i < $mouseover_count; $i++) { 
@@ -241,6 +246,7 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 					));
 			};
 		};
+		print_r($_POST);
 }
 
 // Delete campaigns

@@ -12,6 +12,7 @@ function fetch_data() {
  			datatype: 'text',
  			data: $data,
  			success: function($response) {
+ 				console.log($response);
  				if ($('#global-table').length) {
  					$('#global-table').html($response);
  				}
@@ -77,12 +78,17 @@ function fetch_data() {
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  $('[name="clixplit-redirect-save"]').click(function(){
-  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
-  });
+  
   //cliXplit_meta_box
-  $('#form-meta-box').on('submit', function () {
-  	$form = $(this);
+  $('[name="clixplit-redirect-save"]').on('click', function () {
+  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
+  	$redirect_exit = $('#exit-redirect-switch').next().next().text();
+   				$('[name="exit-redirectopt"]').val($redirect_exit);
+  	$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+   				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+  	$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+   				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+  	$form = $('#form-meta-box');
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
@@ -92,6 +98,7 @@ function fetch_data() {
   		type: $method,
   		data: $data,
   		success: function($response) {
+  			$form.trigger("reset");
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
 
   		}
@@ -140,7 +147,6 @@ function fetch_data() {
  				$('[name="exit-redirectopt"]').val($redirect_exit);
  				$(this).parent().parent().find('input').attr('disabled', false);
  				$(this).parent().parent().find('textarea').attr('disabled', false);
-
  			}
  			if ($switchID == 'mouseover-url-label') {
  				$(this).parent().parent().find('input').attr('disabled', false);
@@ -168,16 +174,16 @@ function fetch_data() {
  			if ($switchID == 'exit-redirect-switch') {
  				$redirect_exit = $('#exit-redirect-switch').next().next().text();
  				$('[name="exit-redirectopt"]').val($redirect_exit);
- 				$(this).parent().parent().find('input').attr('disabled', true);
- 				$(this).parent().parent().find('textarea').attr('disabled', true);
+ 				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', true);
+ 				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', true);
  			}
  			if ($switchID == 'mouseover-url-label') {
- 				$(this).parent().parent().find('input').attr('disabled', true);
+ 				$(this).parent().parent().find('.entry input').attr('disabled', true);
  				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
  				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
  			}
  			if ($switchID == 'secondary-url-label') {
- 				$(this).parent().parent().find('input').attr('disabled', true);
+ 				$(this).parent().parent().find('.entry input').attr('disabled', true);
  				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
  				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
  			}

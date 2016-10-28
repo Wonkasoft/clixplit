@@ -13,10 +13,10 @@ for ($i=0; $i < count($options); $i++) {
 		$exit_option = $options[$i]->exitredirectopt;
 		$pps_option = $options[$i]->secondaryopt;
 	}
-	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->mouseoverurl != '')) {
+	if (($options[$i]->page_post_id == $page_post_id) && (!empty($options[$i]->mouseoverurl))) {
 		$input_pri_count++;
 	}
-	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->secondaryurl != '')) {
+	if (($options[$i]->page_post_id == $page_post_id) && (!empty($options[$i]->secondaryurl))) {
 		$input_sec_count++;
 	}
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->exitredirectopt == 'on')) {
@@ -97,13 +97,10 @@ for ($i=0; $i < count($options); $i++) {
 										</div>
 										<div id="exit-redirect-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<input type="text" class="form-control url-input"<?php if (($exit_option == 'on') && ($exiturl != "")) {
-													?> value="<?php echo $exiturl; ?>"<?php
-												}?> name="exit-pop" placeholder="url...">
+												<input type="text" class="form-control url-input" name="exit-pop" placeholder="url...">
 											</div>
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert"<?php if (($exit_option == 'on') && ($exitmessage != "")) {
-													?> value="<?php echo $exitmessage; ?>"<?php }?> placeholder="Enter alert message..."></textarea>
+												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..."><?php if (($exit_option == 'on') && ($exitmessage != "")) { echo $exitmessage; } ?></textarea>
 										<?php
 									}
 									?>
@@ -116,7 +113,7 @@ for ($i=0; $i < count($options); $i++) {
 							<div class="control-group" id="secondary-url">
 								<div class="bottom-space">
 								<?php
-								if (($exit_option == 'off') || ($exit_option == '')) {
+								if (($pps_option == 'off') || (empty($pps_option))) {
 										?><label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span class="clixplit-switch-text-off">off</span>
 											<input type="hidden" name="secondary-redirectopt">
 										</div>
@@ -127,19 +124,19 @@ for ($i=0; $i < count($options); $i++) {
 								}
 								?>
 								<?php
-								if ($exit_option == 'on') {
+								if ($pps_option == 'on') {
 										?><label id="secondary-url-label" class="clixplit-labels">page / post title secondary url:</label><span class="clixplit-switch-on"><span class="clixplit-switch-center-on"></span></span><span class="clixplit-switch-text-on">on</span>
 											<input type="hidden" name="secondary-redirectopt">
 										</div>
 										<div id="secondary-url-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
 												<input type="text" class="form-control url-input" name="secondary-redirect[]" placeholder="url..." value="">
+											<span class="input-group-btn">
+												<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										<?php
 								}
 								?>
 									
-										<span class="input-group-btn">
-											<button class="btn btn-add clixplit-secondary-add" type="button" disabled="true"><span class="glyphicon glyphicon-plus"></span></button></span>
 										</div>
 									</div>
 								</div>
@@ -148,7 +145,7 @@ for ($i=0; $i < count($options); $i++) {
 								</div>
 							</div>
 							<div class="col-xs-12 text-center vertical-space">
-								<input type="submit" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
+								<input type="button" class="btn btn-default clixplit-save-btn" value="save" name="clixplit-redirect-save">
 								<button type="button" class="btn btn-default clixplit-cancel-btn">cancel</button>
 							</div>
 							<div class="col-xs-12 text-center">
