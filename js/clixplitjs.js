@@ -57,14 +57,10 @@ function fetch_data() {
  	$('[name="post-value"]').val($post_value);
  	$page_value = $('#page-switch').text();
  	$('[name="page-value"]').val($page_value);
- 	
- 	$('[name="global"]').click(function(){
-  	$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500);
-  });
 
-  $('[name="global"]').on('click', function () {
+  $('[name="global"]').click(function () {
+	 	$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   	$form = $('#modal-form-campaigns');
-  	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-campaigns').serialize();
   	$.ajax( {
@@ -72,7 +68,8 @@ function fetch_data() {
   		data: $data,
   		success: function($response) {
   			fetch_data();
-  			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
+  			$form.trigger("reset");
+  			$('#global-submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
   		}
   	});
   });
@@ -81,7 +78,7 @@ function fetch_data() {
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
   $('[name="clixplit-redirect-save"]').click(function(){
-  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500);
+  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   //cliXplit_meta_box
   $('#form-meta-box').on('submit', function () {
@@ -95,7 +92,7 @@ function fetch_data() {
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			$('#submission').text('Data submitted successfully').fadeOut(2000);
+  			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
 
   		}
   	});
@@ -104,7 +101,7 @@ function fetch_data() {
 
   // cliXplit_meta_box modal form
   $('[name="clixplit-modal-save"]').click(function(){
-  	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500);
+  	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   $('#modal-form-meta-box').on('submit', function () {
   	$form = $(this);
@@ -117,7 +114,7 @@ function fetch_data() {
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			$('#modal-submission').text('Data submitted successfully').fadeOut(2000);
+  			$('#modal-submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
   		}
   	});
   	return false;
@@ -308,12 +305,11 @@ function fetch_data() {
  	});
     
     $('[name="end-campaign"]').click(function() {
-      $('#global-submission').text('Processing...').fadeIn();
+      $('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
       $checked_keywords = [];
       $('tbody tr td input[type="checkbox"]:checked').each(function(){
           $checked_keywords.push(this.name); 
       });
-      $checked_keywords;
       $.ajax( {
       url: "../wp-content/plugins/clixplit/ajax/ajax-form.php",
       datatype: 'text',
@@ -324,7 +320,7 @@ function fetch_data() {
       },
       success: function($response) {
       fetch_data();
-      $('#global-submission').text('Data removed successfully').fadeOut(2000);
+      $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
       $('#clixplit-check-all').attr('checked',false);
       }
     });

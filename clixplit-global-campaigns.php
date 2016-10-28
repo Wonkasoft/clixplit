@@ -168,7 +168,7 @@ if (!current_user_can('manage_options')) {
 
 		<?php
 		
-		if (isset($_POST['global'])) {
+		if (isset($_POST['keyword-input'])) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
