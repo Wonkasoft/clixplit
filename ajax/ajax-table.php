@@ -22,7 +22,7 @@ if ($pagepost_id == '') {
 			$instance_count = $wpdb ->get_var('SELECT SUM(instances) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
 
 			echo '<tr>' .
-			'<td><input class="item-checkbox" type="checkbox" value=""></td>' .
+			'<td><input class="item-checkbox" type="checkbox" value="" name="'.$keyword_check.'"></td>' .
 			'<td>'. $keyword_check .'</td>' .
 			'<td>'. $key->created .'</td>' .
 			'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .

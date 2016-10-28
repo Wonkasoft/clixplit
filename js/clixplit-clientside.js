@@ -39,40 +39,51 @@ $(document).ready(function() {
         },
         success: function(links) {
           var dbData = JSON.parse(links);
-          var primaryArr = [];
+          var dbArr = [];
+          var dbJsonString ='[';
           var secondaryArr = [];
-          var primaryCounter = 0;
-          var secondaryCounter = 0;
           var keyword = [];
           for (var i = 0; i < dbData.length; i++) {
             if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-             primaryArr[primaryCounter] = dbData[i].primaryurl;
-             keyword[primaryCounter] = dbData[i].keyword;
-             primaryCounter++;
+              dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'+dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
             }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-             secondaryArr[secondaryCounter] = dbData[i].secondaryurl;
-             secondaryCounter++;
-            }else {
-
+              // dbArr[dbData[i].secondaryurl] = "{secondary: "+"'yes' keyword: "+ "'"+dbData[i].keyword+"', "+"pageopt: "+ "'"+dbData[i].pageopt+"', "+"postopt: "+ "'"+dbData[i].postopt+"', "+"totalclicks: "+ "'"+dbData[i].totalclicks+"', "+"globalopt: "+ "'"+dbData[i].globalopt+"'}";
+              // secondaryCounter++;
             }
-          }
-            var thePage = $("body");
-              for (var i = 0; i < primaryCounter; i++) {
-                var conditions = new RegExp(keyword[i],'ig');
-                keywordOnPage = (thePage.html().match(conditions));
-                console.log(keywordOnPage);
-              }
-              for (var i = 0; i < keywordOnPage.length; i++) {
-                var newconditions = new RegExp(keywordOnPage,'ig');
-                thePage.html(thePage.html().replace(newconditions, '<a href="http://'+ primaryArr[0] +'" target="_self">'+keywordOnPage+'</a>'));  
-              }
 
-              window.addEventListener("beforeunload", secondaryLink);
+          }
+          dbJsonString = dbJsonString.substring(0, dbJsonString.length - 1);
+          dbJsonString +="]";
+
+
+
+          var testdata = JSON.parse(dbJsonString);
+          // var parsedata = {};
+          // for (var i = 0; i < dbArr.length; i++) {
+          //   parsedata[dbArr[0]] = dbArr[1];
+          // }
+
+          // parsedata = dbArr.split("}");
+
+            console.log(testdata);
+            // var thePage = $("body");
+              // for (var i = 0; i < primaryCounter; i++) {
+                // var conditions = new RegExp(keyword[i],'ig');
+                // keywordOnPage = (thePage.html().match(conditions));
+                // console.log(keywordOnPage);
+              // }
+              // for (var i = 0; i < keywordOnPage.length; i++) {
+              //   var newconditions = new RegExp(keywordOnPage,'ig');
+              //   thePage.html(thePage.html().replace(newconditions, '<a href="http://'+ primaryArr[0] +'" target="_self">'+keywordOnPage+'</a>'));  
+              // }
+
+              // window.addEventListener("beforeunload", secondaryLink);
     
-              function secondaryLink() {
-                window.open(secondaryArr[0],'_blank');
-              }
-        } 
-      });
+              // function secondaryLink() {
+              //   window.open(secondaryArr[0],'_blank');
+              // }
+        // } 
+      }
     });
+  });
 });

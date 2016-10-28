@@ -252,4 +252,28 @@
  			});
  		}
  	});
+    
+    $('[name="end-campaign"]').click(function() {
+      $('#global-submission').text('Processing...').fadeIn();
+      $checked_keywords = "";
+      $('tbody tr td input[type="checkbox"]').each(function($i){
+        if ($('tbody tr td input[type="checkbox"]:checked')) {
+          $checked_keywords = $('tbody tr td input[type="checkbox"]:name'); 
+        }
+      }
+      console.log($checked_keywords);
+      $.ajax( {
+      url: CLIXPLIT_AJAX.cliXplit_ajax + "ajax-form.php",
+      type: 'POST',
+      data: {
+        "endcampaign":1
+      },
+      success: function($response) {
+      $('#global-submission').text('Data removed successfully').fadeOut(2000);
+      }
+    });
+
+
+
+    });
  });
