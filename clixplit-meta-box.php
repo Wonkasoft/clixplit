@@ -4,13 +4,17 @@ require_once( $file_path . 'wp-load.php' );
 global  $wpdb;
 $table_redirect = $wpdb->prefix . 'clixplit_redirect';
 $page_post_id = get_the_ID();
+$post_type = get_post_type();
 $options = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
-$mou_option = ''; $exit_option = ''; $pps_option = '';
+$mou_option = ''; $exit_option = ''; $pps_option = ''; $input_pri_count = ''; $input_sec_count = '';
 for ($i=0; $i < count($options); $i++) {
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->input_id == '')) {
 		$mou_option = $options[$i]->mouseoveropt;
 		$exit_option = $options[$i]->exitredirectopt;
 		$pps_option = $options[$i]->secondaryopt;
+	}
+	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->)) {
+		# code...
 	}
 };
 
@@ -171,6 +175,9 @@ for ($i=0; $i < count($options); $i++) {
 								<input type="hidden" name="directory" value="<?php echo plugins_url('ajax/ajax-table.php', __FILE__); ?>">
 							</div>
 						</div>
+					</div>
+					<div class="col-xs-12 text-center">
+						<span id="modal-submission"></span>
 					</div>
 				</div>
 			</div>

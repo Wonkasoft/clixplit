@@ -26,7 +26,7 @@ $(document).ready(function() {
       var cookieKeyValueArr = cookieKeyValue.split("=");
       cookieObj[cookieKeyValueArr[0]] = cookieKeyValueArr[1];
     }
-      // console.log(cookieObj);
+      console.log(cookieObj);
   });
 
     $(function get_links() {
