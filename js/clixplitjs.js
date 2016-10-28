@@ -3,29 +3,50 @@
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
 function fetch_data() {
-    $table_dir = $('[name="directory"]').val();
-    $data = $('[name="activepost"]').serialize();
-    $.ajax({
-      url: $table_dir,
-      method: 'POST',
-      datatype: 'text',
-      data: $data,
-      success: function($response) {
-        if ($('#global-table').length) {
-          $('#global-table').html($response);
-        }
-        if ($('#page-table').length) {
-          $('#page-table').html($response);
-        }
-      }
-    });
-  }
+ 		$table_dir = $('[name="directory"]').val();
+ 		$data = $('[name="activepost"]').serialize();
+
+ 		$.ajax({
+ 			url: $table_dir,
+ 			method: 'POST',
+ 			datatype: 'text',
+ 			data: $data,
+ 			success: function($response) {
+ 				if ($('#global-table').length) {
+ 					$('#global-table').html($response);
+ 				}
+ 				if ($('#page-table').length) {
+ 					$('#page-table').html($response);
+ 				}
+ 			}
+ 		});
+ 	}
+
+
+  
 
  $( document ).ready(function() {
-fetch_data();
-$('[name="add-campaign"]').click(function() {
+ 	fetch_data();
+ 	$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
+        $('#modal-form-campaigns').keypress(function (e) {
+         var key = e.which;
+         if(key == 13)
+          {
+            $('input[name = "global"]').click();
+            return false;  
+          }
+        });
+          $('[name="add-campaign"]').mouseleave(function(){
+            $('#keyword-input').focus();
+          });
+
+          $('[name="add-campaign"]').blur(function(){
+            $('#keyword-input').focus();
+          });
  	});
+
+
  	$(".clixplit-cancel-btn").click(function () {
  		$r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
  		if ($r) {
@@ -56,14 +77,10 @@ $('[name="add-campaign"]').click(function() {
  	$('[name="post-value"]').val($post_value);
  	$page_value = $('#page-switch').text();
  	$('[name="page-value"]').val($page_value);
- 	
- 	$('[name="global"]').click(function(){
-  	$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500);
-  });
 
-  $('[name="global"]').on('click', function () {
+  $('[name="global"]').click(function () {
+	 	$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   	$form = $('#modal-form-campaigns');
-  	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-campaigns').serialize();
 
@@ -71,9 +88,9 @@ $('[name="add-campaign"]').click(function() {
   		type: $method,
   		data: $data,
   		success: function($response) {
-        fetch_data();
-        $form.trigger("reset");
-  			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
+  			fetch_data();
+  			$form.trigger("reset");
+  			$('#global-submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
   		}
   	});
   });
@@ -82,7 +99,7 @@ $('[name="add-campaign"]').click(function() {
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
   $('[name="clixplit-redirect-save"]').click(function(){
-  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500);
+  	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   //cliXplit_meta_box
   $('#form-meta-box').on('submit', function () {
@@ -96,7 +113,7 @@ $('[name="add-campaign"]').click(function() {
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			$('#submission').text('Data submitted successfully').fadeOut(2000);
+  			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
 
   		}
   	});
@@ -105,7 +122,7 @@ $('[name="add-campaign"]').click(function() {
 
   // cliXplit_meta_box modal form
   $('[name="clixplit-modal-save"]').click(function(){
-  	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500);
+  	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   $('#modal-form-meta-box').on('submit', function () {
   	$form = $(this);
@@ -118,7 +135,7 @@ $('[name="add-campaign"]').click(function() {
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			$('#modal-submission').text('Data submitted successfully').fadeOut(2000);
+  			$('#modal-submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
   		}
   	});
   	return false;
@@ -309,7 +326,7 @@ $('[name="add-campaign"]').click(function() {
  	});
     
     $('[name="end-campaign"]').click(function() {
-      $('#global-submission').text('Processing...').fadeIn();
+      $('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
       $checked_keywords = [];
       $('tbody tr td input[type="checkbox"]:checked').each(function(){
           $checked_keywords.push(this.name); 
@@ -324,7 +341,7 @@ $('[name="add-campaign"]').click(function() {
       },
       success: function($response) {
       fetch_data();
-      $('#global-submission').text('Data removed successfully').fadeOut(2000);
+      $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
       $('#clixplit-check-all').attr('checked',false);
       }
     });

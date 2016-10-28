@@ -1,5 +1,7 @@
 <?php
 		$file_path = realpath(dirname(__FILE__). '/../../../..'). '/';
+
+// Page Post Modal Meta-box
 if (isset($_POST['selected-text'])) {
 
 	if (!empty($_POST['selected-text'])) {
@@ -45,7 +47,7 @@ if (isset($_POST['selected-text'])) {
 				};
 }
 
-
+// Page Post Meta-box
 if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty($_POST['secondary-redirect']))) {
 		require_once( $file_path . 'wp-load.php' );
 		global $wpdb;
@@ -241,6 +243,7 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 		};
 }
 
+// Delete campaigns
 if (isset($_POST['endcampaign'])) {
 	require_once( $file_path . 'wp-load.php' );
 	global $wpdb;

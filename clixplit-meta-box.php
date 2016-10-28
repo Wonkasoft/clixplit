@@ -6,15 +6,22 @@ $table_redirect = $wpdb->prefix . 'clixplit_redirect';
 $page_post_id = get_the_ID();
 $post_type = get_post_type();
 $options = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
-$mou_option = ''; $exit_option = ''; $pps_option = ''; $input_pri_count = ''; $input_sec_count = '';
+$mou_option = ''; $exit_option = ''; $pps_option = ''; $input_pri_count = ''; $input_sec_count = ''; $exiturl = ''; $exitmessage = '';
 for ($i=0; $i < count($options); $i++) {
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->input_id == '')) {
 		$mou_option = $options[$i]->mouseoveropt;
 		$exit_option = $options[$i]->exitredirectopt;
 		$pps_option = $options[$i]->secondaryopt;
 	}
-	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->)) {
-		# code...
+	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->mouseoverurl != '')) {
+		$input_pri_count++;
+	}
+	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->secondaryurl != '')) {
+		$input_sec_count++;
+	}
+	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->exitredirectopt == 'on')) {
+		$exiturl = $options[$i]->exitredirecturl; 
+		$exitmessage = $options[$i]->exitmessage;
 	}
 };
 
@@ -90,10 +97,13 @@ for ($i=0; $i < count($options); $i++) {
 										</div>
 										<div id="exit-redirect-controls" class="controls">
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<input type="text" class="form-control url-input" name="exit-pop" placeholder="url...">
+												<input type="text" class="form-control url-input"<?php if (($exit_option == 'on') && ($exiturl != "")) {
+													?> value="<?php echo $exiturl; ?>"<?php
+												}?> name="exit-pop" placeholder="url...">
 											</div>
 											<div class="entry input-group col-xs-12 bottom-form-space">
-												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..."></textarea>
+												<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert"<?php if (($exit_option == 'on') && ($exitmessage != "")) {
+													?> value="<?php echo $exitmessage; ?>"<?php }?> placeholder="Enter alert message..."></textarea>
 										<?php
 									}
 									?>
