@@ -14,8 +14,7 @@ wp_deregister_script(jquery);
 wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), '1.12.4');
 wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',  array(), '1.12.4');
 wp_enqueue_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array(), '1.0.0');
-wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array( 
-'cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
+wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
 }
 
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
@@ -32,6 +31,7 @@ function plugin_enqueues() {
   wp_enqueue_style('clixplit-style', plugins_url( '/css/clixplit.css', __FILE__ ) , array(), '1.0.0', 'all');
   wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7');
   wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array(), '1.0.0');
+  wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
  
 }
 
