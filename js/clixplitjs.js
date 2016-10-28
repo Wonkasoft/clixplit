@@ -72,6 +72,7 @@ $('[name="add-campaign"]').click(function() {
   		data: $data,
   		success: function($response) {
         fetch_data();
+        $form.trigger("reset");
   			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
