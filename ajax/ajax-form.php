@@ -241,4 +241,25 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 		};
 }
 
+if (isset($_POST['endcampaign'])) {
+	require_once( $file_path . 'wp-load.php' );
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+	$enddata = $_POST['enddata'];
+	$enddatacount = count($enddata);
+
+	if ($enddatacount >= 1) {
+		for ($i = 0; $i < $enddatacount; $i++) {
+			$wpdb->delete($table_name, array(
+				'keyword' => $enddata[$i]
+				));
+		}
+	}
+}
+
+
+
+
+
+
 ?>

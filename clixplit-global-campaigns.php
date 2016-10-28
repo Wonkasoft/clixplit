@@ -42,7 +42,7 @@ if (!current_user_can('manage_options')) {
 				<div class="col-xs-12">
 					<ul class="new-campaigns-menu">
 						<li class="campaign-item">
-							<a class="nav-campaign-buttons" href="#">+ New Global Campaign</a>
+							<a class="nav-campaign-buttons" name="add-campaign" href="#">+ New Global Campaign</a>
 						</li>
 						<li class="campaign-item">
 							<a class="nav-campaign-buttons" name="end-campaign" href="#">- End Campaign</a>

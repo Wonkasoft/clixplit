@@ -2,28 +2,29 @@
  * cliXplit v1.0.0 (http://wonkasoft.com)
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
-$(function fetch_data() {
- 		$table_dir = $('[name="directory"]').val();
- 		$data = $('[name="activepost"]').serialize();
+function fetch_data() {
+    $table_dir = $('[name="directory"]').val();
+    $data = $('[name="activepost"]').serialize();
 
- 		$.ajax({
- 			url: $table_dir,
- 			method: 'POST',
- 			datatype: 'text',
- 			data: $data,
- 			success: function($response) {
- 				if ($('#global-table').length) {
- 					$('#global-table').html($response);
- 				}
- 				if ($('#page-table').length) {
- 					$('#page-table').html($response);
- 				}
- 			}
- 		});
- 	});
+    $.ajax({
+      url: $table_dir,
+      method: 'POST',
+      datatype: 'text',
+      data: $data,
+      success: function($response) {
+        if ($('#global-table').length) {
+          $('#global-table').html($response);
+        }
+        if ($('#page-table').length) {
+          $('#page-table').html($response);
+        }
+      }
+    });
+  }
 
  $( document ).ready(function() {
- 	$("a.nav-campaign-buttons").click(function() {
+fetch_data();
+$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
  	});
  	$(".clixplit-cancel-btn").click(function () {
@@ -66,13 +67,11 @@ $(function fetch_data() {
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-campaigns').serialize();
-  	console.log($data);
-
   	$.ajax( {
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			console.log($response);
+        fetch_data();
   			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
@@ -309,21 +308,23 @@ $(function fetch_data() {
     
     $('[name="end-campaign"]').click(function() {
       $('#global-submission').text('Processing...').fadeIn();
-      $checked_keywords = "";
-      $('tbody tr td input[type="checkbox"]').each(function($i){
-        if ($('tbody tr td input[type="checkbox"]:checked')) {
-          $checked_keywords = $('tbody tr td input[type="checkbox"]:name'); 
-        }
-      }
-      console.log($checked_keywords);
+      $checked_keywords = [];
+      $('tbody tr td input[type="checkbox"]:checked').each(function(){
+          $checked_keywords.push(this.name); 
+      });
+      $checked_keywords;
       $.ajax( {
-      url: CLIXPLIT_AJAX.cliXplit_ajax + "ajax-form.php",
+      url: "../wp-content/plugins/clixplit/ajax/ajax-form.php",
+      datatype: 'text',
       type: 'POST',
       data: {
-        "endcampaign":1
+        "endcampaign":1,
+        "enddata": $checked_keywords
       },
       success: function($response) {
+      fetch_data();
       $('#global-submission').text('Data removed successfully').fadeOut(2000);
+      $('#clixplit-check-all').attr('checked',false);
       }
     });
 
