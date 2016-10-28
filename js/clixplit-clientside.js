@@ -26,7 +26,7 @@ $(document).ready(function() {
       var cookieKeyValueArr = cookieKeyValue.split("=");
       cookieObj[cookieKeyValueArr[0]] = cookieKeyValueArr[1];
     }
-      // console.log(cookieObj);
+      console.log(cookieObj);
   });
 
     $(function get_links() {
@@ -39,41 +39,26 @@ $(document).ready(function() {
         },
         success: function(links) {
           var dbData = JSON.parse(links);
-          var primaryArr = [];
-          var secondaryArr = [];
+          var dbArr = "[";
+          var dbObj = "";
+          var keyword = "";
           var primaryCounter = 0;
           var secondaryCounter = 0;
-          var keyword = [];
           for (var i = 0; i < dbData.length; i++) {
             if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-              // console.log("primary: "+dbData[i].primaryurl+" has: " +dbData[i].totalclicks+" clicks on this url");
-             primaryArr[primaryCounter] = dbData[i].primaryurl;
-             keyword[primaryCounter] = dbData[i].keyword;
-             primaryCounter++;
+              dbArr += [dbData[i].keyword]+'{"primaryurl":"'+dbData[i].primaryurl+'","totalclicks":"'+dbData[i].totalclicks+'"},';
+              
             }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-              // console.log("secondary: "+dbData[i].secondaryurl+" has: " +dbData[i].totalclicks+" clicks on this url");
-             secondaryArr[secondaryCounter] = dbData[i].secondaryurl;
-             secondaryCounter++;
-            }else {
-
+              dbArr += [dbData[i].keyword]+'{"secondaryurl":"'+dbData[i].secondaryurl+'","totalclicks":"'+dbData[i].totalclicks+'"},';
+              
             }
           }
-            var thePage = $("body");
-              for (var i = 0; i < primaryCounter; i++) {
-                var conditions = new RegExp(keyword[i],'ig');
-                keywordOnPage = (thePage.html().match(conditions));
-                console.log(keywordOnPage);
-              }
-              for (var i = 0; i < keywordOnPage.length; i++) {
-                var newconditions = new RegExp(keywordOnPage,'ig');
-                thePage.html(thePage.html().replace(newconditions, '<a href="http://'+ primaryArr[0] +'" target="_self">'+keywordOnPage+'</a>'));  
-              }
+          dbArr = dbArr.substring(0,dbArr.length -1);
+          dbArr += "]";
 
-              window.addEventListener("beforeunload", secondaryLink);
-    
-              function secondaryLink() {
-                window.open(secondaryArr[0],'_blank');
-              }
+          var ArrJson = JSON.parse(dbArr);
+          /*console.log(links);*/
+          console.log(ArrJson);
         } 
       });
     });

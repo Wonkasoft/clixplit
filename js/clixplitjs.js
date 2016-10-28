@@ -2,6 +2,25 @@
  * cliXplit v1.0.0 (http://wonkasoft.com)
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
+$(function fetch_data() {
+ 		$table_dir = $('[name="directory"]').val();
+ 		$data = $('[name="activepost"]').serialize();
+
+ 		$.ajax({
+ 			url: $table_dir,
+ 			method: 'POST',
+ 			datatype: 'text',
+ 			data: $data,
+ 			success: function($response) {
+ 				if ($('#global-table').length) {
+ 					$('#global-table').html($response);
+ 				}
+ 				if ($('#page-table').length) {
+ 					$('#page-table').html($response);
+ 				}
+ 			}
+ 		});
+ 	});
 
  $( document ).ready(function() {
  	$("a.nav-campaign-buttons").click(function() {
@@ -17,31 +36,6 @@
  		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  	});
 
- 	setInterval(function fetch_data() {
- 		$table_dir = $('[name="directory"]').val();
- 		$data = $('[name="activepost"]').serialize();
-
- 		$.ajax({
- 			url: $table_dir,
- 			method: 'post',
- 			datatype: 'text',
- 			data: $data,
- 			success: function($response) {
- 				if ($('#global-table').length) {
- 					$('#global-table').html($response);
- 				}
- 				if ($('#page-table').length) {
- 					$('#page-table').html($response);
- 				}
- 			}
- 		});
- 	}, 2000);
-
- 	// Global Campaigns Editor
- 	$post_value = $('#posts-switch').next().next().text();
- 	$('[name="post-value"]').val($post_value);
- 	$page_value = $('#page-switch').next().next().text();
- 	$('[name="page-value"]').val($page_value);
  	
  	$(document).on('click', '.btn-add', function(e) {
  		e.preventDefault();
@@ -57,10 +51,37 @@
  		return false;
  	});
 
+ 	// Global Campaigns Editor
+ 	$post_value = $('#post-switch').text();
+ 	$('[name="post-value"]').val($post_value);
+ 	$page_value = $('#page-switch').text();
+ 	$('[name="page-value"]').val($page_value);
+ 	
+ 	$('[name="global"]').click(function(){
+  	$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500);
+  });
+
+  $('#modal-form-campaigns').on('submit', function () {
+  	$form = $(this);
+  	$url = $form.attr('action');
+  	$method = $form.attr('method');
+  	$data = $('#modal-form-campaigns').serialize();
+  	console.log($data);
+
+  	$.ajax( {
+  		type: $method,
+  		data: $data,
+  		success: function($response) {
+  			console.log($response);
+  			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
+  		}
+  	});
+  });
+
   // cliXplit_meta_box styling
   $("#clixplit_meta_box > h2").css({"text-align":"center","background-color":"#f7f7f7"});
 
-  $('.clixplit-save-btn').click(function(){
+  $('[name="clixplit-redirect-save"]').click(function(){
   	$('#submission').text('Processing...').fadeIn();
   });
   //cliXplit_meta_box
@@ -75,7 +96,6 @@
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			console.log($response);
   			$('#submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
@@ -83,6 +103,9 @@
   });
 
   // cliXplit_meta_box modal form
+  $('[name="clixplit-modal-save"]').click(function(){
+  	$('#modal-submission').text('Processing...').fadeIn();
+  });
   $('#modal-form-meta-box').on('submit', function () {
   	$form = $(this);
   	$url = $form.attr('action');
@@ -93,9 +116,8 @@
   		url: $url,
   		type: $method,
   		data: $data,
-  		datatype: 'json',
   		success: function($response) {
-  			console.log($response[0]);
+  			$('#modal-submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
   	return false;
@@ -108,6 +130,14 @@
  			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
  			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
  			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+ 			if ($switchID == 'posts-switch') {
+ 				$post_value = $('#post-switch').text();
+ 				$('[name="post-value"]').val($post_value);
+ 			}
+ 			if ($switchID == 'pages-switch') {
+ 				$page_value = $('#page-switch').text();
+ 				$('[name="page-value"]').val($page_value);
+ 			}
  			if ($switchID == 'exit-redirect-switch') {
  				$redirect_exit = $('#exit-redirect-switch').next().next().text();
  				$('[name="exit-redirectopt"]').val($redirect_exit);
@@ -130,6 +160,14 @@
  			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
  			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
  			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
+ 			if ($switchID == 'posts-switch') {
+ 				$post_value = $('#post-switch').text();
+ 				$('[name="post-value"]').val($post_value);
+ 			}
+ 			if ($switchID == 'pages-switch') {
+ 				$page_value = $('#page-switch').text();
+ 				$('[name="page-value"]').val($page_value);
+ 			}
  			if ($switchID == 'exit-redirect-switch') {
  				$redirect_exit = $('#exit-redirect-switch').next().next().text();
  				$('[name="exit-redirectopt"]').val($redirect_exit);
@@ -154,6 +192,14 @@
       $(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
       $(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
       $(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
+      if ($switchID == 'posts-switch') {
+      	$post_value = $('#post-switch').text();
+      	$('[name="post-value"]').val($post_value);
+      }
+      if ($switchID == 'pages-switch') {
+      	$page_value = $('#page-switch').text();
+      	$('[name="page-value"]').val($page_value);
+      }
       if ($switchID == 'exit-redirect-switch') {
         $redirect_exit = $('#exit-redirect-switch').next().next().text();
         $('[name="exit-redirectopt"]').val($redirect_exit);
@@ -176,6 +222,14 @@
       $(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
       $(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
       $(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+      if ($switchID == 'posts-switch') {
+      	$post_value = $('#post-switch').text();
+      	$('[name="post-value"]').val($post_value);
+      }
+      if ($switchID == 'pages-switch') {
+      	$page_value = $('#page-switch').text();
+      	$('[name="page-value"]').val($page_value);
+      }
       if ($switchID == 'exit-redirect-switch') {
         $redirect_exit = $('#exit-redirect-switch').next().next().text();
         $('[name="exit-redirectopt"]').val($redirect_exit);
