@@ -3,33 +3,8 @@
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
 function fetch_data() {
-<<<<<<< HEAD
- 		$table_dir = $('[name="directory"]').val();
- 		$data = $('[name="activepost"]').serialize();
-
- 		$.ajax({
- 			url: $table_dir,
- 			method: 'POST',
- 			datatype: 'text',
- 			data: $data,
- 			success: function($response) {
- 				if ($('#global-table').length) {
- 					$('#global-table').html($response);
- 				}
- 				if ($('#page-table').length) {
- 					$('#page-table').html($response);
- 				}
- 			}
- 		});
- 	}
-
- $( document ).ready(function() {
- 	fetch_data();
- 	$('[name="add-campaign"]').click(function() {
-=======
     $table_dir = $('[name="directory"]').val();
     $data = $('[name="activepost"]').serialize();
-
     $.ajax({
       url: $table_dir,
       method: 'POST',
@@ -49,7 +24,6 @@ function fetch_data() {
  $( document ).ready(function() {
 fetch_data();
 $('[name="add-campaign"]').click(function() {
->>>>>>> devturtle
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
  	});
  	$(".clixplit-cancel-btn").click(function () {
@@ -92,19 +66,12 @@ $('[name="add-campaign"]').click(function() {
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-campaigns').serialize();
-<<<<<<< HEAD
 
-=======
->>>>>>> devturtle
   	$.ajax( {
   		type: $method,
   		data: $data,
   		success: function($response) {
-<<<<<<< HEAD
-  			fetch_data();
-=======
         fetch_data();
->>>>>>> devturtle
   			$('#global-submission').text('Data submitted successfully').fadeOut(2000);
   		}
   	});
@@ -346,7 +313,6 @@ $('[name="add-campaign"]').click(function() {
       $('tbody tr td input[type="checkbox"]:checked').each(function(){
           $checked_keywords.push(this.name); 
       });
-      $checked_keywords;
       $.ajax( {
       url: "../wp-content/plugins/clixplit/ajax/ajax-form.php",
       datatype: 'text',
