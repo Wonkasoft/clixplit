@@ -167,8 +167,6 @@ if (!current_user_can('manage_options')) {
 		</div>
 
 		<?php
-		
-		if (isset($_POST['keyword-input'])) {
 			require_once( ABSPATH . 'wp-load.php' );
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
@@ -181,6 +179,7 @@ if (!current_user_can('manage_options')) {
 			$postopt = $_POST['post-value'];
 			$pageopt = $_POST['page-value'];
 
+		if ((isset($_POST['keyword-input'])) || (isset($_POST['globalopt']))) {
 			$content_output = "";
 			$posts = get_posts();
 			$pages = get_pages();
@@ -206,6 +205,11 @@ if (!current_user_can('manage_options')) {
 				'globalopt' => 'Y',
 				'active' => 1
 				));
+		}
+
+		
+
+		if (isset($_POST['keyword-input'])) {
 
 			for ($i=0; $i < $primary_count; $i++) { 
 				$primary_array = $primary[$i];
