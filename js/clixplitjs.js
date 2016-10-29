@@ -18,6 +18,7 @@ function fetch_data() {
  				if ($('#page-table').length) {
  					$('#page-table').html($response);
  				}
+         $('#clixplit-check-all').delay(3000).attr('checked',false);
  			}
  		});
  	}
@@ -90,7 +91,23 @@ function fetch_data() {
   		success: function($response) {
   			fetch_data();
   			$form.trigger("reset");
-  			$('#global-submission').text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
+        $('.clixplit-primary-switch-on').removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
+        $('.clixplit-primary-switch-off').find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
+        $('.clixplit-primary-switch-off').next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
+        $('.clixplit-primary-switch-off').parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
+        $('#modal-primary-url-controls').find('.entry:not(:first)').remove();
+        $('#modal-primary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+          
+          $('.clixplit-secondary-switch-on').removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
+          $('.clixplit-secondary-switch-off').find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
+          $('.clixplit-secondary-switch-off').next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
+          $('.clixplit-secondary-switch-off').parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
+          $('#modal-secondary-url-controls').find('.entry:not(:first)').remove();
+          $('#modal-secondary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+        $("#global-submission").text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
+
+
+
   		}
   	});
   });
@@ -336,13 +353,11 @@ function fetch_data() {
       datatype: 'text',
       type: 'POST',
       data: {
-        "endcampaign":1,
         "enddata": $checked_keywords
       },
       success: function($response) {
       fetch_data();
       $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
-      $('#clixplit-check-all').attr('checked',false);
       }
     });
     });

@@ -244,7 +244,7 @@ if ((!empty($_POST['mouseoverurl'])) || (!empty($_POST['exit-pop'])) || (!empty(
 }
 
 // Delete campaigns
-if (isset($_POST['endcampaign'])) {
+if (isset($_POST['enddata'])) {
 	require_once( $file_path . 'wp-load.php' );
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'clixplit_global_campaigns';
@@ -259,10 +259,5 @@ if (isset($_POST['endcampaign'])) {
 		}
 	}
 }
-
-
-
-
-
 
 ?>
