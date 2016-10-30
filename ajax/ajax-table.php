@@ -1,54 +1,76 @@
  <?php
-$file_path = realpath(dirname(__FILE__). '/../../../..'). '/';
-require_once( $file_path . 'wp-load.php' );
-global  $wpdb;
-$table_name = $wpdb ->prefix.'clixplit_global_campaigns';
-$table_build = $wpdb ->get_results('SELECT * FROM ' . $table_name);
-$pagepost_id = $_POST['activepost'];
-$keyword_check ='';
+ $file_path = realpath(dirname(__FILE__). '/../../../..'). '/';
+ require_once( $file_path . 'wp-load.php' );
+ global  $wpdb;
+ $table_name = $wpdb ->prefix.'clixplit_global_campaigns';
+ $dbfetch = $wpdb ->get_results('SELECT * FROM ' . $table_name);
+ $pagepost_id = $_POST['activepost'];
+ $keyword_check =''; $primaryurl_count = '';
+ $secondaryurl_count = ''; $totalclick_count = '';
+ $unqclicks_count = ''; $instance_count = '';
 
-if ($pagepost_id == '') {
-	foreach ($table_build as $key) {
-		if (($key->keyword != $keyword_check) && ($key->globalopt == "Y")) {
-			$keyword_check = $key->keyword;
+ if ($pagepost_id == '') {
 
-			$primaryurl_count = $wpdb ->get_var('SELECT SUM(numofprimary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-			$secondaryurl_count = $wpdb ->get_var('SELECT SUM(numofsecondary) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+ 	for ( $i = 0; $i < count($dbfetch); $i++) {
+ 		if (($dbfetch[$i]->keyword != $keyword_check) && ($dbfetch[$i]->globalopt == "Y")) {
+ 			$keyword_check = $dbfetch[$i]->keyword;
+ 			$primaryurl_count = 0;
+ 			$secondaryurl_count = 0;
+ 			$totalclick_count = 0;
+ 			$unqclicks_count = 0;
+ 			$instance_count = 0;
+ 			for ($s = 0; $s < count($dbfetch); $s++) {
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->primaryurl != '')) {
+ 					$primaryurl_count++;
+ 				}
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->secondaryurl != '')) {
+ 					$secondaryurl_count++;
+ 				}
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->totalclicks != 0) && ($dbfetch[$s]->primaryurl != '' || $dbfetch[$s]->secondaryurl != '')) {
+ 					$totalclick_count += $dbfetch[$s]->totalclicks;
+ 				}
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->unqclicks != 0) && ($dbfetch[$s]->primaryurl != '' || $dbfetch[$s]->secondaryurl != '')) {
+ 					$unqclicks_count += $dbfetch[$s]->unqclicks;
+ 				}
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->instances != 0)) {
+ 					$instance_count += $dbfetch[$s]->instances;
+ 				}
+ 			};
+ 			echo '<tr>' .
+ 			'<td><input class="item-checkbox" type="checkbox" value="" name="'.$keyword_check.'"></td>' .
+ 			'<td>'. $keyword_check .'</td>' .
+ 			'<td>'. $dbfetch[$i]->created .'</td>' .
+ 			'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
+ 			'<td>'. $totalclick_count . ' | ' . $unqclicks_count .'</td>' .
+ 			'<td>'. $instance_count .'</td>' .
+ 			'</tr>';
+ 		}
+ 	}
+ }
+ if ($pagepost_id) {
+ 	for ( $i = 0; $i < count($dbfetch); $i++) {
+ 		if (($dbfetch[$i]->keyword != $keyword_check) && ($dbfetch[$i]->pagepostcreated == "Y") && ($dbfetch[$i]->page_post_id == $pagepost_id)) {
+ 			$keyword_check = $dbfetch[$i]->keyword;
+ 			$totalclick_count = 0;
+ 			$unqclicks_count = 0;
+ 			for ($s = 0; $s < count($dbfetch); $s++) {
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->totalclicks != 0) && ($dbfetch[$s]->primaryurl != '' || $dbfetch[$s]->secondaryurl != '')) {
+ 					$totalclick_count += $dbfetch[$s]->totalclicks;
+ 				}
+ 				if (($keyword_check == $dbfetch[$s]->keyword) && ($dbfetch[$s]->unqclicks != 0) && ($dbfetch[$s]->primaryurl != '' || $dbfetch[$s]->secondaryurl != '')) {
+ 					$unqclicks_count += $dbfetch[$s]->unqclicks;
+ 				}
+ 			}
 
-			$totalclick_count = $wpdb ->get_var('SELECT SUM(totalclicks) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
+ 			echo '<tr>' .
+ 			'<td></td>' .
+ 			'<td>'. $dbfetch[$i]->keyword .'</td>' .
+ 			'<td>'. $dbfetch[$i]->created .'</td>' .
+ 			'<td>'. $totalclick_count . ' | ' . $unqclicks_count .'</td>' .
+ 			'<td>'. $dbfetch[$i]->globalopt .'</td>' .
+ 			'</tr>';
+ 		}
+ 	}
+ }
 
-			$unqclicks_count = $wpdb ->get_var('SELECT SUM(unqclicks) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-
-			$instance_count = $wpdb ->get_var('SELECT SUM(instances) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-
-			echo '<tr>' .
-			'<td><input class="item-checkbox" type="checkbox" value="" name="'.$keyword_check.'"></td>' .
-			'<td>'. $keyword_check .'</td>' .
-			'<td>'. $key->created .'</td>' .
-			'<td>'. $primaryurl_count . ' | ' . $secondaryurl_count .'</td>' .
-			'<td>'. $totalclick_count . ' | ' . $unqclicks_count .'</td>' .
-			'<td>'. $instance_count .'</td>' .
-			'</tr>';
-		}
-	}
-}
-
-	foreach ($table_build as $key) {
-		if (($key->keyword != $keyword_check) && ($key->pagepostcreated == "Y") && ($key->page_post_id == $pagepost_id)) {
-			$keyword_check = $key->keyword;
-
-			$totalclick_count = $wpdb ->get_var('SELECT SUM(totalclicks) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-
-			$unqclicks_count = $wpdb ->get_var('SELECT SUM(unqclicks) FROM '.$table_name.' WHERE keyword = "' .$keyword_check .'" ');
-
-			echo '<tr>' .
-						'<td></td>' .
-						'<td>'. $key->keyword .'</td>' .
-						'<td>'. $key->created .'</td>' .
-						'<td>'. $totalclick_count . ' | ' . $unqclicks_count .'</td>' .
-						'<td>'. $key->globalopt .'</td>' .
-						'</tr>';
-		}
-	}
-
-?>
+ ?>
