@@ -111,4 +111,3 @@ $(document).ready(function() {
       // document.cookie = "=;expires=(-1)";
       // document.cookie = "uniqueid=;expires=(-1)";
       // how to set the url checked
-      // document.cookie = "urlclicked=url" + ";expires=" + expiredate.toUTCString();
