@@ -27,7 +27,7 @@
  	fetch_data();
  	$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
- 		$('#modal-form-campaigns').keypress(function (e) {
+ 		$('#modal-form-campaigns').unbind().keypress(function (e) {
  			var key = e.which;
  			if(key == 13)
  			{
@@ -51,9 +51,6 @@
  			$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  		}
  	});
- 	$(".clixplit-save-btn").click(function () {
- 		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
- 	});
 
  	
  	$(document).on('click', '.btn-add', function(e) {
@@ -76,16 +73,21 @@
  	$page_value = $('#page-switch').text();
  	$('[name="page-value"]').val($page_value);
 
-  $('[name="global"]').click(function () {
+  $('[name="global"]').unbind().click(function () {
+  	$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
    $('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
    $form = $('#modal-form-campaigns');
+   $url = $form.attr('action');
    $method = $form.attr('method');
    $data = $('#modal-form-campaigns').serialize();
-
+   $data += "&globalopt=Y";
+   console.log($data);
    $.ajax( {
+   	url: $url,
     type: $method,
     data: $data,
     success: function($response) {
+    	console.log($response);
      fetch_data();
      $form.trigger("reset");
      $('.clixplit-primary-switch-on').removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
@@ -123,16 +125,13 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
-  	console.log($data);
   	$.ajax( {
   		url: $url,
   		type: $method,
   		data: $data,
-  		success: function($response) {
-  			console.log($response);
-  			
+  		success: function($response) {  			
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
-
+  			$('.wp-editor-container textarea.wp-editor-area').append('<p>Hello, I am here</p>');
   		}
   	});
   	return false;
@@ -147,7 +146,6 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-meta-box').serialize();
-
   	$.ajax( {
   		url: $url,
   		type: $method,
@@ -161,6 +159,7 @@
   	return false;
   });
 });
+
 $(function() {
 	$('.clixplit-switch-off').click(function(e) {
 		$switchID = $(this).prev().attr('id');
