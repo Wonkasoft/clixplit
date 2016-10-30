@@ -71,8 +71,6 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 			for ($i=0; $i < count($db_fetch); $i++) {
 				if ($db_fetch[$i]->page_post_id == $page_post_id) {
 					$page_post_check = $db_fetch[$i]->page_post_id;
-				} else {
-					$page_post_check = "";
 				}
 				if (($db_fetch[$i]->mouseoverurl != '') && ($db_fetch[$i]->page_post_id == $page_post_id)) {
 					$mou_count++;
@@ -80,176 +78,177 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 				if (($db_fetch[$i]->secondaryurl != '') && ($db_fetch[$i]->page_post_id == $page_post_id)) {
 					$pps_count++;
 				}
-			};
+			}
 
 			// Form reset clear table of page or post
 		if (($page_post_check == $page_post_id) && ($mouseoveropt == "off") && ($secondaryopt == "off") && ($exitredirectopt == "off")) {
 			$wpdb->delete($table_redirect, array(
 					'page_post_id' => $page_post_id));
-		};
-
-		if ($page_post_check == "") {
-			$wpdb->insert($table_redirect, array(
+		}
+		else {
+			if ($page_post_check == "") {
+				$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'mouseoveropt' => $mouseoveropt,
+						'exitredirectopt' => $exitredirectopt,
+						'exitredirecturl' => $exitredirecturl,
+						'exitmessage' => $exitmessage,
+						'secondaryopt' => $secondaryopt
+						));
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'mouseoverurl' => $mouseoverurl[$i]
+						));
+				};
+				for ($i=0; $i < $secondary_count; $i++) { 
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'secondaryurl' => $secondary_redirect[$i]
+						));
+				};	
+			};
+			if (($page_post_check == $page_post_id && $mouseoveropt == "on" && $secondaryopt == "on" && $exitredirectopt == "on")) {
+				$wpdb->update($table_redirect, array(
 					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
 					'mouseoveropt' => $mouseoveropt,
 					'exitredirectopt' => $exitredirectopt,
 					'exitredirecturl' => $exitredirecturl,
 					'exitmessage' => $exitmessage,
 					'secondaryopt' => $secondaryopt
-					));
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'mouseoverurl' => $mouseoverurl[$i]
-					));
+					), array('page_post_id' => $page_post_id, 'mouseoveropt' => "on"));
+			}
+
+			
+			if (($page_post_check == $page_post_id && $mouseover_count == $mou_count && $secondary_count == $pps_count)) {
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'mouseoverurl' => $mouseoverurl[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
+				};
+				for ($i=0; $i < $secondary_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'secondaryurl' => $secondary_redirect[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
+				};
 			};
-			for ($i=0; $i < $secondary_count; $i++) { 
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'secondaryurl' => $secondary_redirect[$i]
-					));
-			};	
-		};
-		if (($page_post_check == $page_post_id && $mouseoveropt == "on" && $secondaryopt == "on" && $exitredirectopt == "on")) {
-			$wpdb->update($table_redirect, array(
-				'created' => current_time('mysql'),
-				'mouseoveropt' => $mouseoveropt,
-				'exitredirectopt' => $exitredirectopt,
-				'exitredirecturl' => $exitredirecturl,
-				'exitmessage' => $exitmessage,
-				'secondaryopt' => $secondaryopt
-				), array('page_post_id' => $page_post_id, 'mouseoveropt' => "on"));
+
+			// For form being cleared
+			if (($page_post_check == $page_post_id && $mouseover_count == 1 && $mouseoverurl[0] == '')) {
+				$wpdb->delete($table_redirect, array(
+						'page_post_id' => $page_post_id, 'input_id' => '', 'mouseoverurl' => ''));
+			};
+			if (($page_post_check == $page_post_id) && ($secondary_count == 1) && ($secondary_redirect[0] == '')) {
+				$wpdb->delete($table_redirect, array(
+						'page_post_id' => $page_post_id, 'input_id' => '', 'secondaryurl' => ''));
+			};
+
+			// For deleting rows for deleted inputs
+			if (($page_post_check == $page_post_id) && ($mou_count > $mouseover_count)) {
+				$set = $mou_count-1;
+				for ($i=$set; $i >= $mouseover_count; $i--) {
+					$wpdb->delete($table_redirect, array(
+						'page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
+				};
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'mouseoverurl' => $mouseoverurl[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
+				};
+			};
+			if (($page_post_check == $page_post_id) && ($pps_count > $secondary_count)) {
+				$set = $pps_count-1;
+				for ($i=$set; $i >= $secondary_count; $i--) {
+					$wpdb->delete($table_redirect, array(
+						'page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
+				};
+				for ($i=0; $i < $secondary_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'secondaryurl' => $secondary_redirect[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
+				};
+			};
+
+			// For adding rows for added inputs
+			if (($page_post_check == $page_post_id) && ($mou_count < $mouseover_count) && ($mou_count != 0)) {
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'mouseoverurl' => $mouseoverurl[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
+				};
+				$set = $mou_count;
+				for ($i=$set; $i < $mouseover_count; $i++) {
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'mouseoverurl' => $mouseoverurl[$i]
+						));
+				};
+			};
+			if (($page_post_check == $page_post_id) && ($mou_count < $mouseover_count) && ($mou_count == 0)) {
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'mouseoverurl' => $mouseoverurl[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
+				};
+				$set = 0;
+				for ($i=$set; $i < $mouseover_count; $i++) {
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'mouseoverurl' => $mouseoverurl[$i]
+						));
+				};
+			};
+
+			if (($page_post_check == $page_post_id) && ($pps_count < $secondary_count) && ($pps_count != 0)) {
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'secondaryurl' => $secondary_redirect[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
+				};
+				$set = $pps_count;
+				for ($i=$set; $i < $secondary_count; $i++) {
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'secondaryurl' => $secondary_redirect[$i]
+						));
+				};
+			};
+			if (($page_post_check == $page_post_id) && ($pps_count < $secondary_count) && ($pps_count == 0)) {
+				for ($i=0; $i < $mouseover_count; $i++) { 
+					$wpdb->update($table_redirect, array(
+						'created' => current_time('mysql'),
+						'secondaryurl' => $secondary_redirect[$i]
+						), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
+				};
+				$set = 0;
+				for ($i=$set; $i < $secondary_count; $i++) {
+					$wpdb->insert($table_redirect, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'input_id' => $i,
+						'secondaryurl' => $secondary_redirect[$i]
+						));
+				};
+			};
 		}
-
-		
-		if (($page_post_check == $page_post_id && $mouseover_count == $mou_count && $secondary_count == $pps_count)) {
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'mouseoverurl' => $mouseoverurl[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
-			};
-			for ($i=0; $i < $secondary_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'secondaryurl' => $secondary_redirect[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
-			};
-		};
-
-		// For form being cleared
-		if (($page_post_check == $page_post_id && $mouseover_count == 1 && $mouseoverurl[0] == '')) {
-			$wpdb->delete($table_redirect, array(
-					'page_post_id' => $page_post_id, 'input_id' => '', 'mouseoverurl' => ''));
-		};
-		if (($page_post_check == $page_post_id) && ($secondary_count == 1) && ($secondary_redirect[0] == '')) {
-			$wpdb->delete($table_redirect, array(
-					'page_post_id' => $page_post_id, 'input_id' => '', 'secondaryurl' => ''));
-		};
-
-		// For deleting rows for deleted inputs
-		if (($page_post_check == $page_post_id) && ($mou_count > $mouseover_count)) {
-			$set = $mou_count-1;
-			for ($i=$set; $i >= $mouseover_count; $i--) {
-				$wpdb->delete($table_redirect, array(
-					'page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
-			};
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'mouseoverurl' => $mouseoverurl[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
-			};
-		};
-		if (($page_post_check == $page_post_id) && ($pps_count > $secondary_count)) {
-			$set = $pps_count-1;
-			for ($i=$set; $i >= $secondary_count; $i--) {
-				$wpdb->delete($table_redirect, array(
-					'page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
-			};
-			for ($i=0; $i < $secondary_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'secondaryurl' => $secondary_redirect[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
-			};
-		};
-
-		// For adding rows for added inputs
-		if (($page_post_check == $page_post_id) && ($mou_count < $mouseover_count) && ($mou_count != 0)) {
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'mouseoverurl' => $mouseoverurl[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
-			};
-			$set = $mou_count;
-			for ($i=$set; $i < $mouseover_count; $i++) {
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'mouseoverurl' => $mouseoverurl[$i]
-					));
-			};
-		};
-		if (($page_post_check == $page_post_id) && ($mou_count < $mouseover_count) && ($mou_count == 0)) {
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'mouseoverurl' => $mouseoverurl[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'secondaryurl' => ""));
-			};
-			$set = 0;
-			for ($i=$set; $i < $mouseover_count; $i++) {
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'mouseoverurl' => $mouseoverurl[$i]
-					));
-			};
-		};
-
-		if (($page_post_check == $page_post_id) && ($pps_count < $secondary_count) && ($pps_count != 0)) {
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'secondaryurl' => $secondary_redirect[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
-			};
-			$set = $pps_count;
-			for ($i=$set; $i < $secondary_count; $i++) {
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'secondaryurl' => $secondary_redirect[$i]
-					));
-			};
-		};
-		if (($page_post_check == $page_post_id) && ($pps_count < $secondary_count) && ($pps_count == 0)) {
-			for ($i=0; $i < $mouseover_count; $i++) { 
-				$wpdb->update($table_redirect, array(
-					'created' => current_time('mysql'),
-					'secondaryurl' => $secondary_redirect[$i]
-					), array('page_post_id' => $page_post_id, 'input_id' => $i, 'mouseoverurl' => ""));
-			};
-			$set = 0;
-			for ($i=$set; $i < $secondary_count; $i++) {
-				$wpdb->insert($table_redirect, array(
-					'created' => current_time('mysql'),
-					'page_post_id' => $page_post_id,
-					'input_id' => $i,
-					'secondaryurl' => $secondary_redirect[$i]
-					));
-			};
-		};
 }
 
 // Delete campaigns

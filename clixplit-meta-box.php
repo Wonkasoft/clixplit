@@ -30,7 +30,7 @@ for ($i=0; $i < count($options); $i++) {
 
 ?>
 
-<div class="box-wrap"> 
+<div class="box-wrap">
 	<div class="container mb-container">
 		<div class="row">
 			<form></form>
