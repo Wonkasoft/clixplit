@@ -14,8 +14,7 @@ $(document).ready(function() {
     if ((!cookieObj.userip) && (!cookieObj.uniqeid)) {
       var expiredate = new Date();
       expiredate.setDate(expiredate.getDate() + 45);
-      var uniqueid = Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1)
-      +"-"+Math.floor((Math.random() * 165463) + 1);
+      var uniqueid = Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1);
       document.cookie = "uniqueid=" + uniqueid + ";expires=" + expiredate.toUTCString();
     }
       console.log(cookieObj);
@@ -34,14 +33,10 @@ $(document).ready(function() {
         var dbJsonString ='[';
         for (var i = 0; i < dbData.length; i++) {
           if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-            dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'
-            +dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'
-            +dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
+            dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'+dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
 
           }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-            dbJsonString +='{"secondary":"'+dbData[i].secondaryurl+'","keyword":"'
-            +dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'
-            +dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
+            dbJsonString +='{"secondary":"'+dbData[i].secondaryurl+'","keyword":"'+dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
           }
 
         }
@@ -49,43 +44,28 @@ $(document).ready(function() {
         dbJsonString +="]";
         var outputObj = JSON.parse(dbJsonString);
         var keyword_check ="";
-        var priIndex =0;
+        var priIndex ='';
         var priIndexurl =0;
+        var priIndexclicks =0;
         var priArr ={};
-        var priArrurl =[];
+        var priArrObj ={};
+        var priArrurl ={};
+        var priArrurlObj ={};
+        var priArrclicks ={};
+        var priclicksObj ={};
         var priCounter = 0;
           for (var i = 0; i < outputObj.length; i++) {
-            if (outputObj[i].primaryurl !=null) {
-              if (keyword_check == outputObj[i].keyword) {
-                priIndexurl += outputObj[i].primaryurl;
-                priArrurl[priIndexurl] = outputObj[i].totalclicks;
-                priIndex = outputObj[i].keyword;
-                priArr[priIndex] += priArrurl[priIndexurl];
-
-              }else {
-                priIndexurl = outputObj[i].primaryurl;
-                priArrurl[priIndexurl] = outputObj[i].totalclicks;
-                priIndex = outputObj[i].keyword;
-                priArr[priIndex] += priArrurl[priIndexurl];
-                keyword_check = outputObj[i].keyword;
+            if (outputObj[i].primaryurl != null) { 
+              priIndex = outputObj[i].keyword;
+              priIndexurl = outputObj[i].primaryurl;
+              priArrurlObj = priclicksObj[priIndexurl] = outputObj[i].totalclicks;
+              priArr[priIndex] = priArrurlObj;
+              priArrObj[priArr[0]] = priArr[1];
             }
+            
           }
 
-
-            //   if (keyword_check == outputObj[i].keyword) {
-            //     priArrurl[] = outputObj[i].totalclicks;
-            //     priIndex = outputObj[i].keyword;
-            //     priArr[priIndex] += priArrurl[outputObj[i].primaryurl] = outputObj[i].totalclicks;
-            //   } else {
-            //     priIndex = outputObj[i].keyword;
-            //     priArr[priIndex] = outputObj[i].primaryurl;
-            //     priArr[priIndex] = outputObj[i].totalclicks;
-            //     keyword_check = outputObj[i].keyword;
-            //   }
-            // }
-          }
-
-          console.log(priArr);
+          console.log(priclicksObj);
             // var thePage = $("body");
               // for (var i = 0; i < primaryCounter; i++) {
                 // var conditions = new RegExp(keyword[i],'ig');
