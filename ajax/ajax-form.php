@@ -268,9 +268,4 @@ if (isset($_POST['enddata'])) {
 	}
 }
 
-
-print_r($_POST);
-
-
-
 ?>

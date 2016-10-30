@@ -1,20 +1,4 @@
 $(document).ready(function() {
-  
-  $(function set_cookie() {
-    $.ajax({
-      type:'POST',
-      datatype: 'json',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getip.php",
-      success: function($response) {
-        var expiredate = new Date();
-        expiredate.setDate(expiredate.getDate() + 45);
-        var uniqueid = Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1);
-        document.cookie = "userip=" + $response + ";expires=" + expiredate.toUTCString();
-        document.cookie = "uniqueid=" + uniqueid + ";expires=" + expiredate.toUTCString();
-        document.cookie = "urlclicked=url" + ";expires=" + expiredate.toUTCString();
-      }
-    });
-  });
 
   $(function check_cookie() {
     var cookie = document.cookie;
@@ -26,46 +10,82 @@ $(document).ready(function() {
       var cookieKeyValueArr = cookieKeyValue.split("=");
       cookieObj[cookieKeyValueArr[0]] = cookieKeyValueArr[1];
     }
+
+    if ((!cookieObj.userip) && (!cookieObj.uniqeid)) {
+      var expiredate = new Date();
+      expiredate.setDate(expiredate.getDate() + 45);
+      var uniqueid = Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1)
+      +"-"+Math.floor((Math.random() * 165463) + 1);
+      document.cookie = "uniqueid=" + uniqueid + ";expires=" + expiredate.toUTCString();
+    }
       console.log(cookieObj);
-  });
+    });
 
-    $(function get_links() {
-      $.ajax({
-        type:'POST',
-        url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
-        datatype: 'json',
-        data: {
-          "getlinks":1
-        },
-        success: function(links) {
-          var dbData = JSON.parse(links);
-          var dbArr = [];
-          var dbJsonString ='[';
-          var secondaryArr = [];
-          var keyword = [];
-          for (var i = 0; i < dbData.length; i++) {
-            if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-              dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'+dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
-            }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-              // dbArr[dbData[i].secondaryurl] = "{secondary: "+"'yes' keyword: "+ "'"+dbData[i].keyword+"', "+"pageopt: "+ "'"+dbData[i].pageopt+"', "+"postopt: "+ "'"+dbData[i].postopt+"', "+"totalclicks: "+ "'"+dbData[i].totalclicks+"', "+"globalopt: "+ "'"+dbData[i].globalopt+"'}";
-              // secondaryCounter++;
-            }
+  $(function get_links() {
+    $.ajax({
+      type:'POST',
+      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
+      datatype: 'json',
+      data: {
+        "getlinks":1
+      },
+      success: function(links) {
+        var dbData = JSON.parse(links);
+        var dbJsonString ='[';
+        for (var i = 0; i < dbData.length; i++) {
+          if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
+            dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'
+            +dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'
+            +dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
 
+          }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
+            dbJsonString +='{"secondary":"'+dbData[i].secondaryurl+'","keyword":"'
+            +dbData[i].keyword+'","pageopt":"'+dbData[i].pageopt+'","postopt":"'
+            +dbData[i].postopt+'","totalclicks":"'+dbData[i].totalclicks+'"},';
           }
-          dbJsonString = dbJsonString.substring(0, dbJsonString.length - 1);
-          dbJsonString +="]";
+
+        }
+        dbJsonString = dbJsonString.substring(0, dbJsonString.length - 1);
+        dbJsonString +="]";
+        var outputObj = JSON.parse(dbJsonString);
+        var keyword_check ="";
+        var priIndex =0;
+        var priIndexurl =0;
+        var priArr ={};
+        var priArrurl =[];
+        var priCounter = 0;
+          for (var i = 0; i < outputObj.length; i++) {
+            if (outputObj[i].primaryurl !=null) {
+              if (keyword_check == outputObj[i].keyword) {
+                priIndexurl += outputObj[i].primaryurl;
+                priArrurl[priIndexurl] = outputObj[i].totalclicks;
+                priIndex = outputObj[i].keyword;
+                priArr[priIndex] += priArrurl[priIndexurl];
+
+              }else {
+                priIndexurl = outputObj[i].primaryurl;
+                priArrurl[priIndexurl] = outputObj[i].totalclicks;
+                priIndex = outputObj[i].keyword;
+                priArr[priIndex] += priArrurl[priIndexurl];
+                keyword_check = outputObj[i].keyword;
+            }
+          }
 
 
+            //   if (keyword_check == outputObj[i].keyword) {
+            //     priArrurl[] = outputObj[i].totalclicks;
+            //     priIndex = outputObj[i].keyword;
+            //     priArr[priIndex] += priArrurl[outputObj[i].primaryurl] = outputObj[i].totalclicks;
+            //   } else {
+            //     priIndex = outputObj[i].keyword;
+            //     priArr[priIndex] = outputObj[i].primaryurl;
+            //     priArr[priIndex] = outputObj[i].totalclicks;
+            //     keyword_check = outputObj[i].keyword;
+            //   }
+            // }
+          }
 
-          var testdata = JSON.parse(dbJsonString);
-          // var parsedata = {};
-          // for (var i = 0; i < dbArr.length; i++) {
-          //   parsedata[dbArr[0]] = dbArr[1];
-          // }
-
-          // parsedata = dbArr.split("}");
-
-            console.log(testdata);
+          console.log(priArr);
             // var thePage = $("body");
               // for (var i = 0; i < primaryCounter; i++) {
                 // var conditions = new RegExp(keyword[i],'ig');
@@ -76,9 +96,10 @@ $(document).ready(function() {
               //   var newconditions = new RegExp(keywordOnPage,'ig');
               //   thePage.html(thePage.html().replace(newconditions, '<a href="http://'+ primaryArr[0] +'" target="_self">'+keywordOnPage+'</a>'));  
               // }
-
+              // 
+              // Script for secondary url
               // window.addEventListener("beforeunload", secondaryLink);
-    
+              
               // function secondaryLink() {
               //   window.open(secondaryArr[0],'_blank');
               // }
@@ -87,3 +108,8 @@ $(document).ready(function() {
     });
   });
 });
+      // how to delete a property in the cookie;
+      // document.cookie = "=;expires=(-1)";
+      // document.cookie = "uniqueid=;expires=(-1)";
+      // how to set the url checked
+      // document.cookie = "urlclicked=url" + ";expires=" + expiredate.toUTCString();

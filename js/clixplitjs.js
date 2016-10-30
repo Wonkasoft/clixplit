@@ -18,15 +18,36 @@
  			if ($('#page-table').length) {
  				$('#page-table').html($response);
  			}
+ 			$('#clixplit-check-all').delay(3000).attr('checked',false);
  		}
  	});
  }
+
+
+ 
 
  $( document ).ready(function() {
  	fetch_data();
  	$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
+ 		$('#modal-form-campaigns').keypress(function (e) {
+ 			var key = e.which;
+ 			if(key == 13)
+ 			{
+ 				$('input[name = "global"]').click();
+ 				return false;  
+ 			}
+ 		});
+ 		$('[name="add-campaign"]').mouseleave(function(){
+ 			$('#keyword-input').focus();
+ 		});
+
+ 		$('[name="add-campaign"]').blur(function(){
+ 			$('#keyword-input').focus();
+ 		});
  	});
+
+
  	$(".clixplit-cancel-btn").click(function () {
  		$r = confirm("Are you sure you would like to cancel this campaign?\nYour changes will be lost if you leave this page.");
  		if ($r) {
@@ -59,17 +80,31 @@
  	$('[name="page-value"]').val($page_value);
 
  	$('[name="global"]').click(function () {
- 		$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
+ 		$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
  		$form = $('#modal-form-campaigns');
  		$method = $form.attr('method');
  		$data = $('#modal-form-campaigns').serialize();
+
  		$.ajax( {
  			type: $method,
  			data: $data,
  			success: function($response) {
  				fetch_data();
  				$form.trigger("reset");
- 				$('#global-submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
+ 				$('.clixplit-primary-switch-on').removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
+ 				$('.clixplit-primary-switch-off').find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
+ 				$('.clixplit-primary-switch-off').next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
+ 				$('.clixplit-primary-switch-off').parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
+ 				$('#modal-primary-url-controls').find('.entry:not(:first)').remove();
+ 				$('#modal-primary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+ 				
+ 				$('.clixplit-secondary-switch-on').removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
+ 				$('.clixplit-secondary-switch-off').find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
+ 				$('.clixplit-secondary-switch-off').next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
+ 				$('.clixplit-secondary-switch-off').parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
+ 				$('#modal-secondary-url-controls').find('.entry:not(:first)').remove();
+ 				$('#modal-secondary-url-controls').find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
+ 				$("#global-submission").text('Data submitted successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
  			}
  		});
  	});
@@ -129,130 +164,130 @@
   	return false;
   });
  });
- $(function() {
- 	$('.clixplit-switch-off').click(function(e) {
- 		$switchID = $(this).prev().attr('id');
- 		if ($(this).hasClass('clixplit-switch-off')) {
- 			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
- 			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
- 			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
- 			if ($switchID == 'posts-switch') {
- 				$post_value = $('#post-switch').text();
- 				$('[name="post-value"]').val($post_value);
- 			}
- 			if ($switchID == 'pages-switch') {
- 				$page_value = $('#page-switch').text();
- 				$('[name="page-value"]').val($page_value);
- 			}
- 			if ($switchID == 'exit-redirect-switch') {
- 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
- 				$('[name="exit-redirectopt"]').val($redirect_exit);
- 				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', false);
- 				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', false);
- 			}
- 			if ($switchID == 'mouseover-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', false);
- 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
- 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
- 			}
- 			if ($switchID == 'secondary-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', false);
- 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
- 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
- 			}
- 		}
- 		else {
- 			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
- 			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
- 			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
- 			if ($switchID == 'posts-switch') {
- 				$post_value = $('#post-switch').text();
- 				$('[name="post-value"]').val($post_value);
- 			}
- 			if ($switchID == 'pages-switch') {
- 				$page_value = $('#page-switch').text();
- 				$('[name="page-value"]').val($page_value);
- 			}
- 			if ($switchID == 'exit-redirect-switch') {
- 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
- 				$('[name="exit-redirectopt"]').val($redirect_exit);
- 				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', true);
- 				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', true);
- 			}
- 			if ($switchID == 'mouseover-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', true);
- 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
- 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
- 			}
- 			if ($switchID == 'secondary-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', true);
- 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
- 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
- 			}
- 		}
- 	});
- 	$('.clixplit-switch-on').click(function(e) {
- 		$switchID = $(this).prev().attr('id');
- 		if ($(this).hasClass('clixplit-switch-on')) {
- 			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
- 			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
- 			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
- 			if ($switchID == 'posts-switch') {
- 				$post_value = $('#post-switch').text();
- 				$('[name="post-value"]').val($post_value);
- 			}
- 			if ($switchID == 'pages-switch') {
- 				$page_value = $('#page-switch').text();
- 				$('[name="page-value"]').val($page_value);
- 			}
- 			if ($switchID == 'exit-redirect-switch') {
- 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
- 				$('[name="exit-redirectopt"]').val($redirect_exit);
- 				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', true);
- 				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', true);
+$(function() {
+	$('.clixplit-switch-off').click(function(e) {
+		$switchID = $(this).prev().attr('id');
+		if ($(this).hasClass('clixplit-switch-off')) {
+			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
+			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
+			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+			if ($switchID == 'posts-switch') {
+				$post_value = $('#post-switch').text();
+				$('[name="post-value"]').val($post_value);
+			}
+			if ($switchID == 'pages-switch') {
+				$page_value = $('#page-switch').text();
+				$('[name="page-value"]').val($page_value);
+			}
+			if ($switchID == 'exit-redirect-switch') {
+				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+				$('[name="exit-redirectopt"]').val($redirect_exit);
+				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', false);
+				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', false);
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', false);
+				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', false);
+				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+			}
+		}
+		else {
+			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
+			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
+			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
+			if ($switchID == 'posts-switch') {
+				$post_value = $('#post-switch').text();
+				$('[name="post-value"]').val($post_value);
+			}
+			if ($switchID == 'pages-switch') {
+				$page_value = $('#page-switch').text();
+				$('[name="page-value"]').val($page_value);
+			}
+			if ($switchID == 'exit-redirect-switch') {
+				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+				$('[name="exit-redirectopt"]').val($redirect_exit);
+				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', true);
+				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', true);
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', true);
+				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', true);
+				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+			}
+		}
+	});
+	$('.clixplit-switch-on').click(function(e) {
+		$switchID = $(this).prev().attr('id');
+		if ($(this).hasClass('clixplit-switch-on')) {
+			$(this).removeClass('clixplit-switch-on').addClass('clixplit-switch-off');
+			$(this).find('.clixplit-switch-center-on').removeClass('clixplit-switch-center-on').addClass('clixplit-switch-center-off');
+			$(this).next('.clixplit-switch-text-on').removeClass('clixplit-switch-text-on').addClass('clixplit-switch-text-off').text('off');
+			if ($switchID == 'posts-switch') {
+				$post_value = $('#post-switch').text();
+				$('[name="post-value"]').val($post_value);
+			}
+			if ($switchID == 'pages-switch') {
+				$page_value = $('#page-switch').text();
+				$('[name="page-value"]').val($page_value);
+			}
+			if ($switchID == 'exit-redirect-switch') {
+				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+				$('[name="exit-redirectopt"]').val($redirect_exit);
+				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', true);
+				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', true);
 
- 			}
- 			if ($switchID == 'mouseover-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', true);
- 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
- 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
- 			}
- 			if ($switchID == 'secondary-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', true);
- 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
- 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
- 			}
- 		}
- 		else {
- 			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
- 			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
- 			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
- 			if ($switchID == 'posts-switch') {
- 				$post_value = $('#post-switch').text();
- 				$('[name="post-value"]').val($post_value);
- 			}
- 			if ($switchID == 'pages-switch') {
- 				$page_value = $('#page-switch').text();
- 				$('[name="page-value"]').val($page_value);
- 			}
- 			if ($switchID == 'exit-redirect-switch') {
- 				$redirect_exit = $('#exit-redirect-switch').next().next().text();
- 				$('[name="exit-redirectopt"]').val($redirect_exit);
- 				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', false);
- 				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', false);
- 			}
- 			if ($switchID == 'mouseover-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', false);
- 				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
- 				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
- 			}
- 			if ($switchID == 'secondary-url-label') {
- 				$(this).parent().parent().find('.entry input').attr('disabled', false);
- 				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
- 				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
- 			}
- 		}
- 	});
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', true);
+				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', true);
+				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+			}
+		}
+		else {
+			$(this).removeClass('clixplit-switch-off').addClass('clixplit-switch-on');
+			$(this).find('.clixplit-switch-center-off').removeClass('clixplit-switch-center-off').addClass('clixplit-switch-center-on');
+			$(this).next('.clixplit-switch-text-off').removeClass('clixplit-switch-text-off').addClass('clixplit-switch-text-on').text('on');
+			if ($switchID == 'posts-switch') {
+				$post_value = $('#post-switch').text();
+				$('[name="post-value"]').val($post_value);
+			}
+			if ($switchID == 'pages-switch') {
+				$page_value = $('#page-switch').text();
+				$('[name="page-value"]').val($page_value);
+			}
+			if ($switchID == 'exit-redirect-switch') {
+				$redirect_exit = $('#exit-redirect-switch').next().next().text();
+				$('[name="exit-redirectopt"]').val($redirect_exit);
+				$(this).parent().parent().find('input[name="exit-pop"]').attr('disabled', false);
+				$(this).parent().parent().find('textarea[name="exit-message"]').attr('disabled', false);
+			}
+			if ($switchID == 'mouseover-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', false);
+				$mouseover_redirect_label = $('#mouseover-url-label').next().next().text();
+				$('[name="mouseover-redirectopt"]').val($mouseover_redirect_label);
+			}
+			if ($switchID == 'secondary-url-label') {
+				$(this).parent().parent().find('.entry input').attr('disabled', false);
+				$secondary_redirect_label = $('#secondary-url-label').next().next().text();
+				$('[name="secondary-redirectopt"]').val($secondary_redirect_label);
+			}
+		}
+	});
   // Link rotation switches Primary
   $('.clixplit-primary-switch-off').click(function(e) {
   	$controlid = $('#' + $(this).parent('div').parent('div').attr('id'));
@@ -364,9 +399,9 @@
  			});
  		}
  	});
-
+ 	
  	$('[name="end-campaign"]').click(function() {
- 		$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
+ 		$('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
  		$checked_keywords = [];
  		$('tbody tr td input[type="checkbox"]:checked').each(function(){
  			$checked_keywords.push(this.name); 
@@ -380,8 +415,7 @@
  			},
  			success: function($response) {
  				fetch_data();
- 				$('#global-submission').text('Data removed successfully').fadeToggle(500).fadeOut(700);
- 				$('#clixplit-check-all').attr('checked',false);
+ 				$('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
  			}
  		});
  	});
