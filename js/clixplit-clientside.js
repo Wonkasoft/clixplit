@@ -90,7 +90,6 @@ $(document).ready(function() {
               // for (var i = 0; i < primaryCounter; i++) {
                 // var conditions = new RegExp(keyword[i],'ig');
                 // keywordOnPage = (thePage.html().match(conditions));
-                // console.log(keywordOnPage);
               // }
               // for (var i = 0; i < keywordOnPage.length; i++) {
               //   var newconditions = new RegExp(keywordOnPage,'ig');
