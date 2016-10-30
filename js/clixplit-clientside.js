@@ -50,23 +50,41 @@ $(document).ready(function() {
         var outputObj = JSON.parse(dbJsonString);
         var keyword_check ="";
         var priIndex =0;
-        var priArr =[];
+        var priIndexurl =0;
+        var priArr ={};
+        var priArrurl =[];
         var priCounter = 0;
-        var newIndex =0;
           for (var i = 0; i < outputObj.length; i++) {
-            if (outputObj[i].primaryurl !="") {
+            if (outputObj[i].primaryurl !=null) {
               if (keyword_check == outputObj[i].keyword) {
-                newIndex = i + 1;
+                priIndexurl += outputObj[i].primaryurl;
+                priArrurl[priIndexurl] = outputObj[i].totalclicks;
                 priIndex = outputObj[i].keyword;
-                priArr[priIndex] += outputObj[i].primaryurl +" : "+ outputObj[i].totalclicks+", ";
-                newIndex=0;
-              } else {
+                priArr[priIndex] += priArrurl[priIndexurl];
+
+              }else {
+                priIndexurl = outputObj[i].primaryurl;
+                priArrurl[priIndexurl] = outputObj[i].totalclicks;
                 priIndex = outputObj[i].keyword;
-                priArr[priIndex] = outputObj[i].primaryurl +" : "+ outputObj[i].totalclicks+", ";
+                priArr[priIndex] += priArrurl[priIndexurl];
                 keyword_check = outputObj[i].keyword;
-              }
             }
           }
+
+
+            //   if (keyword_check == outputObj[i].keyword) {
+            //     priArrurl[] = outputObj[i].totalclicks;
+            //     priIndex = outputObj[i].keyword;
+            //     priArr[priIndex] += priArrurl[outputObj[i].primaryurl] = outputObj[i].totalclicks;
+            //   } else {
+            //     priIndex = outputObj[i].keyword;
+            //     priArr[priIndex] = outputObj[i].primaryurl;
+            //     priArr[priIndex] = outputObj[i].totalclicks;
+            //     keyword_check = outputObj[i].keyword;
+            //   }
+            // }
+          }
+
           console.log(priArr);
             // var thePage = $("body");
               // for (var i = 0; i < primaryCounter; i++) {
