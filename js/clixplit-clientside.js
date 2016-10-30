@@ -11,7 +11,7 @@ $(document).ready(function() {
       cookieObj[cookieKeyValueArr[0]] = cookieKeyValueArr[1];
     }
 
-    if ((!cookieObj.userip) && (!cookieObj.uniqeid)) {
+    if (!cookieObj.uniqeid) {
       var expiredate = new Date();
       expiredate.setDate(expiredate.getDate() + 45);
       var uniqueid = Math.floor((Math.random() * 165463) + 1)+"-"+Math.floor((Math.random() * 165463) + 1)
@@ -47,45 +47,55 @@ $(document).ready(function() {
         }
         dbJsonString = dbJsonString.substring(0, dbJsonString.length - 1);
         dbJsonString +="]";
-        var outputObj = JSON.parse(dbJsonString);
+        var myDataJson = JSON.parse(dbJsonString);
         var keyword_check ="";
-        var priIndex =0;
-        var priIndexurl =0;
-        var priArr ={};
-        var priArrurl =[];
+        var iKeyword ="";
+        var iPriUrl ="";
+        var iTotalclicks ="";
+        var iPrimary =[];
+        var cleanData ={};
+        var cleanDataurl =[];
+        var cleanTotalclicks =[];
         var priCounter = 0;
-          for (var i = 0; i < outputObj.length; i++) {
-            if (outputObj[i].primaryurl !=null) {
-              if (keyword_check == outputObj[i].keyword) {
-                priIndexurl += outputObj[i].primaryurl;
-                priArrurl[priIndexurl] = outputObj[i].totalclicks;
-                priIndex = outputObj[i].keyword;
-                priArr[priIndex] += priArrurl[priIndexurl];
+          for (var i = 0; i < myDataJson.length; i++) {
+            if (myDataJson[i].primaryurl !=null) {
+              if (keyword_check == myDataJson[i].keyword) {
+                iKeyword = myDataJson[i].keyword;
+                iPrimary = myDataJson[i].primaryurl;
+                iTotalclicks = myDataJson[i].totalclicks;
+                cleanData[iKeyword].iPrimary += "'"+iPrimary+"'";
+                cleanData[iKeyword].iTotalclicks += "'"+iTotalclicks+"'";
+              } else {
+                iKeyword = myDataJson[i].keyword;
+                iPrimary = myDataJson[i].primaryurl;
+                iTotalclicks = myDataJson[i].totalclicks;
+                cleanData[iKeyword] = {iKeyword,iPrimary,iTotalclicks};
+                keyword_check = myDataJson[i].keyword;
+              }
+              if (myDataJson[i].secondaryurl !=null) {
+                if (keyword_check == myDataJson[i].keyword) {
+                  
+                }
+              } else {
 
-              }else {
-                priIndexurl = outputObj[i].primaryurl;
-                priArrurl[priIndexurl] = outputObj[i].totalclicks;
-                priIndex = outputObj[i].keyword;
-                priArr[priIndex] += priArrurl[priIndexurl];
-                keyword_check = outputObj[i].keyword;
-            }
+              }
           }
 
-
-            //   if (keyword_check == outputObj[i].keyword) {
-            //     priArrurl[] = outputObj[i].totalclicks;
-            //     priIndex = outputObj[i].keyword;
-            //     priArr[priIndex] += priArrurl[outputObj[i].primaryurl] = outputObj[i].totalclicks;
+// cookieObj[cookieKeyValueArr[0]] = cookieKeyValueArr[1];
+            //   if (keyword_check == myDataJson[i].keyword) {
+            //     cleanDataurl[] = myDataJson[i].totalclicks;
+            //     iKeyword = myDataJson[i].keyword;
+            //     cleanData[iKeyword] += cleanDataurl[myDataJson[i].primaryurl] = myDataJson[i].totalclicks;
             //   } else {
-            //     priIndex = outputObj[i].keyword;
-            //     priArr[priIndex] = outputObj[i].primaryurl;
-            //     priArr[priIndex] = outputObj[i].totalclicks;
-            //     keyword_check = outputObj[i].keyword;
+            //     iKeyword = myDataJson[i].keyword;
+            //     cleanData[iKeyword] = myDataJson[i].primaryurl;
+            //     cleanData[iKeyword] = myDataJson[i].totalclicks;
+            //     keyword_check = myDataJson[i].keyword;
             //   }
             // }
           }
 
-          console.log(priArr);
+          console.log(cleanData.Toby.iPrimary);
             // var thePage = $("body");
               // for (var i = 0; i < primaryCounter; i++) {
                 // var conditions = new RegExp(keyword[i],'ig');
