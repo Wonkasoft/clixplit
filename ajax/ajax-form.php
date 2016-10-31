@@ -24,6 +24,7 @@ if (isset($_POST['selected-text'])) {
 			$wpdb->insert($table_name, array(
 				'created' => current_time('mysql'),
 				'page_post_id' => $page_post_id,
+				'input_id' => $i,
 				'keyword' => $keyword,
 				'primaryurl' => $primary_array,
 				'enablemobile' => $mobileopt,
@@ -37,6 +38,7 @@ if (isset($_POST['selected-text'])) {
 			$wpdb->insert($table_name, array(
 				'created' => current_time('mysql'),
 				'page_post_id' => $page_post_id,
+				'input_id' => $i,
 				'keyword' => $keyword,
 				'secondaryurl' => $secondary_array,
 				'enablemobile' => $mobileopt,
@@ -282,16 +284,52 @@ if (isset($_POST['globalopt'])) {
 			$keyword = $selected_text;
 		}
 		$content_output = "";
-		$posts = get_posts();
-		$pages = get_pages();
-		foreach ($posts as $post) {
-			$post_content = apply_filters('the_content', $post->post_content);
-			$content_output .= $post_content;
+		$posts = get_posts(); $postlinksID = ""; $postlinksTitle = ""; $postlinksContent = ""; $postlinkspost = "";
+		$pages = get_pages(); $pagelinksID = ""; $pagelinksTitle = ""; $pagelinksContent = ""; $pagelinkspage = "";
+		$linksprimary = "";
+		$update_check = "";
+		for ($i = 0; $i < count($db_fetch); $i++) {
+			if ($keyword == $db_fetch[$i]->keyword && $db_fetch[$i]->primaryurl != null) {
+				$linksprimary = $db_fetch[$i]->primaryurl;
+			}
+			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == '')) {
+				$update_check = 'update';
+			}
 		}
-		foreach ($pages as $page) {
-			$page_content = apply_filters('the_content', $page->post_content);
-			$content_output .= $page_content;
-		}
+
+			foreach ($posts as $post) {
+				$post_content = apply_filters('the_content', $post->post_content);
+				$content_output .= $post_content;
+				if ($postopt == 'on' ) {
+					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
+					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $postlinksContent);
+					$postlinkspost = array(
+						'ID' => $postlinksID,
+						'post_title' => $postlinksTitle,
+						'post_content' => $postlinksContent,
+						'post_status' => 'publish'
+						);
+					wp_update_post($postlinkspost);
+				}
+			}
+
+
+			foreach ($pages as $page) {
+				$page_content = apply_filters('the_content', $page->post_content);
+				$content_output .= $page_content;
+				if ($pageopt == 'on') {
+					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
+					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $pagelinksContent);
+					$pagelinkspage = array(
+						'ID' => $pagelinksID,
+						'post_title' => $pagelinksTitle,
+						'post_content' => $pagelinksContent,
+						'post_status' => 'publish'
+						);
+					wp_update_post($pagelinkspage);
+				}
+			}
+
 		$index_content = file_get_contents(get_home_url());
 		$index_cleaned = strip_tags($index_content);
 		$content_output .= trim($index_cleaned);
@@ -299,12 +337,8 @@ if (isset($_POST['globalopt'])) {
 		$keyword_instance = str_replace(' ', '',$keyword_instance);
 		$content_output = str_replace(' ', '',$content_output);
 		$instances = substr_count(strtoupper($content_output), strtoupper($keyword_instance));
-		$update_check = "";
-		for ($i = 0; $i < count($db_fetch); $i++) {
-			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == '')) {
-				$update_check = 'update';
-			}
-		}
+		
+		
 		if ($update_check == 'update') {
 			$wpdb->update($table_name, array(
 				'created' => current_time('mysql'),
@@ -314,7 +348,7 @@ if (isset($_POST['globalopt'])) {
 				'active' => 1
 				), array('page_post_id' => $page_post_id, 'input_id' => '', 'keyword' => $keyword));
 		} else { 
-			if ($update_check == "") {
+			if (($update_check == "" && $primary != null && $secondary != null)) {
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
 					'keyword' => $keyword,
@@ -322,6 +356,8 @@ if (isset($_POST['globalopt'])) {
 					'globalopt' => $globalopt,
 					'active' => 1
 					));
+				print_r($primary);
+				echo 'inserted';
 			}
 		}
 	}
@@ -396,7 +432,7 @@ if (isset($_POST['keyword-input'])) {
 						'postopt' => $postopt,
 						'globalopt' => $globalopt,
 						'active' => 1
-						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i));
+						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'secondaryurl' => ''));
 				}
 			}
 			for ($i=0; $i < $secondary_count; $i++) { 
@@ -413,7 +449,7 @@ if (isset($_POST['keyword-input'])) {
 						'postopt' => $postopt,
 						'globalopt' => $globalopt,
 						'active' => 1
-						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i));
+						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'primaryurl' => ''));
 				}
 			}
 		}

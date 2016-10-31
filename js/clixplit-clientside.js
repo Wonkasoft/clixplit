@@ -31,61 +31,7 @@ $(document).ready(function() {
       },
       success: function(links) {
         var dbData = JSON.parse(links);
-        var dbJsonString ='[';
-        for (var i = 0; i < dbData.length; i++) {
-          if (dbData[i].primaryurl != '' && dbData[i].globalopt == 'Y') {
-            dbJsonString +='{"primaryurl":"'+dbData[i].primaryurl+'","keyword":"'+dbData[i].keyword+'","input_id":"'+dbData[i].input_id
-            +'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'
-            +dbData[i].totalclicks+'"},';
-
-          }else if (dbData[i].secondaryurl != '' && dbData[i].globalopt == 'Y') {
-            dbJsonString +='{"secondary":"'+dbData[i].secondaryurl+'","keyword":"'+dbData[i].keyword+'","input_id":"'+dbData[i].input_id
-            +'","pageopt":"'+dbData[i].pageopt+'","postopt":"'+dbData[i].postopt+'","totalclicks":"'
-            +dbData[i].totalclicks+'"},';
-          }
-        }
-        dbJsonString = dbJsonString.substring(0, dbJsonString.length - 1);
-        dbJsonString +="]";
-        var myDataJson = JSON.parse(dbJsonString);
-        var keyword_check ="";
-        var iKeyword ="";
-        var iTotalclicks ="";
-        var iSecTotalclicks ="";
-        var iPrimary =[];
-        var iSecondary =[];
-        var cleanData ={};
-        var cleanDataurl =[];
-        var cleanTotalclicks =[];
         
-        for (var i = 0; i < myDataJson.length; i++) {
-          if (myDataJson[i].primaryurl !=null) {
-            if (keyword_check == myDataJson[i].keyword) {
-              iKeyword = myDataJson[i].keyword;
-              iPrimary = myDataJson[i].primaryurl;
-              iTotalclicks = myDataJson[i].totalclicks;
-              cleanData[iKeyword].iPrimary += "'"+iPrimary+"'";
-              cleanData[iKeyword].iTotalclicks += "'"+iTotalclicks+"'";
-            } else {
-
-              iKeyword = myDataJson[i].keyword;
-              iPrimary = myDataJson[i].primaryurl;
-              iTotalclicks = myDataJson[i].totalclicks;
-              cleanData[iKeyword] = {iKeyword,iPrimary,iTotalclicks};
-              keyword_check = myDataJson[i].keyword;
-            }
-          }
-          if (myDataJson[i].secondary !=null && myDataJson[i].input_id !=null) {
-            if (keyword_check == myDataJson[i].keyword && myDataJson[i].input_id !=null) {
-              iKeyword = myDataJson[i].keyword;
-              iSecondary = myDataJson[i].secondary;
-              iSecTotalclicks = myDataJson[i].totalclicks;
-              cleanData[iKeyword].iSecondary += "'"+iSecondary+"'";
-              cleanData[iKeyword].iSecTotalclicks += "'"+iSecTotalclicks+"'";
-              alert(myDataJson[i].primaryurl+" "+myDataJson[i].secondary);
-            } 
-          }
-        }
-          console.log(cleanData);
       }
     });
   });

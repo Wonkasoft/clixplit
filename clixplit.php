@@ -73,8 +73,8 @@ function clixplit_register_custom_menu() {
       'manage_options',
       'clixplit/clixplit-activation.php',
       '');
-  } 
-  
+  }
+
 include_once('clixplit_validation_class.php');
 $checkkey = new clixplit_validation();
 $localhostdbkey = get_option('clixplit_license_key');

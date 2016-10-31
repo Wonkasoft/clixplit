@@ -81,7 +81,6 @@
    $method = $form.attr('method');
    $data = $('#modal-form-campaigns').serialize();
    $data += "&globalopt=Y";
-   console.log($data);
    $.ajax( {
    	url: $url,
     type: $method,

@@ -104,7 +104,7 @@ if (!current_user_can('manage_options')) {
 							</div>
 
 							<div class="col-xs-6">
-								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-off"><span class="clixplit-switch-center-off"></span></span><span id="page-switch" class="clixplit-switch-text-off">off</span>
+								<label id="pages-switch" class="clixplit-labels">pages:</label><span class="clixplit-switch-on"><span class="clixplit-switch-center-on"></span></span><span id="page-switch" class="clixplit-switch-text-on">on</span>
 								<input type="hidden" name="page-value">
 							</div>
 						</div>
