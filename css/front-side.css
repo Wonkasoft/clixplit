@@ -1,0 +1,48 @@
+/*!
+ * cliXplit v1.0.0 (http://wonkasoft.com)
+ * Copyright 2016 Wonkasoft.com & EpicWin.
+ */
+ @font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+
+#dialogbox,
+#dialog-yes,
+#dialog-no {
+  transition: all .4s ease-in-out;
+}
+
+#dialogbox {
+	position:relative;
+	display:block;
+	width: 450px;
+	height: 200px;
+	top: 50px;
+	left: 25%;
+	background: #fff;
+	box-shadow: 0 3px 8px 6px #eee;
+
+}
+
+#dialogbox-header {
+	width: 100%;
+}
+
+#dialogbox-message {
+	width: 100%;
+}
+
+#dialogbox-footer {
+	width: 100%;
+}
+
+#dialog-yes {
+	margin: 0 15px;
+	padding: 15px;
+}
+
+#dialog-no {
+	margin: 0 15px;
+	padding: 15px;
+}

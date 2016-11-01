@@ -274,7 +274,7 @@ if (isset($_POST['enddata'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $keyword, $postlinksContent);
+					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -293,7 +293,7 @@ if (isset($_POST['enddata'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $keyword, $pagelinksContent);
+					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,
@@ -341,8 +341,8 @@ if (isset($_POST['keyword-input'])) {
 			$secCounter++;
 		}
 	}
-
 	if ($update_check == "") {
+		echo 'fired for insert';
 		for ($i=0; $i < $primary_count; $i++) { 
 			$primary_array = $primary[$i];
 			if ($primary_array != '') {
@@ -378,7 +378,64 @@ if (isset($_POST['keyword-input'])) {
 			}
 		}
 	} else {
-		if ($update_check = 'update') {
+		if (($update_check = 'update')) {
+			echo 'entered update';
+				if ($primary_count < $priCounter) {
+			$set = $priCounter-1;
+			for ($i=$set; $i >= $primary_count; $i--) { 
+				$wpdb->delete($table_name, array(
+					'input_id' => $i, 'secondaryurl' => ""
+					));
+			}
+		}
+		if ($secondary_count > $secCounter) {
+			$set = $secCounter-1;
+			for ($i=$set; $i >= $secondary_count; $i--) { 
+				$wpdb->delete($table_name, array(
+					'input_id' => $i, '$primaryurl' => ""
+					));
+			}
+		}
+		if ($primary_count > $priCounter) {
+			$set = $priCounter;
+			for ($i=$set; $i < $primary_count; $i++) { 
+				$primary_array = $primary[$i];
+				if ($primary_array != '') {
+					$wpdb->insert($table_name, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'keyword' => $keyword,
+						'input_id' =>$i,
+						'primaryurl' => $primary_array,
+						'numofprimary' => 1,
+						'pageopt' => $pageopt,
+						'postopt' => $postopt,
+						'globalopt' => $globalopt,
+						'active' => 1
+						));
+				}
+			}
+		}
+		if ($secondary_count > $secCounter) {
+			$set = $secCounter;
+			for ($i=$set; $i < $secondary_count; $i++) { 
+				$secondary_array = $secondary[$i];
+				if ($secondary_array != '') {
+					$wpdb->insert($table_name, array(
+						'created' => current_time('mysql'),
+						'page_post_id' => $page_post_id,
+						'keyword' => $keyword,
+						'input_id' =>$i,
+						'secondaryurl' => $secondary_array,
+						'numofsecondary' => 1,
+						'pageopt' => $pageopt,
+						'postopt' => $postopt,
+						'globalopt' => $globalopt,
+						'active' => 1
+						));
+				}
+			}
+		}
 			for ($i=0; $i < $primary_count; $i++) { 
 				$primary_array = $primary[$i];
 				if ($primary_array != '') {
@@ -414,62 +471,6 @@ if (isset($_POST['keyword-input'])) {
 				}
 			}
 		}
-		if ($primary_count > $priCounter) {
-			$set = $priCounter-1;
-			for ($i=$set; $i < $primary_count; $i++) { 
-				$primary_array = $primary[$i];
-				if ($primary_array != '') {
-					$wpdb->insert($table_name, array(
-						'created' => current_time('mysql'),
-						'page_post_id' => $page_post_id,
-						'keyword' => $keyword,
-						'input_id' =>$i,
-						'primaryurl' => $primary_array,
-						'numofprimary' => 1,
-						'pageopt' => $pageopt,
-						'postopt' => $postopt,
-						'globalopt' => $globalopt,
-						'active' => 1
-						));
-				}
-			}
-		}
-		if ($secondary_count > $secCounter) {
-			$set = $secCounter-1;
-			for ($i=$set; $i < $secondary_count; $i++) { 
-				$secondary_array = $secondary[$i];
-				if ($secondary_array != '') {
-					$wpdb->insert($table_name, array(
-						'created' => current_time('mysql'),
-						'page_post_id' => $page_post_id,
-						'keyword' => $keyword,
-						'input_id' =>$i,
-						'secondaryurl' => $secondary_array,
-						'numofsecondary' => 1,
-						'pageopt' => $pageopt,
-						'postopt' => $postopt,
-						'globalopt' => $globalopt,
-						'active' => 1
-						));
-				}
-			}
-		}
-		if ($primary_count < $priCounter) {
-			$set = $priCounter-1;
-			for ($i=$set; $i >= $primary_count; $i--) { 
-				$wpdb->delete($table_name, array(
-					'input_id' => $i
-					));
-			}
-		}
-		if ($secondary_count > $secCounter) {
-			$set = $secCounter-1;
-			for ($i=$set; $i >= $secondary_count; $i--) { 
-				$wpdb->delete($table_name, array(
-					'input_id' => $i
-					));
-			}
-		}
 	}
 };
 
@@ -489,7 +490,6 @@ if (isset($_POST['globalopt'])) {
 		for ($i = 0; $i < count($db_fetch); $i++) {
 			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->primaryurl != "")) {
 				$linksprimary = $db_fetch[$i]->primaryurl;
-				echo $linksprimary;
 			}
 			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == '')) {
 				$update_check = 'update';
@@ -506,7 +506,7 @@ if (isset($_POST['globalopt'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $postlinksContent);
+					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -531,7 +531,7 @@ if (isset($_POST['globalopt'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $pagelinksContent);
+					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,

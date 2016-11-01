@@ -18,7 +18,6 @@ $(document).ready(function() {
       +"-"+Math.floor((Math.random() * 165463) + 1);
       document.cookie = "uniqueid=" + uniqueid + ";expires=" + expiredate.toUTCString();
     }
-    // console.log(cookieObj);
   });
 
   $(function get_links() {
@@ -33,13 +32,13 @@ $(document).ready(function() {
       },
       success: function(links) {
         var dat = JSON.parse(links);
-        set_links(dat);
+        /*set_links(dat);*/
       }
     });
   });
-});
 
-function clicxplit_clicks_update (link,keyword) {
+
+function clixplit_clicks_update(link,keyword) {
   var checkcookie = document.cookie;
   var uniqueclick ="N";
   if (!checkcookie.includes(link)) {
@@ -65,7 +64,7 @@ function clicxplit_clicks_update (link,keyword) {
   });
 }
 
-function set_links(links) {
+/*function set_links(links) {
   var dat = links;
   var keyword ="";
   var primaryurl ="";
@@ -125,12 +124,12 @@ function set_links(links) {
     winner2 = "http://"+winner2;
   }
   var thePage = $("body");
-  var link = '<a href="'+winner+'" target="_self" onclick="clicxplit_clicks_update(this,this.text)">'+winnerKeyword+'</a>';
+  var link = '<a href="'+winner+'" target="_self" onclick="clixplit_clicks_update(this,this.text)">'+winnerKeyword+'</a>';
   var newconditions = new RegExp(winnerKeyword,'ig');
     // thePage.html(thePage.html().replace(newconditions,link));  
    // Script for secondary url
    window.addEventListener("beforeunload", secondaryLink);
-   window.addEventListener("unload", clicxplit_clicks_update(winner2,winner2Keyword));
+   window.addEventListener("unload", clixplit_clicks_update(winner2,winner2Keyword));
 
 
    function secondaryLink() {
@@ -138,4 +137,6 @@ function set_links(links) {
     window.open(secId,'_blank');
   }
 
-}
+}*/
+
+});
