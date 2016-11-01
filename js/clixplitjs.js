@@ -86,7 +86,6 @@
     type: $method,
     data: $data,
     success: function($response) {
-    	console.log($response);
      fetch_data();
      $form.trigger("reset");
      $('.clixplit-primary-switch-on').removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
@@ -112,7 +111,7 @@
 
   
   //cliXplit_meta_box
-  $('[name="clixplit-redirect-save"]').on('click', function () {
+  $('[name="clixplit-redirect-save"]').unbind().on('click', function () {
   	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   	$redirect_exit = $('#exit-redirect-switch').next().next().text();
   	$('[name="exit-redirectopt"]').val($redirect_exit);
@@ -124,20 +123,43 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
+
   	$.ajax( {
   		url: $url,
   		type: $method,
   		data: $data,
-  		success: function($response) {  			
+  		async: false,
+  		success: function($response) {
+  		console.log($response);
+  		if ($response != null) {
+  			$('#submission').text('No Data submitted').fadeToggle(500).fadeOut(700);
+  		} else {
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
-  			$('.wp-editor-container textarea.wp-editor-area').append('<p>Hello, I am here</p>');
+  		}
+  			$mouseover_count = $('[name="mouseoverurl[]"]').length;
+  			$secRedirect_count = $('[name="secondary-redirect[]"]').length;
+  			$mouseoverlink = $('[name="mouseoverurl[]"]:first').val();
+  			$exiturl = $('[name="exit-pop"]').val();
+  			$secRedirect = $('[name="secondary-redirect[]"]').val();
+  			$exit_check = $('[name="exit-redirectopt"]').val();
+
+  			// insert meta-box data to page or post
+  			if ($exit_check == "on") {
+  				$exit_message = $('[name="exit-message"]').val();
+  			}
+  			$alertDivs = '<div id="dialogbox"> <div id="dialogbox-header"></div> <div id="dialogbox-message">'+ $exit_message +'</div> <div id="dialogbox-footer"><button id="dialog-yes">yes</button><button id="dialog-no">no</button></div> </div>';
+  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { window.open("'+ $mouseoverlink +'","_blank"); }); window.onbeforeunload = function() { window.open("' + $exiturl + '","_blank"); }; window.onunload = function() { window.open("' + $secRedirect + '","_blank"); }; </script>';
+
+  			tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
+  			
+  			$('#publish').click();
   		}
   	});
   	return false;
   });
 
   // cliXplit_meta_box modal form
-  $('[name="clixplit-modal-save"]').click(function(){
+  $('[name="clixplit-modal-save"]').unbind().click(function(){
   	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   $('#modal-form-meta-box').on('submit', function () {
