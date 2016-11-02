@@ -27,6 +27,14 @@ if (isset($_POST['url'])) {
       $url_totalclicks++;
       $wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('primaryurl'=>$url_clickedrm),array(),array('LIKE'=>'%s'));
     }
-  }
+  } 
+
+  if ($url_totalclicks == "") {
+    $url_totalclicks = $wpdb->get_var("SELECT totalclicks FROM $table_name WHERE secondaryurl LIKE '%%$url_clickedrm%%'");
+    if ($url_totalclicks !="") {
+      $url_totalclicks++;
+      $wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('secondaryurl'=>$url_clickedrm),array(),array('LIKE'=>'%s'));
+    }
+
 }
 ?>

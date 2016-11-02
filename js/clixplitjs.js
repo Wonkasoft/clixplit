@@ -149,9 +149,8 @@
   				$exit_message = $('[name="exit-message"]').val();
   			}
 
-  			$alertDivs = '<div id="dialogbox"><div id="dialogbox-message">'+ $exit_message +'</div><div id="dialogbox-footer"><button id="dialog-yes">yes</button><button id="dialog-no" onclick="exit_pop_click(\''+$exiturl+'\')">no</button></div></div>';
-  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("body").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
-  			tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
+  			$alertDivs = '<div id="dialogbox"><div id="dialogbox-message">'+ $exit_message +'</div><div id="dialogbox-footer"><button id="dialog-yes" onclick="exit_pop_click_yes()">yes</button><button id="dialog-no" onclick="exit_pop_click(\''+$exiturl+'\')">no</button></div></div>';
+  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("html").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
         if ($response != 'deleted') {
   			 tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
         }

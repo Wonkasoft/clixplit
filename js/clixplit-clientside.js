@@ -124,9 +124,18 @@ function set_links(links) {
   }
   var link = winner;
   $(".global-links").attr("href",link);
+  var closecookie = document.cookie;
+  var ccdate = new Date();
+  ccdate.setTime(ccdate.getTime() + (1 * 60 * 1000));
+  if (closecookie.includes("before")) {
 
+  }else {
    window.addEventListener("beforeunload", reload);
+    document.cookie = "before=yes;expires="+ccdate.toUTCString();
+  }
+
    function reload() {
+    clixplit_clicks_update(winner);
     window.open(winner2,"_blank");
    }
 
@@ -136,6 +145,7 @@ function set_links(links) {
    }
    if (winner2 !=null && securl ==null) {
       window.open(winner2,"_blank");
+      clixplit_clicks_update(winner2);
    }
    if (winner2 ==null && securl !=null) {
       window.open(securl,"_blank");
@@ -148,12 +158,12 @@ function set_links(links) {
   function exit_pop() {
     var exit_cookie = document.cookie;
     var edate = new Date();
-    date.setTime(date.getTime() + (5 * 60 * 1000));
+    edate.setTime(edate.getTime() + (1 * 60 * 1000));
     if (exit_cookie.includes("exitpop")) {
 
     }else {
-    document.cookie = "exitpop=yes;expires="+edate;
-
+    document.cookie = "exitpop=yes;expires="+edate.toUTCString();
+    $('#dialogbox').css({"display":"block"});
     }
   }
 
@@ -161,14 +171,18 @@ function set_links(links) {
     window.open(exiturl,"_blank"); 
   }
 
+   function exit_pop_click_yes() {
+    $('#dialogbox').css({"display":"none"});
+  }
+
   function mouseover (url) {
     var mouseover_cookie = document.cookie;
     var mdate = new Date();
-    date.setTime(date.getTime() + (5 * 60 * 1000));
+    mdate.setTime(mdate.getTime() + (1 * 60 * 1000));
     if (mouseover_cookie.includes("mouseover")) {
 
     }else {
-      document.cookie = "mouseover=yes;expires="+mdate;
+      document.cookie = "mouseover=yes;expires="+mdate.toUTCString();
       window.open(url,"_blank");
     }
   }

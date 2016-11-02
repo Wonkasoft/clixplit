@@ -17,7 +17,7 @@
 
 #dialogbox {
 	position:relative;
-	display:block;
+	display:none;
 	width: 450px;
 	height: 200px;
 	top: 50px;
