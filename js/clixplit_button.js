@@ -1,12 +1,12 @@
-$(function() {     
+$(function() {    
+
   tinymce.create( 'tinymce.plugins.clixplit', {   
     init: function( ed, url ) {   
       ed.addButton( 'clixplit', {           
         title: 'clixplit',            
         cmd:   'clixplit',            
         image:  '../wp-content/plugins/clixplit/img/clixplit-icon-color25px.svg'                      
-      });   
-      
+      });
 
       ed.addCommand('clixplit', function() {
         $(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
@@ -40,10 +40,11 @@ $(function() {
         infourl : 'http://wonkasoft.com',
         version : "1.0"
       };
-    }
+    },
 
   });
-  
+
   tinymce.PluginManager.add( 'clixplit', tinymce.plugins.clixplit );    
 
+  
 });

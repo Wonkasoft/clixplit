@@ -6,6 +6,7 @@
  	$table_dir = $('[name="directory"]').val();
  	$data = $('[name="activepost"]').serialize();
 
+
    $.ajax({
     url: $table_dir,
     method: 'POST',
@@ -25,9 +26,11 @@
 
  $( document ).ready(function() {
  	fetch_data();
+ 	setInterval(function() {
+ 		fetch_data();}, 10000);
  	$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
- 		$('#modal-form-campaigns').keypress(function (e) {
+ 		$('#modal-form-campaigns').unbind().keypress(function (e) {
  			var key = e.which;
  			if(key == 13)
  			{
@@ -51,9 +54,6 @@
  			$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
  		}
  	});
- 	$(".clixplit-save-btn").click(function () {
- 		$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
- 	});
 
  	
  	$(document).on('click', '.btn-add', function(e) {
@@ -76,13 +76,16 @@
  	$page_value = $('#page-switch').text();
  	$('[name="page-value"]').val($page_value);
 
-  $('[name="global"]').click(function () {
+  $('[name="global"]').unbind().click(function () {
+  	$(".mymodal").css({"visibility":"hidden", "opacity": "0", "height": "0"});
    $('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
    $form = $('#modal-form-campaigns');
+   $url = $form.attr('action');
    $method = $form.attr('method');
    $data = $('#modal-form-campaigns').serialize();
-
+   $data += "&globalopt=Y";
    $.ajax( {
+   	url: $url,
     type: $method,
     data: $data,
     success: function($response) {
@@ -111,7 +114,7 @@
 
   
   //cliXplit_meta_box
-  $('[name="clixplit-redirect-save"]').on('click', function () {
+  $('[name="clixplit-redirect-save"]').unbind().on('click', function () {
   	$('#submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   	$redirect_exit = $('#exit-redirect-switch').next().next().text();
   	$('[name="exit-redirectopt"]').val($redirect_exit);
@@ -123,23 +126,43 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
-  	console.log($data);
+
   	$.ajax( {
   		url: $url,
   		type: $method,
   		data: $data,
   		success: function($response) {
-  			console.log($response);
-  			
+  		if ($response != null) {
+  			$('#submission').text('No Data submitted').fadeToggle(500).fadeOut(700);
+  		} else {
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
+  		}
+  			$mouseover_count = $('[name="mouseoverurl[]"]').length;
+  			$secRedirect_count = $('[name="secondary-redirect[]"]').length;
+  			$mouseoverlink = $('[name="mouseoverurl[]"]:first').val();
+  			$exiturl = $('[name="exit-pop"]').val();
+  			$secRedirect = $('[name="secondary-redirect[]"]').val();
+  			$exit_check = $('[name="exit-redirectopt"]').val();
 
+  			// insert meta-box data to page or post
+  			if ($exit_check == "on") {
+  				$exit_message = $('[name="exit-message"]').val();
+  			}
+
+  			$alertDivs = '<div id="dialogbox"><div id="dialogbox-message">'+ $exit_message +'</div><div id="dialogbox-footer"><button id="dialog-yes" onclick="exit_pop_click_yes()">yes</button><button id="dialog-no" onclick="exit_pop_click(\''+$exiturl+'\')">no</button></div></div>';
+  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("html").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
+        if ($response != 'deleted') {
+  			 tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
+        }
+  			
+  			$('#publish').click();
   		}
   	});
   	return false;
   });
 
   // cliXplit_meta_box modal form
-  $('[name="clixplit-modal-save"]').click(function(){
+  $('[name="clixplit-modal-save"]').unbind().click(function(){
   	$('#modal-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
   });
   $('#modal-form-meta-box').on('submit', function () {
@@ -147,7 +170,6 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#modal-form-meta-box').serialize();
-
   	$.ajax( {
   		url: $url,
   		type: $method,
@@ -161,6 +183,7 @@
   	return false;
   });
 });
+
 $(function() {
 	$('.clixplit-switch-off').click(function(e) {
 		$switchID = $(this).prev().attr('id');
@@ -320,14 +343,14 @@ $(function() {
   				$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
   				$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
   				$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
-  				$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',false);
+  				$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
   			}
   		}
   		else {
   			$(this).removeClass('clixplit-primary-switch-off').addClass('clixplit-primary-switch-on');
   			$(this).find('.clixplit-primary-switch-center-off').removeClass('clixplit-primary-switch-center-off').addClass('clixplit-primary-switch-center-on');
   			$(this).next('.clixplit-primary-switch-text-off').removeClass('clixplit-primary-switch-text-off').addClass('clixplit-primary-switch-text-on').text('on');
-  			$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
+  			$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',false);
   			$controlid.find('.entry:not(:first)').remove();
   			$controlid.find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
   		}
@@ -369,14 +392,14 @@ $(function() {
  					$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
  					$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
  					$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
- 					$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',false);
+ 					$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
  				}
  			}
  			else {
  				$(this).removeClass('clixplit-secondary-switch-off').addClass('clixplit-secondary-switch-on');
  				$(this).find('.clixplit-secondary-switch-center-off').removeClass('clixplit-secondary-switch-center-off').addClass('clixplit-secondary-switch-center-on');
  				$(this).next('.clixplit-secondary-switch-text-off').removeClass('clixplit-secondary-switch-text-off').addClass('clixplit-secondary-switch-text-on').text('on');
- 				$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
+ 				$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',false);
  				$controlid.find('.entry:not(:first)').remove();
  				$controlid.find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
  			}
