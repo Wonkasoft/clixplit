@@ -84,6 +84,7 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 	if (($page_post_check == $page_post_id) && ($mouseoveropt == "off") && ($secondaryopt == "off") && ($exitredirectopt == "off")) {
 		$wpdb->delete($table_redirect, array(
 			'page_post_id' => $page_post_id));
+		echo "deleted";
 	}
 	else {
 		if ($page_post_check == "") {
@@ -546,6 +547,9 @@ if (isset($_POST['globalopt'])) {
 		}
 
 		$index_content = file_get_contents(get_home_url());
+		/*if ($pageopt == 'on') {
+			$index_content = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $index_content);
+		}*/
 		$index_cleaned = strip_tags($index_content);
 		$content_output .= trim($index_cleaned);
 		$keyword_instance = trim($keyword);

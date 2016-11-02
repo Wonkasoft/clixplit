@@ -8,6 +8,8 @@
 }
 
 #dialogbox,
+#dialogbox-message,
+#dialogbox-footer,
 #dialog-yes,
 #dialog-no {
   transition: all .4s ease-in-out;
@@ -21,28 +23,30 @@
 	top: 50px;
 	left: 25%;
 	background: #fff;
-	box-shadow: 0 3px 8px 6px #eee;
+	box-shadow: 0 3px 6px 8px #eee;
+	border: 1px solid #000;
+	border-radius: 6px 6px 6px 6px;
 
-}
-
-#dialogbox-header {
-	width: 100%;
 }
 
 #dialogbox-message {
 	width: 100%;
+	padding: 15px;
 }
 
 #dialogbox-footer {
 	width: 100%;
+	text-align: right;
 }
 
 #dialog-yes {
 	margin: 0 15px;
 	padding: 15px;
+	border: 1px solid #000;
 }
 
 #dialog-no {
 	margin: 0 15px;
 	padding: 15px;
+	border: 1px solid #000;
 }

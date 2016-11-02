@@ -150,8 +150,9 @@
   			}
   			$alertDivs = '<div id="dialogbox"> <div id="dialogbox-header"></div> <div id="dialogbox-message">'+ $exit_message +'</div> <div id="dialogbox-footer"><button id="dialog-yes">yes</button><button id="dialog-no">no</button></div> </div>';
   			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { window.open("'+ $mouseoverlink +'","_blank"); }); window.onbeforeunload = function() { window.open("' + $exiturl + '","_blank"); }; window.onunload = function() { window.open("' + $secRedirect + '","_blank"); }; </script>';
-
-  			tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
+        if ($response != 'deleted') {
+  			 tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
+        }
   			
   			$('#publish').click();
   		}
