@@ -10,7 +10,9 @@ $uniqueclicks = 0;
 $keyword = $_POST['keyword'];
 $url_totalclicks ="";
 if (isset($_POST['url'])) {
+
   $url_clickedrm = rtrim($url_clicked,"/");
+
   if ($unique == "Y") {
     $url_totalclicks = $wpdb->get_var("SELECT totalclicks FROM $table_name WHERE primaryurl LIKE '%%$url_clickedrm%%'");
     $unqclicks = $wpdb->get_var("SELECT unqclicks FROM $table_name WHERE primaryurl LIKE '%%$url_clickedrm%%'");
