@@ -36,5 +36,7 @@ if (isset($_POST['url'])) {
       $wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('secondaryurl'=>$url_clickedrm),array(),array('LIKE'=>'%s'));
     }
 
+  }
+
 }
 ?>
