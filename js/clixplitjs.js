@@ -128,7 +128,6 @@
   		url: $url,
   		type: $method,
   		data: $data,
-  		async: false,
   		success: function($response) {
   		console.log($response);
   		if ($response != null) {
@@ -147,11 +146,10 @@
   			if ($exit_check == "on") {
   				$exit_message = $('[name="exit-message"]').val();
   			}
-  			$alertDivs = '<div id="dialogbox"> <div id="dialogbox-header"></div> <div id="dialogbox-message">'+ $exit_message +'</div> <div id="dialogbox-footer"><button id="dialog-yes">yes</button><button id="dialog-no">no</button></div> </div>';
-  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { window.open("'+ $mouseoverlink +'","_blank"); }); window.onbeforeunload = function() { window.open("' + $exiturl + '","_blank"); }; window.onunload = function() { window.open("' + $secRedirect + '","_blank"); }; </script>';
+  			$alertDivs = '<div id="dialogbox"><div id="dialogbox-message">'+ $exit_message +'</div><div id="dialogbox-footer"><button id="dialog-yes">yes</button><button id="dialog-no" onclick="exit_pop_click(\''+$exiturl+'\')">no</button></div></div>';
+  			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("body").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
 
   			tinymce.execCommand('mceInsertContent', 0, $alertDivs + ' ' + $redirectScript);
-  			
   			$('#publish').click();
   		}
   	});
@@ -340,14 +338,14 @@ $(function() {
   				$(this).removeClass('clixplit-primary-switch-on').addClass('clixplit-primary-switch-off');
   				$(this).find('.clixplit-primary-switch-center-on').removeClass('clixplit-primary-switch-center-on').addClass('clixplit-primary-switch-center-off');
   				$(this).next('.clixplit-primary-switch-text-on').removeClass('clixplit-primary-switch-text-on').addClass('clixplit-primary-switch-text-off').text('off');
-  				$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',false);
+  				$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
   			}
   		}
   		else {
   			$(this).removeClass('clixplit-primary-switch-off').addClass('clixplit-primary-switch-on');
   			$(this).find('.clixplit-primary-switch-center-off').removeClass('clixplit-primary-switch-center-off').addClass('clixplit-primary-switch-center-on');
   			$(this).next('.clixplit-primary-switch-text-off').removeClass('clixplit-primary-switch-text-off').addClass('clixplit-primary-switch-text-on').text('on');
-  			$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',true);
+  			$(this).parent('div').prev().find('.clixplit-primary-add').attr('disabled',false);
   			$controlid.find('.entry:not(:first)').remove();
   			$controlid.find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
   		}
@@ -389,14 +387,14 @@ $(function() {
  					$(this).removeClass('clixplit-secondary-switch-on').addClass('clixplit-secondary-switch-off');
  					$(this).find('.clixplit-secondary-switch-center-on').removeClass('clixplit-secondary-switch-center-on').addClass('clixplit-secondary-switch-center-off');
  					$(this).next('.clixplit-secondary-switch-text-on').removeClass('clixplit-secondary-switch-text-on').addClass('clixplit-secondary-switch-text-off').text('off');
- 					$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',false);
+ 					$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
  				}
  			}
  			else {
  				$(this).removeClass('clixplit-secondary-switch-off').addClass('clixplit-secondary-switch-on');
  				$(this).find('.clixplit-secondary-switch-center-off').removeClass('clixplit-secondary-switch-center-off').addClass('clixplit-secondary-switch-center-on');
  				$(this).next('.clixplit-secondary-switch-text-off').removeClass('clixplit-secondary-switch-text-off').addClass('clixplit-secondary-switch-text-on').text('on');
- 				$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',true);
+ 				$(this).parent('div').prev().find('.clixplit-secondary-add').attr('disabled',false);
  				$controlid.find('.entry:not(:first)').remove();
  				$controlid.find('.entry .btn-remove').removeClass('btn-remove').addClass('btn-add').html('<span class="glyphicon glyphicon-plus"></span>');
  			}

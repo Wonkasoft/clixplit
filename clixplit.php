@@ -91,7 +91,8 @@ $activeoption = get_option('clixplit_license_active');
 
 function clixplit_tinymce_filter( $in ) {
 
-	$in['extended_valid_elements'] = 'a[href|class|onclick|id],div[id|div|div|div]';
+	$in['extended_valid_elements'] = 'a[href|class|onclick|id],div[id|div|div|div],button[id|class|onclick|target|rel|title]';
+  $in['element_format'] = 'html';
 
 	return $in;
 }

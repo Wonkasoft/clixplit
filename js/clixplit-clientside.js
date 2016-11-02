@@ -27,7 +27,6 @@ $(document).ready(function() {
       type:'POST',
       url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
       datatype: 'json',
-      async: false,
       data: {
         "getlinks":1
       },
@@ -39,7 +38,7 @@ $(document).ready(function() {
   });
 });
 
-function clicxplit_clicks_update (link,keyword) {
+function clixplit_clicks_update(link,keyword) {
   var checkcookie = document.cookie;
   var uniqueclick ="N";
   if (!checkcookie.includes(link)) {
@@ -53,9 +52,8 @@ function clicxplit_clicks_update (link,keyword) {
       type:'POST',
       url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-clickupdate.php",
       datatype: 'String',
-      async: false,
       data: {
-        "url": link.toString(),
+        "url":link.toString(),
         "keyword":keyword.toString(),
         'uniqueclick':uniqueclick
       },
@@ -124,18 +122,53 @@ function set_links(links) {
   } else {
     winner2 = "http://"+winner2;
   }
-  var thePage = $("body");
-  var link = '<a href="'+winner+'" target="_self" onclick="clicxplit_clicks_update(this,this.text)">'+winnerKeyword+'</a>';
-  var newconditions = new RegExp(winnerKeyword,'ig');
-    // thePage.html(thePage.html().replace(newconditions,link));  
-   // Script for secondary url
-   window.addEventListener("beforeunload", secondaryLink);
-   window.addEventListener("unload", clicxplit_clicks_update(winner2,winner2Keyword));
+  var link = winner;
+  $(".global-links").attr("href",link);
 
+   window.addEventListener("beforeunload", reload);
+   function reload() {
+    window.open(winner2,"_blank");
+   }
 
-   function secondaryLink() {
-    var secId = winner2;
-    window.open(secId,'_blank');
+  function page_post(securl) {
+   if (winner2 !=null && securl !=null){
+      window.open(securl,"_blank");
+   }
+   if (winner2 !=null && securl ==null) {
+      window.open(winner2,"_blank");
+   }
+   if (winner2 ==null && securl !=null) {
+      window.open(securl,"_blank");
+   } else if (winner2 ==null & securl ==null){
+
+   }
+  }
+}
+
+  function exit_pop() {
+    var exit_cookie = document.cookie;
+    var edate = new Date();
+    date.setTime(date.getTime() + (5 * 60 * 1000));
+    if (exit_cookie.includes("exitpop")) {
+
+    }else {
+    document.cookie = "exitpop=yes;expires="+edate;
+
+    }
   }
 
-}
+  function exit_pop_click(exiturl) {
+    window.open(exiturl,"_blank"); 
+  }
+
+  function mouseover (url) {
+    var mouseover_cookie = document.cookie;
+    var mdate = new Date();
+    date.setTime(date.getTime() + (5 * 60 * 1000));
+    if (mouseover_cookie.includes("mouseover")) {
+
+    }else {
+      document.cookie = "mouseover=yes;expires="+mdate;
+      window.open(url,"_blank");
+    }
+  }

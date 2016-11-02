@@ -274,7 +274,7 @@ if (isset($_POST['enddata'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $keyword, $postlinksContent);
+					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -293,7 +293,7 @@ if (isset($_POST['enddata'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $keyword, $pagelinksContent);
+					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,
@@ -506,7 +506,7 @@ if (isset($_POST['globalopt'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $postlinksContent);
+					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -531,7 +531,7 @@ if (isset($_POST['globalopt'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update()">' . $keyword . '</a>', $pagelinksContent);
+					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,
