@@ -39,6 +39,7 @@ $(document).ready(function() {
 });
 
 function clixplit_clicks_update(link,keyword) {
+  // console.log(keyword);
   var checkcookie = document.cookie;
   var uniqueclick ="N";
   if (!checkcookie.includes(link)) {
@@ -122,22 +123,59 @@ function set_links(links) {
   } else {
     winner2 = "http://"+winner2;
   }
+  
+  // Updates the primary global campaigns
   var link = winner;
   $(".global-links").attr("href",link);
+  
   var closecookie = document.cookie;
   var ccdate = new Date();
   ccdate.setTime(ccdate.getTime() + (1 * 60 * 1000));
   if (closecookie.includes("before")) {
 
   }else {
-   window.addEventListener("beforeunload", reload);
+   // window.addEventListener("beforeunload", reload);
     document.cookie = "before=yes;expires="+ccdate.toUTCString();
   }
 
-   function reload() {
-    clixplit_clicks_update(winner);
-    window.open(winner2,"_blank");
-   }
+
+
+
+var showMsgTimer;
+
+window.onbeforeunload = function(evt) {
+    var message = location.replace("http://www.w3schools.com");
+    showMsgTimer = window.setTimeout(showMessage, 500);
+
+    evt = evt || window.evt;
+    evt.returnValue = location.replace("http://www.w3schools.com");
+location.replace("http://www.w3schools.com");
+};
+
+window.onunload = function () {
+    clearTimeout(showMsgTimer);
+    location.replace("http://www.w3schools.com");
+    
+};
+function showMessage() {
+    location.replace("http://www.w3schools.com");
+}
+
+
+
+
+
+
+
+
+
+   // function reload() {
+   //  clixplit_clicks_update(winner,winnerKeyword);
+   //  var r = confirm("Testing");
+   //  confirm("hello");
+
+   //  // window.open(winner2,"_blank");
+   // }
 
   function page_post(securl) {
    if (winner2 !=null && securl !=null){
@@ -145,7 +183,7 @@ function set_links(links) {
    }
    if (winner2 !=null && securl ==null) {
       window.open(winner2,"_blank");
-      clixplit_clicks_update(winner2);
+      clixplit_clicks_update(winner2,winner2Keyword);
    }
    if (winner2 ==null && securl !=null) {
       window.open(securl,"_blank");
@@ -155,24 +193,19 @@ function set_links(links) {
   }
 }
 
-  function exit_pop() {
-    var exit_cookie = document.cookie;
-    var edate = new Date();
-    edate.setTime(edate.getTime() + (1 * 60 * 1000));
-    if (exit_cookie.includes("exitpop")) {
+  function exit_pop(exiturl) {
+    // var exit_cookie = document.cookie;
+    // var edate = new Date();
+    // edate.setTime(edate.getTime() + (1 * 60 * 1000));
+    // if (exit_cookie.includes("exitpop")) {
 
-    }else {
-    document.cookie = "exitpop=yes;expires="+edate.toUTCString();
-    $('#dialogbox').css({"display":"block"});
+    // }else {
+    // document.cookie = "exitpop=yes;expires="+edate.toUTCString();
+    window.onbeforeunload = function(){
+    window.location = exiturl;   
+    return false;
     }
-  }
-
-  function exit_pop_click(exiturl) {
-    window.open(exiturl,"_blank"); 
-  }
-
-   function exit_pop_click_yes() {
-    $('#dialogbox').css({"display":"none"});
+    // }
   }
 
   function mouseover (url) {
@@ -183,6 +216,7 @@ function set_links(links) {
 
     }else {
       document.cookie = "mouseover=yes;expires="+mdate.toUTCString();
+      var response = confirm("do you want to leave");
       window.open(url,"_blank");
     }
   }
