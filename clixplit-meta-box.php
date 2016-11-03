@@ -7,7 +7,7 @@ $page_post_id = get_the_ID();
 $post_type = get_post_type();
 $options = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
 $mou_option = ''; $exit_option = ''; $pps_option = ''; $input_pri_count = ''; 
-$input_sec_count = ''; $exiturl = ''; $exitmessage = ''; $priArr = []; $priIndex = 0;
+$input_sec_count = ''; $exiturl = ''; $priArr = []; $priIndex = 0;
 $secArr = []; $secIndex = 0;
 for ($i=0; $i < count($options); $i++) {
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->input_id == '')) {
@@ -16,8 +16,7 @@ for ($i=0; $i < count($options); $i++) {
 		$pps_option = $options[$i]->secondaryopt;
 	}
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->exitredirectopt == 'on')) {
-		$exiturl = $options[$i]->exitredirecturl; 
-		$exitmessage = $options[$i]->exitmessage;
+		$exiturl = $options[$i]->exitredirecturl;
 	}
 	if (($options[$i]->page_post_id == $page_post_id) && ($options[$i]->mouseoverurl != '')) {
 		$priArr[$priIndex] = $options[$i]->mouseoverurl;
@@ -67,7 +66,7 @@ for ($i=0; $i < count($options); $i++) {
 						<div id="mouseover-url-controls" class="controls">
 
 								<?php 
-								if ($priIndex > 0) {
+								if ($priIndex > 1) {
 									for ($i = 0; $i < $priIndex; $i++) {
 										if ($i == $priIndex-1) { ?>
 											<div class="entry input-group col-xs-12 bottom-form-space">
@@ -121,9 +120,6 @@ for ($i=0; $i < count($options); $i++) {
 								<div class="entry input-group col-xs-12 bottom-form-space">
 									<input type="text" class="form-control url-input" name="exit-pop" placeholder="url..." disabled="disabled">
 								</div>
-								<div class="entry input-group col-xs-12 bottom-form-space">
-									<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." disabled="disabled"></textarea>
-								</div>
 							</div>
 						</div>
 
@@ -138,9 +134,6 @@ for ($i=0; $i < count($options); $i++) {
 						<div id="exit-redirect-controls" class="controls">
 							<div class="entry input-group col-xs-12 bottom-form-space">
 								<input type="text" class="form-control url-input" name="exit-pop" placeholder="url..." value="<?php echo $exiturl; ?>">
-							</div>
-							<div class="entry input-group col-xs-12 bottom-form-space">
-								<textarea name="exit-message" class="form-control" rows="5" id="exit-redirect-alert" placeholder="Enter alert message..." value="<?php echo $exitmessage; ?>"><?php echo $exitmessage; ?></textarea>
 							</div>
 						</div>
 					</div>
@@ -177,7 +170,7 @@ for ($i=0; $i < count($options); $i++) {
 				</div>
 			<div id="secondary-url-controls" class="controls">
 				<?php
-				if ($secIndex > 0) {
+				if ($secIndex > 1) {
 					for ($i = 0; $i < $secIndex; $i++) {
 						if ($i == $secIndex-1) { ?>
 							<div class="entry input-group col-xs-12 bottom-form-space">

@@ -170,7 +170,6 @@ function clixplit_redirect_install() {
     mouseoverurl VARCHAR(850) NOT NULL,
     exitredirectopt ENUM('','off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
-    exitmessage TEXT NOT NULL, 
     secondaryopt ENUM('','off','on') NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL, 
     PRIMARY KEY (id)
@@ -199,7 +198,6 @@ function clixplit_redirect_install() {
         mouseoverurl VARCHAR(850) NOT NULL,
         exitredirectopt ENUM('','off','on') NOT NULL,
         exitredirecturl VARCHAR(850) NOT NULL,
-        exitmessage TEXT NOT NULL, 
         secondaryopt ENUM('','off','on') NOT NULL,
         secondaryurl VARCHAR(850) NOT NULL, 
         PRIMARY KEY (id)

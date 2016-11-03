@@ -126,14 +126,16 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
+  	console.log($data);
 
   	$.ajax( {
   		url: $url,
   		type: $method,
   		data: $data,
   		success: function($response) {
-  		if ($response != null) {
-  			$('#submission').text('No Data submitted').fadeToggle(500).fadeOut(700);
+  			console.log($response);
+  		if ($response == 'deleted') {
+  			$('#submission').text('All data deleted').fadeToggle(500).fadeOut(700);
   		} else {
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
   		}
@@ -150,7 +152,9 @@
   			}
   			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("html").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
         if ($response != 'deleted') {
-  			 tinymce.execCommand('mceInsertContent', 0, $redirectScript);
+  			 			tinymce.execCommand('mceInsertContent', 0, $redirectScript);
+        } else {
+        	tinymce.execCommand('mceRemoveContent', 0, $redirectScript);
         }
   			
   			$('#publish').click();
