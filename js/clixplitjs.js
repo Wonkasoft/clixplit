@@ -2,6 +2,7 @@
  * cliXplit v1.0.0 (http://wonkasoft.com)
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
+ jQuery(function($) {
  function fetch_data() {
  	$table_dir = $('[name="directory"]').val();
  	$data = $('[name="activepost"]').serialize();
@@ -428,7 +429,7 @@ $(function() {
     $('tbody tr td input[type="checkbox"]:checked').each(function(){
       $checked_keywords.push(this.name); 
     });
-    $.ajax( {
+    $.ajax({
       url: "../wp-content/plugins/clixplit/ajax/ajax-form.php",
       datatype: 'text',
       type: 'POST',
@@ -438,7 +439,7 @@ $(function() {
       success: function($response) {
         fetch_data();
         $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
-      }
-    });
+      }});
   });
+});
 });

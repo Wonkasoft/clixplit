@@ -1,3 +1,4 @@
+jQuery(function ($) {
 $(function() {    
 
   tinymce.create( 'tinymce.plugins.clixplit', {   
@@ -47,4 +48,5 @@ $(function() {
   tinymce.PluginManager.add( 'clixplit', tinymce.plugins.clixplit );    
 
   
+});
 });
