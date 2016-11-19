@@ -21,22 +21,38 @@ jQuery(document).ready(function($) {
     // console.log(cookieObj);
   });
 
-  $(function get_links() {
-    var links;
+  $(function get_global_links() {
     $.ajax({
       type:'POST',
       url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
       datatype: 'json',
       data: {
-        "getlinks":1
+        "get_global_links":1
       },
       success: function(links) {
-        var dat = JSON.parse(links);
-        set_links(dat);
+        
+
       }
     });
   });
-});
+
+   $(function get_redirect_links() {
+    $.ajax({
+      type:'POST',
+      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
+      datatype: 'json',
+      data: {
+        "get_redirect_links":1
+      },
+      success: function(links) {
+        
+
+      }
+    });
+  });
+}); // End of document ready
+
+
 
 function clixplit_clicks_update(link,keyword) {
   // console.log(keyword);
@@ -64,158 +80,18 @@ function clixplit_clicks_update(link,keyword) {
   });
 }
 
-function set_links(links) {
-  var dat = links;
-  var keyword ="";
-  var primaryurl ="";
-  var priTotalclicks ="";
-  var secondaryurl ="";
-  var secTotalclicks ="";
-  var winner ="";
-  var winnerKeyword ="";
-  var winner2 ="";
-  var winner2Keyword ="";
-
-  for (var i = 0; i < dat.length; i++) {
-    if ((dat[i].primaryurl != "") && (dat[i].globalopt == "Y")) {
-      keyword += dat[i].keyword+",";
-      primaryurl += dat[i].primaryurl+",";
-      priTotalclicks += dat[i].totalclicks+",";   
-    }
-
-    if ((dat[i].secondaryurl != "") && (dat[i].globalopt == "Y")) {
-      secondaryurl += dat[i].secondaryurl+",";
-      secTotalclicks += dat[i].totalclicks+",";   
-    }
-  }
-
-  primaryurl = primaryurl.substring(0,primaryurl.length - 1);
-  secondaryurl = secondaryurl.substring(0,secondaryurl.length - 1);
-  priTotalclicks = priTotalclicks.substring(0,priTotalclicks.length - 1);
-  secTotalclicks = secTotalclicks.substring(0,secTotalclicks.length - 1);
-  keyword = keyword.substring(0,keyword.length - 1);
-  var keywordArr = keyword.split(",");
-  var primaryurlArr = primaryurl.split(",");
-  var secondaryArr = secondaryurl.split(",");
-  var priTotalclicksArr = priTotalclicks.split(",");
-  var secTotalclicksArr = secTotalclicks.split(",");
-  var minTotalclicks = Math.min.apply(Math,priTotalclicksArr);
-  var secminTotalclicks = Math.min.apply(Math,secTotalclicksArr);
-
-  for (i = 0; i < primaryurlArr.length; i++) {
-    if (priTotalclicksArr[i] == minTotalclicks) {
-      winner = primaryurlArr[i];
-      winnerKeyword = keywordArr[i];
-    }
-  }
-
-  for (i = 0; i < secondaryArr.length; i++) {
-    if (secTotalclicksArr[i] == secminTotalclicks) {
-      winner2 = secondaryArr[i];
-      winner2Keyword = keywordArr[i];
-    }
-  }
-  if (winner.includes("http://") || winner.includes("https://")) {
-  } else {
-    winner = "http://"+winner;
-  }
-  if (winner2.includes("http://") || winner2.includes("https://")) {
-  } else {
-    winner2 = "http://"+winner2;
-  }
-  
-  // Updates the primary global campaigns
-  var link = winner;
-  jQuery(".global-links").attr("href",link);
-  var closecookie = document.cookie;
-  var ccdate = new Date();
-  ccdate.setTime(ccdate.getTime() + (1 * 60 * 1000));
-  if (closecookie.includes("before")) {
-
-  }else {
-   // window.addEventListener("beforeunload", reload);
-    document.cookie = "before=yes;expires="+ccdate.toUTCString();
-  }
-
-
-
-
-var showMsgTimer;
-
-window.onbeforeunload = function(evt) {
-    var message = location.replace("http://www.w3schools.com");
-    showMsgTimer = window.setTimeout(showMessage, 500);
-
-    evt = evt || window.evt;
-    evt.returnValue = location.replace("http://www.w3schools.com");
-location.replace("http://www.w3schools.com");
-};
-
-window.onunload = function () {
-    clearTimeout(showMsgTimer);
-    location.replace("http://www.w3schools.com");
-    
-};
-function showMessage() {
-    location.replace("http://www.w3schools.com");
+function clixplit_clicks_update_redirects(url,pageid) {
+  $(function get_links() {
+    $.ajax({
+      type:'POST',
+      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-clickupdate.php",
+      datatype: 'String',
+      data: {
+        "mouseoverurl":link.toString()
+      },
+      success: function(response) {
+      }
+    });
+  });
 }
 
-
-
-
-
-
-
-
-
-   // function reload() {
-   //  clixplit_clicks_update(winner,winnerKeyword);
-   //  var r = confirm("Testing");
-   //  confirm("hello");
-
-   //  // window.open(winner2,"_blank");
-   // }
-
-  function page_post(securl) {
-   if (winner2 !=null && securl !=null){
-      window.open(securl,"_blank");
-   }
-   if (winner2 !=null && securl ==null) {
-      window.open(winner2,"_blank");
-      clixplit_clicks_update(winner2,winner2Keyword);
-   }
-   if (winner2 ==null && securl !=null) {
-      window.open(securl,"_blank");
-   } else if (winner2 ==null & securl ==null){
-
-   }
-  }
-}
-
-  function exit_pop(exiturl) {
-    // var exit_cookie = document.cookie;
-    // var edate = new Date();
-    // edate.setTime(edate.getTime() + (1 * 60 * 1000));
-    // if (exit_cookie.includes("exitpop")) {
-
-    // }else {
-    // document.cookie = "exitpop=yes;expires="+edate.toUTCString();
-    window.onbeforeunload = function(){
-    window.location = exiturl;   
-    return false;
-    }
-    // }
-  }
-
-  function mouseover (url) {
-    var mouseover_cookie = document.cookie;
-    var mdate = new Date();
-    mdate.setTime(mdate.getTime() + (1 * 60 * 1000));
-    if (mouseover_cookie.includes("mouseover")) {
-
-    }else {
-      document.cookie = "mouseover=yes;expires="+mdate.toUTCString();
-      var response = confirm("do you want to leave");
-      window.open(url,"_blank");
-    }
-  }
