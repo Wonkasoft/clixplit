@@ -95,7 +95,7 @@ for ($i=0; $i < count($options); $i++) {
 								<div class="entry input-group col-xs-12 bottom-form-space">
 									<input type="text" class="form-control url-input" name="mouseoverurl[]" placeholder="url..." value="<?php echo $priArr[0]; ?>">
 									<span class="input-group-btn">
-										<button class="btn btn-add clixplit-primary-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span>								
+										<button class="btn btn-add clixplit-primary-add" type="button" disabled="disabled"><span class="glyphicon glyphicon-plus"></span></button></span>								
 									</div>
 							</div>
 							<div class="vertical-space">

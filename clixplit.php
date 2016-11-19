@@ -167,7 +167,8 @@ function clixplit_redirect_install() {
     exitredirectopt ENUM('','off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
     secondaryopt ENUM('','off','on') NOT NULL,
-    secondaryurl VARCHAR(850) NOT NULL, 
+    secondaryurl VARCHAR(850) NOT NULL,
+    clicks int(250) NOT NULL,
     PRIMARY KEY (id)
     ) $charset_collate;";
 
@@ -196,6 +197,7 @@ function clixplit_redirect_install() {
         exitredirecturl VARCHAR(850) NOT NULL,
         secondaryopt ENUM('','off','on') NOT NULL,
         secondaryurl VARCHAR(850) NOT NULL, 
+        clicks int(250) NOT NULL,
         PRIMARY KEY (id)
         ) $charset_collate;";
 
