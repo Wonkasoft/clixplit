@@ -45,6 +45,7 @@ $url_totalclicks ="";
 if (isset($_POST['mouseoverurl']) || isset($_POST['secondaryurl'])) {
   $mouseoverurl = $_POST['mouseoverurl'];
   $secondaryurl = $_POST['secondaryurl'];
+  $page_post_id = '';
   $clicks_update = 0;
   $db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
   for ($i=0; $i < count($db_fetch); $i++) { 
