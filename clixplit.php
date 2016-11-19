@@ -10,11 +10,9 @@
 
 add_action( 'wp_enqueue_scripts', 'plugin_locals');
 function plugin_locals() {
-wp_register_script('clixplit-jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), '1.12.4');
-wp_register_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('clixplit-jquery'), '1.0.0');
+wp_register_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('jquery'), '1.0.0', true);
 wp_register_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
-wp_enqueue_script('clixplit-jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',  array(), '1.12.4');
-wp_enqueue_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('clixplit-jquery'), '1.0.0');
+wp_enqueue_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('jquery'), '1.0.0', true);
 wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
 wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
 }
@@ -22,18 +20,16 @@ wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax'
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
 
 function plugin_enqueues() {
-  wp_register_script('clixplit-jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), '1.12.4');
-  wp_enqueue_script('clixplit-jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',  array(), '1.12.4');
   wp_register_style('clixplit-bootstrap', plugins_url( '/css/bootstrap.min.css', __FILE__ ) , array(), '3.3.7', 'all');
   wp_register_style('clixplit-style', plugins_url( '/css/clixplit.css', __FILE__ ) , array(), '1.0.0', 'all');
   wp_register_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
-  wp_register_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('clixplit-jquery'), '3.3.7');
-  wp_register_script('clixplit-clixplit.js', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('clixplit-jquery'), '1.0.0', 'all');
+  wp_register_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7', true);
+  wp_register_script('clixplit-clixplit.js', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('jquery'), '1.0.0', true);
   wp_enqueue_style('clixplit-bootstrap', plugins_url( '/css/bootstrap.min.css', __FILE__ ) , array(), '3.3.7', 'all');
   wp_enqueue_style('clixplit-style', plugins_url( '/css/clixplit.css', __FILE__ ) , array(), '1.0.0', 'all');
-   wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
-  wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('clixplit-jquery'), '3.3.7');
-  wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('clixplit-jquery'), '1.0.0');
+  wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
+  wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7', true);
+  wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('jquery'), '1.0.0', true);
   wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
  
 }
@@ -170,7 +166,6 @@ function clixplit_redirect_install() {
     mouseoverurl VARCHAR(850) NOT NULL,
     exitredirectopt ENUM('','off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
-    exitmessage TEXT NOT NULL, 
     secondaryopt ENUM('','off','on') NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL, 
     PRIMARY KEY (id)
@@ -199,7 +194,6 @@ function clixplit_redirect_install() {
         mouseoverurl VARCHAR(850) NOT NULL,
         exitredirectopt ENUM('','off','on') NOT NULL,
         exitredirecturl VARCHAR(850) NOT NULL,
-        exitmessage TEXT NOT NULL, 
         secondaryopt ENUM('','off','on') NOT NULL,
         secondaryurl VARCHAR(850) NOT NULL, 
         PRIMARY KEY (id)

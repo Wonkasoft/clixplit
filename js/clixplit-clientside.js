@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 
   $(function check_cookie() {
     var cookie = document.cookie;
@@ -126,8 +126,7 @@ function set_links(links) {
   
   // Updates the primary global campaigns
   var link = winner;
-  $(".global-links").attr("href",link);
-  
+  jQuery(".global-links").attr("href",link);
   var closecookie = document.cookie;
   var ccdate = new Date();
   ccdate.setTime(ccdate.getTime() + (1 * 60 * 1000));

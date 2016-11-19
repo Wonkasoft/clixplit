@@ -2,6 +2,7 @@
  * cliXplit v1.0.0 (http://wonkasoft.com)
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
+ jQuery(function($) {
  function fetch_data() {
  	$table_dir = $('[name="directory"]').val();
  	$data = $('[name="activepost"]').serialize();
@@ -126,14 +127,16 @@
   	$url = $form.attr('action');
   	$method = $form.attr('method');
   	$data = $('#form-meta-box').serialize();
+  	console.log($data);
 
   	$.ajax( {
   		url: $url,
   		type: $method,
   		data: $data,
   		success: function($response) {
-  		if ($response != null) {
-  			$('#submission').text('No Data submitted').fadeToggle(500).fadeOut(700);
+  			console.log($response);
+  		if ($response == 'deleted') {
+  			$('#submission').text('All data deleted').fadeToggle(500).fadeOut(700);
   		} else {
   			$('#submission').text('Data submitted successfully').fadeToggle(500).fadeOut(700);
   		}
@@ -150,7 +153,9 @@
   			}
   			$redirectScript = '<script type="text/javascript"> $("body").mouseleave(function() { mouseover("'+ $mouseoverlink +'"); }); $("html").mouseleave(function(){ exit_pop(); }); window.onunload = function() { page_post("' + $secRedirect + '"); }; </script>';
         if ($response != 'deleted') {
-  			 tinymce.execCommand('mceInsertContent', 0, $redirectScript);
+  			 			tinymce.execCommand('mceInsertContent', 0, $redirectScript);
+        } else {
+        	tinymce.execCommand('mceRemoveContent', 0, $redirectScript);
         }
   			
   			$('#publish').click();
@@ -424,7 +429,7 @@ $(function() {
     $('tbody tr td input[type="checkbox"]:checked').each(function(){
       $checked_keywords.push(this.name); 
     });
-    $.ajax( {
+    $.ajax({
       url: "../wp-content/plugins/clixplit/ajax/ajax-form.php",
       datatype: 'text',
       type: 'POST',
@@ -434,7 +439,7 @@ $(function() {
       success: function($response) {
         fetch_data();
         $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
-      }
-    });
+      }});
   });
+});
 });

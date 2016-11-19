@@ -62,7 +62,6 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 	$secondary_redirect = $_POST['secondary-redirect'];
 	$exitredirectopt = $_POST['exit-redirectopt'];
 	$exitredirecturl = $_POST['exit-pop'];
-	$exitmessage = $_POST['exit-message'];
 		// varibles for use
 	$page_post_check = ''; $mou_count = ''; $pps_count = '';
 		// Database Fetch
@@ -88,13 +87,13 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 	}
 	else {
 		if ($page_post_check == "") {
+			echo 'entered update';
 			$wpdb->insert($table_redirect, array(
 				'created' => current_time('mysql'),
 				'page_post_id' => $page_post_id,
 				'mouseoveropt' => $mouseoveropt,
 				'exitredirectopt' => $exitredirectopt,
 				'exitredirecturl' => $exitredirecturl,
-				'exitmessage' => $exitmessage,
 				'secondaryopt' => $secondaryopt
 				));
 			for ($i=0; $i < $mouseover_count; $i++) { 
@@ -120,7 +119,6 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 				'mouseoveropt' => $mouseoveropt,
 				'exitredirectopt' => $exitredirectopt,
 				'exitredirecturl' => $exitredirecturl,
-				'exitmessage' => $exitmessage,
 				'secondaryopt' => $secondaryopt
 				), array('page_post_id' => $page_post_id, 'mouseoveropt' => "on"));
 		}
@@ -248,7 +246,6 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 			};
 		};
 	}
-
 }
 
 // Delete campaigns
