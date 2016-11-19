@@ -3,13 +3,14 @@ $file_path = realpath(dirname(__FILE__). '/../../../..'). '/';
 require_once( $file_path . 'wp-load.php' );
 global $wpdb;
 $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
+$table_redirect = $wpdb->prefix . 'clixplit_redirect';
 
+if (isset($_POST['url'])) {
 $url_clicked = $_POST['url'];
 $unique = $_POST['uniqueclick'];
 $uniqueclicks = 0;
 $keyword = $_POST['keyword'];
 $url_totalclicks ="";
-if (isset($_POST['url'])) {
 
   $url_clickedrm = rtrim($url_clicked,"/");
 
@@ -39,4 +40,19 @@ if (isset($_POST['url'])) {
   }
 
 }
+
+// For redirect settings
+if (isset($_POST['mouseoverurl']) || isset($_POST['secondaryurl'])) {
+  $mouseoverurl = $_POST['mouseoverurl'];
+  $secondaryurl = $_POST['secondaryurl'];
+  $clicks_update = 0;
+  $db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
+  for ($i=0; $i < count($db_fetch); $i++) { 
+    if ($db_fetch[$i] == $mouseoverurl) {
+      $clicks_update++;
+      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('mouseoverurl'=> $mouseoverurl, 'page_post_id'=> $page_post_id))
+    }
+  }
+}
+
 ?>
