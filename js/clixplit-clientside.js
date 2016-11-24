@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
   $(function get_global_links() {
     $.ajax({
       type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
+      url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
       datatype: 'json',
       data: {
         "get_global_links":1
@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
    $(function get_redirect_links() {
     $.ajax({
       type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
+      url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
       datatype: 'json',
       data: {
         "get_redirect_links":1
@@ -64,27 +64,13 @@ function clixplit_clicks_update(link,keyword) {
     document.cookie = link+"=" + link + ";expires=" + expiredate.toUTCString();
     uniqueclick ="Y";
   }
-  $(function get_links() {
-    $.ajax({
-      type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-clickupdate.php",
-      datatype: 'String',
-      data: {
-        "url":link.toString(),
-        "keyword":keyword.toString(),
-        'uniqueclick':uniqueclick
-      },
-      success: function(response) {
-      }
-    });
-  });
 }
 
 function clixplit_clicks_update_redirects(url,pageid) {
   $(function get_links() {
     $.ajax({
       type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-clickupdate.php",
+      url:CLIXPLIT_AJAX.ajaxdir + "ajax-clickupdate.php",
       datatype: 'String',
       data: {
         "mouseoverurl":link.toString()
@@ -94,4 +80,3 @@ function clixplit_clicks_update_redirects(url,pageid) {
     });
   });
 }
-

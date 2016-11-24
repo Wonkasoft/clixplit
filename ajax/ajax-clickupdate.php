@@ -45,14 +45,16 @@ $url_totalclicks ="";
 if (isset($_POST['mouseoverurl']) || isset($_POST['secondaryurl'])) {
   $mouseoverurl = $_POST['mouseoverurl'];
   $secondaryurl = $_POST['secondaryurl'];
+  $page_post_id = $_POST['post_id'];
   $clicks_update = 0;
   $db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
-  for ($i=0; $i < count($db_fetch); $i++) { 
-    if ($db_fetch[$i] == $mouseoverurl) {
+  for ($i=0; $i < count($db_fetch); $i++) {
+    if ($db_fetch[$i]->mouseoverurl == $mouseoverurl) {
+      $clicks_update = $db_fetch[$i]->clicks;
       $clicks_update++;
-      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('mouseoverurl'=> $mouseoverurl, 'page_post_id'=> $page_post_id))
+      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('mouseoverurl'=> $mouseoverurl, 'page_post_id'=> $page_post_id));
     }
-  }
+  };
 }
 
 ?>
