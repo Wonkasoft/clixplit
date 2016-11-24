@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
     var links;
     $.ajax({
       type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-getlinks.php",
+      url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
       datatype: 'json',
       data: {
         "getlinks":1
@@ -51,12 +51,13 @@ function clixplit_clicks_update(link,keyword) {
   $(function get_links() {
     $.ajax({
       type:'POST',
-      url:CLIXPLIT_AJAX.cliXplit_ajax + "ajax-clickupdate.php",
+      url:CLIXPLIT_AJAX.ajaxdir + "ajax-clickupdate.php",
       datatype: 'String',
       data: {
         "url":link.toString(),
         "keyword":keyword.toString(),
-        'uniqueclick':uniqueclick
+        "uniqueclick":uniqueclick,
+        "post_id":CLIXPLIT_AJAX.postid
       },
       success: function(response) {
       }
@@ -203,7 +204,7 @@ function showMessage() {
     window.onbeforeunload = function(){
     window.location = exiturl;   
     return false;
-    }
+    };
     // }
   }
 

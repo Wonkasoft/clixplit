@@ -14,7 +14,7 @@ wp_register_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.
 wp_register_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
 wp_enqueue_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('jquery'), '1.0.0', true);
 wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
-wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
+wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('ajaxdir' => plugins_url('/clixplit/ajax/'), 'postid' => get_the_ID()));
 }
 
 add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
@@ -30,7 +30,7 @@ function plugin_enqueues() {
   wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
   wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7', true);
   wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('jquery'), '1.0.0', true);
-  wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
+  wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('ajaxdir' => plugins_url('/clixplit/ajax/'), 'postid' => get_the_ID()));
  
 }
 
