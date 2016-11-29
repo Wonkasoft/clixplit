@@ -8,7 +8,7 @@
 * Author URI: http://epicwinsolutions.com, http://wonkasoft.com
 */
 
-add_action( 'wp_enqueue_scripts', 'plugin_locals');
+
 function plugin_locals() {
 wp_register_script('clixplit-clientside', plugins_url( '/js/clixplit-clientside.js', __FILE__ ) , array('jquery'), '1.0.0', true);
 wp_register_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ ) , array(), '1.0.0', 'all');
@@ -17,7 +17,7 @@ wp_enqueue_style('clixplit-front', plugins_url( '/css/front-side.css', __FILE__ 
 wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('ajaxdir' => plugins_url('/clixplit/ajax/'), 'postid' => get_the_ID()));
 }
 
-add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
+add_action( 'wp_enqueue_scripts', 'plugin_locals');
 
 function plugin_enqueues() {
   wp_register_style('clixplit-bootstrap', plugins_url( '/css/bootstrap.min.css', __FILE__ ) , array(), '3.3.7', 'all');
@@ -33,6 +33,8 @@ function plugin_enqueues() {
   wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('ajaxdir' => plugins_url('/clixplit/ajax/'), 'postid' => get_the_ID()));
  
 }
+
+add_action( 'admin_enqueue_scripts', 'plugin_enqueues');
 
 function clixplit_register_custom_menu() {
   add_menu_page (

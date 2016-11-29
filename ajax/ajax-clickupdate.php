@@ -42,17 +42,23 @@ $url_totalclicks ="";
 }
 
 // For redirect settings
-if (isset($_POST['mouseoverurl']) || isset($_POST['secondaryurl'])) {
-  $mouseoverurl = $_POST['mouseoverurl'];
-  $secondaryurl = $_POST['secondaryurl'];
+if (isset($_POST['url'])) {
+  $url = $_POST['url'];
+  $type = $_POST['type'];
   $page_post_id = $_POST['post_id'];
   $clicks_update = 0;
   $db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_redirect);
   for ($i=0; $i < count($db_fetch); $i++) {
-    if ($db_fetch[$i]->mouseoverurl == $mouseoverurl) {
+    if ($db_fetch[$i]->mouseoverurl == $url) {
       $clicks_update = $db_fetch[$i]->clicks;
       $clicks_update++;
-      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('mouseoverurl'=> $mouseoverurl, 'page_post_id'=> $page_post_id));
+      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('mouseoverurl'=> $url, 'page_post_id'=> $page_post_id));
+    }
+    if ($db_fetch[$i]->secondaryurl == $url) {
+      $clicks_update = 0;
+      $clicks_update = $db_fetch[$i]->clicks;
+      $clicks_update++;
+      $wpdb->update($table_redirect, array('clicks'=>$clicks_update), array('secondaryurl'=> $url, 'page_post_id'=> $page_post_id));
     }
   };
 }
