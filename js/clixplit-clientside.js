@@ -22,17 +22,29 @@ jQuery(document).ready(function($) {
   });
 
   $(function get_global_links() {
+    $keywords = [];
+    $('.global-links').each(function(){
+      $keywords.push($(this).text());  
+    });
     $.ajax({
       type:'POST',
       url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
       data: {
-        "get_global_links":1
+        "keywords":$keywords
       },
-      success: function(primary) {
-        console.log(primary);
-        primary = JSON.parse(primary);
-        console.log(primary.pk + ' ' + primary.p + ' | ' + primary.sk + ' ' + primary.s);
-
+      success: function(global_links) {
+        global_links = JSON.parse(global_links);
+        $priurl = '';
+        $('.global-links').each(function(){
+          for (var i = 0; i < global_links[0].length; i++) {
+            if (global_links[0][i] == $(this).text()) {
+              $priurl = global_links[0][i+1];
+              $(this).attr('href', $priurl);
+            }
+        }
+        });
+        // console.log($keywords);
+        $sec_url = global_links[1];
       }
     });
   });
@@ -53,7 +65,6 @@ jQuery(document).ready(function($) {
 }); // End of document ready
 
 
-
 function clixplit_clicks_update(link,keyword) {
   // console.log(keyword);
   var checkcookie = document.cookie;
@@ -64,6 +75,25 @@ function clixplit_clicks_update(link,keyword) {
     document.cookie = link+"=" + link + ";expires=" + expiredate.toUTCString();
     uniqueclick ="Y";
   }
+  jQuery(function click_update($) {
+    $.ajax({
+        type:'POST',
+        url:CLIXPLIT_AJAX.ajaxdir + "ajax-clickupdate.php",
+        datatype:'String',
+        async: false,
+        data: {
+          "url":link.toString(),
+          "keyword":keyword,
+          "uniqueclick":uniqueclick
+        },
+        success: function(response) {
+          response = JSON.parse(response);
+          console.log(response);
+          
+          
+        }
+    });
+  });
 }
 
 function clixplit_clicks_update_redirects(url, type) {
@@ -72,7 +102,7 @@ function clixplit_clicks_update_redirects(url, type) {
       type:'POST',
       url:CLIXPLIT_AJAX.ajaxdir + "ajax-clickupdate.php",
       data: {
-        "url":url.toString(),
+        "redirecturl":url.toString(),
         "type":type,
         "post_id":CLIXPLIT_AJAX.postid
       },

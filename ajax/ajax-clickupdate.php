@@ -11,6 +11,7 @@ $unique = $_POST['uniqueclick'];
 $uniqueclicks = 0;
 $keyword = $_POST['keyword'];
 $url_totalclicks ="";
+$secData = [];
 
   $url_clickedrm = rtrim($url_clicked,"/");
 
@@ -39,11 +40,17 @@ $url_totalclicks ="";
 
   }
 
+  if (!in_array($keyword, $secData, true)) {
+      $sec_clicks = $wpdb->get_var('SELECT MIN(totalclicks) AS clicks FROM ' . $table_name . ' WHERE secondaryurl != "" AND keyword = "'. $keyword .'" group by keyword');
+      $sec_fetch = $wpdb->get_row('SELECT keyword, secondaryurl FROM ' . $table_name . ' WHERE secondaryurl != "" AND keyword = "' . $keyword .'" AND totalclicks = "'. $sec_clicks .'" group by keyword');
+      array_push($secData, $sec_fetch->keyword, $sec_fetch->secondaryurl);
+    }
+    echo json_encode(array($secData));
 }
 
 // For redirect settings
-if (isset($_POST['url'])) {
-  $url = $_POST['url'];
+if (isset($_POST['redirecturl'])) {
+  $url = $_POST['redirecturl'];
   $type = $_POST['type'];
   $page_post_id = $_POST['post_id'];
   $clicks_update = 0;

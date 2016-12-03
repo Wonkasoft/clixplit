@@ -71,10 +71,10 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 		if ($db_fetch[$i]->page_post_id == $page_post_id) {
 			$page_post_check = $db_fetch[$i]->page_post_id;
 		}
-		if (($db_fetch[$i]->mouseoverurl != '') && ($db_fetch[$i]->page_post_id == $page_post_id)) {
+		if (($db_fetch[$i]->mouseoverurl != "") && ($db_fetch[$i]->page_post_id == $page_post_id)) {
 			$mou_count++;
 		}
-		if (($db_fetch[$i]->secondaryurl != '') && ($db_fetch[$i]->page_post_id == $page_post_id)) {
+		if (($db_fetch[$i]->secondaryurl != "") && ($db_fetch[$i]->page_post_id == $page_post_id)) {
 			$pps_count++;
 		}
 	}
@@ -138,13 +138,13 @@ if ((isset($_POST['mouseover-redirectopt'])) || (isset($_POST['exit-redirectopt'
 		};
 
 			// For form being cleared
-		if (($page_post_check == $page_post_id && $mouseover_count == 1 && $mouseoverurl[0] == '')) {
+		if (($page_post_check == $page_post_id && $mouseover_count == 1 && $mouseoverurl[0] == "")) {
 			$wpdb->delete($table_redirect, array(
-				'page_post_id' => $page_post_id, 'input_id' => '', 'mouseoverurl' => ''));
+				'page_post_id' => $page_post_id, 'input_id' => "", 'mouseoverurl' => ""));
 		};
-		if (($page_post_check == $page_post_id) && ($secondary_count == 1) && ($secondary_redirect[0] == '')) {
+		if (($page_post_check == $page_post_id) && ($secondary_count == 1) && ($secondary_redirect[0] == "")) {
 			$wpdb->delete($table_redirect, array(
-				'page_post_id' => $page_post_id, 'input_id' => '', 'secondaryurl' => ''));
+				'page_post_id' => $page_post_id, 'input_id' => "", 'secondaryurl' => ""));
 		};
 
 			// For deleting rows for deleted inputs
@@ -272,7 +272,7 @@ if (isset($_POST['enddata'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $postlinksContent);
+					$postlinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" target="_blank" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -291,7 +291,7 @@ if (isset($_POST['enddata'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $pagelinksContent);
+					$pagelinksContent = str_replace('<a href="'. $linksprimary .'" class="global-links" target="_blank" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $keyword, $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,
@@ -329,13 +329,13 @@ if (isset($_POST['keyword-input'])) {
 	$secCounter = 0;
 	$db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_name);
 	for ($i = 0; $i < count($db_fetch); $i++) {
-		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == '')) {
+		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == "")) {
 			$update_check = 'update';
 		}
-		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->primaryurl != '')) {
+		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->primaryurl != "")) {
 			$priCounter++;
 		}
-		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->secondaryurl != '')) {
+		if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->secondaryurl != "")) {
 			$secCounter++;
 		}
 	}
@@ -343,7 +343,7 @@ if (isset($_POST['keyword-input'])) {
 		echo 'fired for insert';
 		for ($i=0; $i < $primary_count; $i++) { 
 			$primary_array = $primary[$i];
-			if ($primary_array != '') {
+			if ($primary_array != "") {
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
 					'page_post_id' => $page_post_id,
@@ -360,7 +360,7 @@ if (isset($_POST['keyword-input'])) {
 		}
 		for ($i=0; $i < $secondary_count; $i++) { 
 			$secondary_array = $secondary[$i];
-			if ($secondary_array != '') {
+			if ($secondary_array != "") {
 				$wpdb->insert($table_name, array(
 					'created' => current_time('mysql'),
 					'page_post_id' => $page_post_id,
@@ -398,7 +398,7 @@ if (isset($_POST['keyword-input'])) {
 			$set = $priCounter;
 			for ($i=$set; $i < $primary_count; $i++) { 
 				$primary_array = $primary[$i];
-				if ($primary_array != '') {
+				if ($primary_array != "") {
 					$wpdb->insert($table_name, array(
 						'created' => current_time('mysql'),
 						'page_post_id' => $page_post_id,
@@ -418,7 +418,7 @@ if (isset($_POST['keyword-input'])) {
 			$set = $secCounter;
 			for ($i=$set; $i < $secondary_count; $i++) { 
 				$secondary_array = $secondary[$i];
-				if ($secondary_array != '') {
+				if ($secondary_array != "") {
 					$wpdb->insert($table_name, array(
 						'created' => current_time('mysql'),
 						'page_post_id' => $page_post_id,
@@ -436,7 +436,7 @@ if (isset($_POST['keyword-input'])) {
 		}
 			for ($i=0; $i < $primary_count; $i++) { 
 				$primary_array = $primary[$i];
-				if ($primary_array != '') {
+				if ($primary_array != "") {
 					$wpdb->update($table_name, array(
 						'created' => current_time('mysql'),
 						'page_post_id' => $page_post_id,
@@ -448,12 +448,12 @@ if (isset($_POST['keyword-input'])) {
 						'postopt' => $postopt,
 						'globalopt' => $globalopt,
 						'active' => 1
-						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'secondaryurl' => ''));
+						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'secondaryurl' => ""));
 				}
 			}
 			for ($i=0; $i < $secondary_count; $i++) { 
 				$secondary_array = $secondary[$i];
-				if ($secondary_array != '') {
+				if ($secondary_array != "") {
 					$wpdb->update($table_name, array(
 						'created' => current_time('mysql'),
 						'page_post_id' => $page_post_id,
@@ -465,7 +465,7 @@ if (isset($_POST['keyword-input'])) {
 						'postopt' => $postopt,
 						'globalopt' => $globalopt,
 						'active' => 1
-						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'primaryurl' => ''));
+						), array('page_post_id' => $page_post_id, 'keyword' => $keyword, 'input_id' =>$i, 'primaryurl' => ""));
 				}
 			}
 		}
@@ -489,7 +489,7 @@ if (isset($_POST['globalopt'])) {
 			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->primaryurl != "")) {
 				$linksprimary = $db_fetch[$i]->primaryurl;
 			}
-			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == '')) {
+			if (($keyword == $db_fetch[$i]->keyword) && ($db_fetch[$i]->input_id == "")) {
 				$update_check = 'update';
 			}
 		}
@@ -504,7 +504,7 @@ if (isset($_POST['globalopt'])) {
 					$postlinksDates['post_date'] = date( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $postlinksDate);
 					$postlinksID = $post->ID; $postlinksTitle = $post->post_title; $postlinksContent = $post->post_content;
-					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $postlinksContent);
+					$postlinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" target="_blank" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $postlinksContent);
 					$postlinkspost = array(
 						'ID' => $postlinksID,
 						'post_title' => $postlinksTitle,
@@ -529,7 +529,7 @@ if (isset($_POST['globalopt'])) {
 					$pagelinksDates['post_date'] = date( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksDates['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', $pagelinksDate);
 					$pagelinksID = $page->ID; $pagelinksTitle = $page->post_title; $pagelinksContent = $page->post_content;
-					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $pagelinksContent);
+					$pagelinksContent = str_replace($keyword,'<a href="'. $linksprimary .'" class="global-links" target="_blank" onclick="clixplit_clicks_update(this,this.text)">' . $keyword . '</a>', $pagelinksContent);
 					$pagelinkspage = array(
 						'ID' => $pagelinksID,
 						'post_title' => $pagelinksTitle,
