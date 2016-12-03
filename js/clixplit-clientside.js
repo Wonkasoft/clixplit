@@ -22,6 +22,11 @@ jQuery(document).ready(function($) {
   });
 
   $(function get_global_links() {
+    var keywords = [];
+    $("[class='global-links']").each(function() {
+      keywords.push($(this).text());
+    });
+    console.log(keywords);
     $.ajax({
       type:'POST',
       url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
@@ -29,9 +34,9 @@ jQuery(document).ready(function($) {
       data: {
         "get_global_links":1
       },
-      success: function(links) {
-        
-
+      success: function(urldata) {
+        var pri = urldata.a;
+        var sec = urldata.b;
       }
     });
   });
@@ -42,17 +47,22 @@ jQuery(document).ready(function($) {
       url:CLIXPLIT_AJAX.ajaxdir + "ajax-getlinks.php",
       datatype: 'json',
       data: {
-        "get_redirect_links":1
+        "get_redirect_links":1,
+        "post_id":CLIXPLIT_AJAX.postid
       },
-      success: function(links) {
-        
-
+      success: function(redirecturl) {
+        var mouseoverurl = redirecturl.a;
+        var secondary = redirecturl.b;
       }
     });
   });
 }); // End of document ready
 
-
+function clixplit_mouseover(url) {
+  jQuery('body').mouseleave(function(url) {
+    window.open(url.toString(),"_blank");
+  });
+}
 
 function clixplit_clicks_update(link,keyword) {
   // console.log(keyword);
@@ -66,7 +76,7 @@ function clixplit_clicks_update(link,keyword) {
   }
 }
 
-function clixplit_clicks_update_redirects(url,pageid) {
+function clixplit_clicks_update_redirects(url) {
   $(function get_links() {
     $.ajax({
       type:'POST',
