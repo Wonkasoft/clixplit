@@ -63,7 +63,7 @@
  			}
 
  			echo '<tr>' .
- 			'<td></td>' .
+ 			'<td><button class="btn btn-remove clixplit-remove" type="button"><span class="glyphicon glyphicon-minus glyphicon-clixplit"></span></button></td>' .
  			'<td>'. $dbfetch[$i]->keyword .'</td>' .
  			'<td>'. $dbfetch[$i]->created .'</td>' .
  			'<td>'. $totalclick_count . ' | ' . $unqclicks_count .'</td>' .

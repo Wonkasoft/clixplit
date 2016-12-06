@@ -12,6 +12,7 @@ $uniqueclicks = 0;
 $keyword = $_POST['keyword'];
 $url_totalclicks ="";
 $secData = [];
+$sec_fetch = [];
 
   $url_clickedrm = rtrim($url_clicked,"/");
 
@@ -31,21 +32,19 @@ $secData = [];
     }
   } 
 
-  if ($url_totalclicks == "") {
-    $url_totalclicks = $wpdb->get_var("SELECT totalclicks FROM $table_name WHERE secondaryurl LIKE '%%$url_clickedrm%%'");
-    if ($url_totalclicks !="") {
-      $url_totalclicks++;
-      $wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('secondaryurl'=>$url_clickedrm),array(),array('LIKE'=>'%s'));
-    }
-
-  }
-
   if (!in_array($keyword, $secData, true)) {
       $sec_clicks = $wpdb->get_var('SELECT MIN(totalclicks) AS clicks FROM ' . $table_name . ' WHERE secondaryurl != "" AND keyword = "'. $keyword .'" group by keyword');
       $sec_fetch = $wpdb->get_row('SELECT keyword, secondaryurl FROM ' . $table_name . ' WHERE secondaryurl != "" AND keyword = "' . $keyword .'" AND totalclicks = "'. $sec_clicks .'" group by keyword');
       array_push($secData, $sec_fetch->keyword, $sec_fetch->secondaryurl);
-    }
-    echo json_encode(array($secData));
+  }
+
+echo json_encode(array($secData));
+
+  if (isset($secData)) {
+    $url_totalclicks = $wpdb->get_var("SELECT totalclicks FROM $table_name WHERE secondaryurl = '$sec_fetch->secondaryurl'");
+    $url_totalclicks++;
+    $wpdb->update($table_name, array('totalclicks'=>$url_totalclicks),array('keyword' => $sec_fetch->keyword, 'secondaryurl'=>$sec_fetch->secondaryurl));
+  }
 }
 
 // For redirect settings

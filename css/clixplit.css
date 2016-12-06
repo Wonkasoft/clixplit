@@ -57,7 +57,9 @@ button.clixplit-secondary-add,
 iframe,
 #exit-redirect-alert,
 .clixplit-activate-btn,
-.clixplit-deactivate-btn {
+.clixplit-deactivate-btn,
+button.clixplit-remove,
+.glyphicon-clixplit {
   transition: all .4s ease-in-out;
 }
 
@@ -737,6 +739,23 @@ button.clixplit-secondary-add:active:focus {
 
 #exit-redirect-alert {
   border-radius: 4px;
+}
+
+button.clixplit-remove {
+  padding: 0;
+  text-align: center;
+  width: 20px;
+  height: 15px;
+  background-color: #39d8cb;
+}
+
+button.clixplit-remove:hover {
+  background-color: #02ffa1;
+}
+
+.glyphicon-clixplit {
+  top: -2px;
+  left: -1px;
 }
 
 @media only screen and (max-width: 784px) {

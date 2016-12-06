@@ -478,6 +478,7 @@ if (isset($_POST['globalopt'])) {
 		$db_fetch = $wpdb->get_results('SELECT * FROM ' . $table_name);
 		if (isset($_POST['selected-text'])) {
 			$keyword = $selected_text;
+			$pattern = '//';
 			
 		}
 		$content_output = "";

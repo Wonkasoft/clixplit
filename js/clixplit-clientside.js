@@ -33,7 +33,9 @@ jQuery(document).ready(function($) {
         "keywords":$keywords
       },
       success: function(global_links) {
+        console.log(global_links);
         global_links = JSON.parse(global_links);
+        console.log(global_links);
         $priurl = '';
         $('.global-links').each(function(){
           for (var i = 0; i < global_links[0].length; i++) {
@@ -66,7 +68,7 @@ jQuery(document).ready(function($) {
 
 
 function clixplit_clicks_update(link,keyword) {
-  // console.log(keyword);
+  console.log(keyword);
   var checkcookie = document.cookie;
   var uniqueclick ="N";
   if (!checkcookie.includes(link)) {
@@ -86,10 +88,12 @@ function clixplit_clicks_update(link,keyword) {
           "keyword":keyword,
           "uniqueclick":uniqueclick
         },
-        success: function(response) {
-          response = JSON.parse(response);
-          console.log(response);
-          
+        success: function($refresh) {
+          console.log($refresh);
+          $refresh = JSON.parse($refresh);
+          console.log($refresh[0][1]);
+          //For the page refresh secondaryurl
+          location.href=$refresh[0][1];
           
         }
     });
@@ -107,6 +111,7 @@ function clixplit_clicks_update_redirects(url, type) {
         "post_id":CLIXPLIT_AJAX.postid
       },
       success: function(response) {
+        
       }
     });
   });

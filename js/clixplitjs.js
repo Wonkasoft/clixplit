@@ -3,6 +3,8 @@
  * Copyright 2016 Wonkasoft.com & EpicWin.
  */
  jQuery(function($) {
+  var tableTimer = setInterval(function() {
+    fetch_data();}, 20000);
  function fetch_data() {
  	$table_dir = $('[name="directory"]').val();
  	$data = $('[name="activepost"]').serialize();
@@ -27,8 +29,7 @@
 
  $( document ).ready(function() {
  	fetch_data();
- 	setInterval(function() {
- 		fetch_data();}, 10000);
+ 	
  	$('[name="add-campaign"]').click(function() {
  		$(".mymodal").css({"visibility": "inherit", "opacity": "1", "height": "inherit"});
  		$('#modal-form-campaigns').unbind().keypress(function (e) {
@@ -424,6 +425,7 @@ $(function() {
  	});
   
   $('[name="end-campaign"]').click(function() {
+    clearInterval(tableTimer);
     $('#global-submission').text('Processing...').fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeToggle(500).fadeIn(500);
     $checked_keywords = [];
     $('tbody tr td input[type="checkbox"]:checked').each(function(){
@@ -437,8 +439,8 @@ $(function() {
         "enddata": $checked_keywords
       },
       success: function($response) {
-        fetch_data();
         $('#global-submission').text('Data removed successfully').fadeToggle(500).fadeToggle(1000).fadeOut(700);
+        setInterval(tableTimer);
       }});
   });
 });
