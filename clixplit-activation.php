@@ -1,12 +1,12 @@
-<?php 
-    include_once('clixplit_validation_class.php'); 
+<?php
+    include_once('clixplit_validation_class.php');
     $checkkey = new clixplit_validation();
 
 if (isset($_REQUEST['activate_license'])) {
     $license_key_input = $_REQUEST['clixplit_license_key'];
     $validkey = $checkkey->clixplit_activate($license_key_input);
     update_option('clixplit_license_key',$license_key_input);
-    if ($checkkey->clixplit_check($license_key_input) =='active') {
+    if ($checkkey->clixplit_check($license_key_input) ==='active') {
     update_option('clixplit_license_active','active');
     }
 }
@@ -17,7 +17,7 @@ if (isset($_REQUEST['deactivate_license'])) {
     update_option('clixplit_license_key','');
     update_option('clixplit_license_active','inactive');
 
-    
+
 }
 ?>
 <div class="content-wrap">
@@ -63,7 +63,7 @@ if (isset($_REQUEST['deactivate_license'])) {
         $localhostdbkey = get_option('clixplit_license_key');
         $activeoption = get_option('clixplit_license_active');
 
-        if (($activeoption =='active') && ($checkkey->clixplit_check($localhostdbkey) == 'active')) {
+        if (($activeoption ==='active') && ($checkkey->clixplit_check($localhostdbkey) === 'active')) {
             echo "Your product is activated. Use this page for deactivation only.";
         } else {
         echo "Please enter the license key for this product to activate it. You were given a license key when you purchased this item.";

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class clixplit_validation {
 
@@ -9,7 +9,7 @@ class clixplit_validation {
 	function __construct() {
 	}
 
-	
+
 	function clixplit_check($key) {
 		$license_key = $key;
 		$response_message ='';
@@ -34,10 +34,11 @@ class clixplit_validation {
         //var_dump($response);//uncomment it if you want to look at the full response
 
         // License data.
-		$license_data = json_decode(wp_remote_retrieve_body($response));
+		// $license_data = json_decode(wp_remote_retrieve_body($response));
+               $license_data = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', wp_remote_retrieve_body($response)), true );
 
         // TODO - Do something with it.
-        //var_dump($license_data);//uncomment it to look at the data
+        var_dump($license_data);//uncomment it to look at the data
 
         if($license_data->result == 'success'){//Success was returned for the license activation
 
@@ -57,6 +58,10 @@ class clixplit_validation {
     }
     /*** End of license check ***/
 
+/*
+* Activation process
+*
+*/
     function clixplit_activate($key) {
 
       $license_key = $key;
@@ -81,20 +86,21 @@ class clixplit_validation {
          return $response_message;
      }
 
-        //var_dump($response);//uncomment it if you want to look at the full response
+        // var_dump($response);//uncomment it if you want to look at the full response
 
         // License data.
-     $license_data = json_decode(wp_remote_retrieve_body($response));
+     // $license_data = json_decode(wp_remote_retrieve_body($response));
+        $license_data = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', wp_remote_retrieve_body($response)), true );
 
         // TODO - Do something with it.
-        //var_dump($license_data);//uncomment it to look at the data
+        var_dump($license_data);//uncomment it to look at the data
 
         if($license_data->result == 'success'){//Success was returned for the license activation
 
             //Uncomment the followng line to see the message that returned from the license server
-        	$response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="0;url=?page=clixplit/clixplit-home.php" />';
+        	$response_message = '<br />The following message was returned from the server: ' . $license_data->message . '<meta http-equiv="refresh" content="2;url=?page=clixplit/clixplit-home.php" />';
         	return $response_message;
-        	
+
         }
         else{
             //Show error to the user. Probably entered incorrect license key.
@@ -132,15 +138,16 @@ class clixplit_validation {
         //var_dump($response);//uncomment it if you want to look at the full response
 
         // License data.
-     $license_data = json_decode(wp_remote_retrieve_body($response));
+     // $license_data = json_decode(wp_remote_retrieve_body($response));
+     $license_data = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', wp_remote_retrieve_body($response)), true );
 
         // TODO - Do something with it.
-        //var_dump($license_data);//uncomment it to look at the data
+        var_dump($license_data);//uncomment it to look at the data
 
      if($license_data->result == 'success'){//Success was returned for the license activation
 
             //Uncomment the followng line to see the message that returned from the license server
-        $response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="0;url=?page=clixplit/clixplit-activation.php" />';
+        $response_message = '<br />The following message was returned from the server: '.$license_data->message . '<meta http-equiv="refresh" content="2;url=?page=clixplit/clixplit-activation.php" />';
        return $response_message;
    }
    else{
@@ -153,5 +160,4 @@ class clixplit_validation {
 }
 
 } // End of Class
-
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Plugin Name: Clixplit
 * Plugin URI: http://clixplit.com
@@ -37,12 +37,12 @@ function plugin_enqueues() {
   wp_enqueue_script('clixplit-bootstrapjs', plugins_url( '/js/bootstrap.min.js', __FILE__ ) , array('jquery'), '3.3.7');
   wp_enqueue_script('clixplit-clixplitjs', plugins_url( '/js/clixplitjs.js', __FILE__ ) , array('jquery'), '1.0.0');
   wp_localize_script('clixplit-clientside', 'CLIXPLIT_AJAX', array('cliXplit_ajax' => plugins_url('/clixplit/ajax/')));
- 
+
 }
 
 function clixplit_register_custom_menu() {
   add_menu_page (
-    'cliXplit', 
+    'cliXplit',
     'cliXplit',
     'manage_options',
     'clixplit/clixplit-home.php',
@@ -80,10 +80,28 @@ function clixplit_register_custom_menu() {
       '');
   }
 
+
 include_once('clixplit_validation_class.php');
 $checkkey = new clixplit_validation();
 $localhostdbkey = get_option('clixplit_license_key');
 $activeoption = get_option('clixplit_license_active');
+
+// Add Settings links
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'add_action_links' );
+
+function add_action_links ( $links ) {
+  if ($activeoption =='active') {
+     $mylinks = array(
+     '<a href="' . admin_url( 'admin.php?page=clixplit%2Fclixplit-home.php' ) . '">Settings</a>',
+     );
+    return array_merge( $links, $mylinks );
+  } else {
+     $mylinks = array(
+     '<a href="' . admin_url( 'admin.php?page=clixplit%2Fclixplit-activation.php' ) . '">Settings</a>',
+     );
+    return array_merge( $links, $mylinks );
+  }
+}
 
   function clixplit_register_activation_menu() {
    add_menu_page ('ClixplitRegistration',
@@ -128,7 +146,7 @@ add_action( "add_meta_boxes_post", "clixplit_meta_box2" );
 }
 // Register Your Meta box
 function clixplit_meta_box( $post ) {
-    add_meta_box( 
+    add_meta_box(
        'clixplit_meta_box', // This is HTML id
        'page redirect options', // This is the title
        'clixplit_meta_box_callback', // The callback function
@@ -139,7 +157,7 @@ function clixplit_meta_box( $post ) {
 }
 
 function clixplit_meta_box2( $post ) {
-    add_meta_box( 
+    add_meta_box(
        'clixplit_meta_box', // This is HTML id
        'page redirect options', // This is the title
        'clixplit_meta_box_callback', // The callback function
@@ -162,10 +180,10 @@ function clixplit_redirect_install() {
   global $clixplit_db_version;
 
   $table_name = $wpdb->prefix . 'clixplit_redirect';
-  
+
   $charset_collate = $wpdb->get_charset_collate();
 
-  $sql = "CREATE TABLE $table_name ( 
+  $sql = "CREATE TABLE $table_name (
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
     page_post_id VARCHAR(850) NOT NULL,
@@ -174,9 +192,9 @@ function clixplit_redirect_install() {
     mouseoverurl VARCHAR(850) NOT NULL,
     exitredirectopt ENUM('','off','on') NOT NULL,
     exitredirecturl VARCHAR(850) NOT NULL,
-    exitmessage TEXT NOT NULL, 
+    exitmessage TEXT NOT NULL,
     secondaryopt ENUM('','off','on') NOT NULL,
-    secondaryurl VARCHAR(850) NOT NULL, 
+    secondaryurl VARCHAR(850) NOT NULL,
     PRIMARY KEY (id)
     ) $charset_collate;";
 
@@ -191,10 +209,10 @@ function clixplit_redirect_install() {
     if ( $installed_ver != $clixplit_db_version ) {
 
         $table_name = $wpdb->prefix . 'clixplit_redirect';
-      
+
       $charset_collate = $wpdb->get_charset_collate();
 
-      $sql = "CREATE TABLE $table_name ( 
+      $sql = "CREATE TABLE $table_name (
         id INT(15) NOT NULL AUTO_INCREMENT,
         created DATETIME NOT NULL,
         page_post_id VARCHAR(850) NOT NULL,
@@ -203,9 +221,9 @@ function clixplit_redirect_install() {
         mouseoverurl VARCHAR(850) NOT NULL,
         exitredirectopt ENUM('','off','on') NOT NULL,
         exitredirecturl VARCHAR(850) NOT NULL,
-        exitmessage TEXT NOT NULL, 
+        exitmessage TEXT NOT NULL,
         secondaryopt ENUM('','off','on') NOT NULL,
-        secondaryurl VARCHAR(850) NOT NULL, 
+        secondaryurl VARCHAR(850) NOT NULL,
         PRIMARY KEY (id)
         ) $charset_collate;";
 
@@ -224,10 +242,10 @@ function clixplit_global_campaigns() {
   global $clixplit_db_version;
 
   $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-  
+
   $charset_collate = $wpdb->get_charset_collate();
 
-  $sql = "CREATE TABLE $table_name ( 
+  $sql = "CREATE TABLE $table_name (
     id INT(15) NOT NULL AUTO_INCREMENT,
     created DATETIME NOT NULL,
     page_post_id VARCHAR(850) NOT NULL,
@@ -236,16 +254,16 @@ function clixplit_global_campaigns() {
     primaryurl VARCHAR(850) NOT NULL,
     secondaryurl VARCHAR(850) NOT NULL,
     postopt ENUM('off','on') NOT NULL,
-    pageopt ENUM('off','on') NOT NULL, 
+    pageopt ENUM('off','on') NOT NULL,
     enablemobile ENUM('off','on') NOT NULL,
-    numofprimary int(100) NOT NULL, 
-    numofsecondary int(100) NOT NULL, 
-    totalclicks int(250) NOT NULL, 
-    unqclicks int(250) NOT NULL, 
-    instances int(250) NOT NULL, 
-    globalopt ENUM('N','Y')NOT NULL, 
-    pagepostcreated ENUM('N','Y')NOT NULL, 
-    active BOOLEAN NOT NULL, 
+    numofprimary int(100) NOT NULL,
+    numofsecondary int(100) NOT NULL,
+    totalclicks int(250) NOT NULL,
+    unqclicks int(250) NOT NULL,
+    instances int(250) NOT NULL,
+    globalopt ENUM('N','Y')NOT NULL,
+    pagepostcreated ENUM('N','Y')NOT NULL,
+    active BOOLEAN NOT NULL,
     PRIMARY KEY (id)
     ) $charset_collate;";
 
@@ -258,10 +276,10 @@ function clixplit_global_campaigns() {
   if ( $installed_ver != $clixplit_db_version ) {
 
       $table_name = $wpdb->prefix . 'clixplit_global_campaigns';
-    
+
       $charset_collate = $wpdb->get_charset_collate();
 
-      $sql = "CREATE TABLE $table_name ( 
+      $sql = "CREATE TABLE $table_name (
       id INT(15) NOT NULL AUTO_INCREMENT,
       created DATETIME NOT NULL,
       page_post_id VARCHAR(850) NOT NULL,
@@ -270,16 +288,16 @@ function clixplit_global_campaigns() {
       primaryurl VARCHAR(850) NOT NULL,
       secondaryurl VARCHAR(850) NOT NULL,
       postopt ENUM('off','on') NOT NULL,
-      pageopt ENUM('off','on') NOT NULL, 
+      pageopt ENUM('off','on') NOT NULL,
       enablemobile ENUM('off','on') NOT NULL,
-      numofprimary int(100) NOT NULL, 
-      numofsecondary int(100) NOT NULL, 
-      totalclicks int(250) NOT NULL, 
-      unqclicks int(250) NOT NULL, 
-      instances int(250) NOT NULL, 
-      globalopt ENUM('N','Y') NOT NULL, 
-      pagepostcreated ENUM('N','Y') NOT NULL, 
-      active BOOLEAN NOT NULL, 
+      numofprimary int(100) NOT NULL,
+      numofsecondary int(100) NOT NULL,
+      totalclicks int(250) NOT NULL,
+      unqclicks int(250) NOT NULL,
+      instances int(250) NOT NULL,
+      globalopt ENUM('N','Y') NOT NULL,
+      pagepostcreated ENUM('N','Y') NOT NULL,
+      active BOOLEAN NOT NULL,
       PRIMARY KEY (id)
       ) $charset_collate;";
 
@@ -293,7 +311,7 @@ function clixplit_global_campaigns() {
 register_activation_hook( __FILE__, 'clixplit_global_campaigns' );
 
 
-// Check for plugin update that requires new database structure 
+// Check for plugin update that requires new database structure
 function clixplit_update_db_check() {
     global $clixplit_db_version;
     if ( get_site_option( 'clixplit_db_version' ) != $clixplit_db_version ) {
@@ -302,6 +320,6 @@ function clixplit_update_db_check() {
     }
 }
 add_action( 'plugins_loaded', 'clixplit_update_db_check' );
-    
+
 
 ?>
